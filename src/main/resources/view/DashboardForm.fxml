@@ -1,14 +1,139 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="lk.ijse.controller.DashboardFormController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="780.0" prefWidth="1530.0" style="-fx-background-color: E9ECEF;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.DashboardFormController">
+   <children>
+      <AnchorPane layoutX="-1.0" prefHeight="780.0" prefWidth="242.0" style="-fx-background-color: FFFCF2;">
+         <children>
+            <ImageView fitHeight="170.0" fitWidth="170.0" layoutX="36.0" layoutY="-5.0">
+               <image>
+                  <Image url="@../asset/Monochrome_Modern_Technology_Black_Logo__1_-removebg-preview.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="96.0" layoutY="11.0">
+               <image>
+                  <Image url="@../asset/S%20letter%20geometric%20Logo%20design%20Linear.%20%20(2).png" />
+               </image>
+            </ImageView>
+            <Pane layoutX="13.0" layoutY="194.0" prefHeight="37.0" prefWidth="218.0" style="-fx-background-color: FFFCF2; -fx-background-radius: 5;">
+               <children>
+                  <Label layoutX="75.0" layoutY="2.0" prefHeight="32.0" prefWidth="97.0" text="Dashboard">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="27.0" layoutY="6.0">
+                     <image>
+                        <Image url="@../asset/dashboard.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane layoutX="13.0" layoutY="237.0" prefHeight="37.0" prefWidth="218.0" style="-fx-background-color: FFFCF2; -fx-border-radius: 15px;">
+               <children>
+                  <Label layoutX="75.0" layoutY="2.0" prefHeight="32.0" prefWidth="97.0" text="Orders" textFill="#6c757d">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="29.0" layoutY="7.0">
+                     <image>
+                        <Image url="@../asset/stock%20(1).png" />
+                     </image>
+                     <effect>
+                        <ColorAdjust contrast="-1.0" />
+                     </effect>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane layoutX="13.0" layoutY="280.0" prefHeight="37.0" prefWidth="218.0" style="-fx-background-color: FFFCF2; -fx-border-radius: 15px;">
+               <children>
+                  <Label layoutX="75.0" layoutY="2.0" prefHeight="32.0" prefWidth="97.0" text="Customers" textFill="#6c757d">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="13.0" layoutY="323.0" prefHeight="37.0" prefWidth="218.0" style="-fx-background-color: FFFCF2; -fx-border-radius: 15px;">
+               <children>
+                  <Label layoutX="75.0" layoutY="2.0" prefHeight="32.0" prefWidth="97.0" text="Devices" textFill="#6c757d">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="13.0" layoutY="366.0" prefHeight="37.0" prefWidth="218.0" style="-fx-background-color: FFFCF2; -fx-border-radius: 15px;">
+               <children>
+                  <Label layoutX="75.0" layoutY="2.0" prefHeight="32.0" prefWidth="97.0" text="Stock" textFill="#6c757d">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="13.0" layoutY="409.0" prefHeight="37.0" prefWidth="218.0" style="-fx-background-color: FFFCF2; -fx-border-radius: 15px;">
+               <children>
+                  <Label layoutX="75.0" layoutY="2.0" prefHeight="32.0" prefWidth="97.0" text="Suppliers" textFill="#6c757d">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="13.0" layoutY="452.0" prefHeight="37.0" prefWidth="218.0" style="-fx-background-color: FFFCF2; -fx-border-radius: 15px;">
+               <children>
+                  <Label layoutX="75.0" layoutY="2.0" prefHeight="32.0" prefWidth="97.0" text="Reports" textFill="#6c757d">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="13.0" layoutY="495.0" prefHeight="37.0" prefWidth="218.0" style="-fx-background-color: FFFCF2; -fx-border-radius: 15px;">
+               <children>
+                  <Label layoutX="75.0" layoutY="2.0" prefHeight="32.0" prefWidth="97.0" text="Employees" textFill="#6c757d">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="54.0" layoutY="602.0" prefHeight="128.0" prefWidth="133.0" style="-fx-background-color: DEE2E6; -fx-background-radius: 10;" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="241.0" prefHeight="35.0" prefWidth="1292.0" style="-fx-background-color: FFFCF2;">
+         <children>
+            <Label layoutX="18.0" layoutY="10.0" prefHeight="24.0" prefWidth="163.0" text="Dashboard">
+               <font>
+                  <Font name="Arial Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="1175.0" layoutY="13.0" prefHeight="18.0" prefWidth="42.0" text="Logout">
+               <font>
+                  <Font name="Arial Bold" size="12.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="1222.0" layoutY="15.0">
+               <image>
+                  <Image url="@../asset/sign-out.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="629.0" layoutY="10.0" prefHeight="24.0" prefWidth="163.0" text="Date">
+               <font>
+                  <Font name="Arial Bold" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
 </AnchorPane>
