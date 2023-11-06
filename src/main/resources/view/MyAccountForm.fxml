@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="691.0" prefWidth="450.0" style="-fx-background-color: #FFFCF2;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.MyAccountFormController">
+   <children>
+      <Pane layoutX="155.0" layoutY="52.0" prefHeight="134.0" prefWidth="140.0" style="-fx-background-color: #CCC5B9; -fx-background-radius: 10;" />
+      <Label alignment="CENTER" layoutX="93.0" layoutY="206.0" prefHeight="27.0" prefWidth="263.0" text="Account Name">
+         <font>
+            <Font name="Arial Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="93.0" layoutY="229.0" prefHeight="27.0" prefWidth="263.0" text="position">
+         <font>
+            <Font name="Arial Bold" size="12.0" />
+         </font>
+      </Label>
+      <Button layoutX="179.0" layoutY="631.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="90.0" style="-fx-background-color: #FFFCF2; -fx-border-color: #403D39;" text="Comfirm">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
