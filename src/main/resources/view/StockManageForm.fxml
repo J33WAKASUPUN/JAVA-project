@@ -1,11 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
-
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="782.0" prefWidth="1293.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.StockManageFormController">
    <children>
-      <Label layoutX="334.0" layoutY="162.0" text="Stock" />
+      <JFXButton layoutX="1176.0" layoutY="266.0" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Add" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="1072.0" layoutY="266.0" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Update" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="967.0" layoutY="266.0" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Delete" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="862.0" layoutY="266.0" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Clear" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <TableView layoutX="47.0" layoutY="329.0" prefHeight="402.0" prefWidth="1208.0">
+         <columns>
+            <TableColumn prefWidth="111.20001220703125" text="Item ID" />
+            <TableColumn prefWidth="427.1999969482422" text="Item name" />
+            <TableColumn prefWidth="188.800048828125" text="Unit price" />
+            <TableColumn prefWidth="164.0" text="Cost" />
+            <TableColumn minWidth="0.0" prefWidth="125.59991455078125" text="Qty on hand" />
+            <TableColumn prefWidth="191.2000732421875" text="Category" />
+         </columns>
+      </TableView>
+      <Label layoutX="48.0" layoutY="84.0" text="Item ID">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="444.0" layoutY="84.0" text="Name">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="1054.0" layoutY="180.0" text="Qty on hand">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="47.0" layoutY="180.0" text="Cost">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="41.0" layoutY="24.0" prefHeight="30.0" prefWidth="198.0" text="Manage Stock">
+         <font>
+            <Font name="Arial Bold" size="20.0" />
+         </font>
+      </Label>
+      <JFXTextField layoutX="48.0" layoutY="102.0" prefHeight="30.0" prefWidth="198.0" promptText="Enter item ID" unFocusColor="BLACK" />
+      <JFXTextField layoutX="443.0" layoutY="102.0" prefHeight="30.0" prefWidth="415.0" promptText="Enter item name" unFocusColor="BLACK" />
+      <JFXTextField layoutX="47.0" layoutY="197.0" prefHeight="30.0" prefWidth="234.0" promptText="Enter problem in device" text="Cost for one piece" unFocusColor="BLACK" />
+      <JFXTextField layoutX="1053.0" layoutY="197.0" prefHeight="30.0" prefWidth="198.0" promptText="Qty" unFocusColor="BLACK" />
+      <JFXComboBox layoutX="1053.0" layoutY="102.0" prefHeight="30.0" prefWidth="198.0" promptText="Select category" unFocusColor="BLACK" />
+      <Label layoutX="443.0" layoutY="180.0" text="Unit price">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Label>
+      <JFXTextField layoutX="443.0" layoutY="197.0" prefHeight="30.0" prefWidth="214.0" promptText="Enter problem in device" text="Unit price of one piece" unFocusColor="BLACK" />
+      <JFXComboBox layoutX="47.0" layoutY="265.0" prefHeight="30.0" prefWidth="198.0" promptText="Select category to filter items" unFocusColor="BLACK" />
+      <Label layoutX="1053.0" layoutY="85.0" text="Item category">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Label>
+      <JFXButton layoutX="1089.0" layoutY="26.0" prefHeight="30.0" prefWidth="163.0" style="-fx-background-color: #403D39;" text="Add new Catrgory" textFill="#bbff76">
+         <font>
+            <Font name="Arial Bold" size="12.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
@@ -19,10 +20,38 @@
             <Font name="Arial Bold" size="12.0" />
          </font>
       </Label>
-      <Button layoutX="179.0" layoutY="631.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="90.0" style="-fx-background-color: #FFFCF2; -fx-border-color: #403D39;" text="Comfirm">
+      <Label layoutX="193.0" layoutY="280.0" text="Username">
          <font>
-            <Font name="Arial Bold" size="14.0" />
+            <Font name="Arial Bold" size="13.0" />
          </font>
-      </Button>
+      </Label>
+      <JFXButton layoutX="259.0" layoutY="623.0" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #403D39;" text="Save" textFill="WHITE" />
+      <Label layoutX="147.0" layoutY="296.0" text="Sample username">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+      </Label>
+      <JFXButton layoutX="113.0" layoutY="623.0" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #403D39;" text="Close" textFill="WHITE" />
+      <JFXButton layoutX="155.0" layoutY="339.0" prefHeight="36.0" prefWidth="140.0" style="-fx-background-color: #403D39;" text="Change Password" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <JFXPasswordField layoutX="93.0" layoutY="404.0" prefHeight="36.0" prefWidth="263.0" />
+      <Label layoutX="93.0" layoutY="392.0" text="current password" />
+      <Label layoutX="277.0" layoutY="440.0" text="Invalied password">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <JFXPasswordField layoutX="93.0" layoutY="476.0" prefHeight="36.0" prefWidth="263.0" />
+      <Label layoutX="93.0" layoutY="464.0" text="new password" />
+      <JFXPasswordField layoutX="93.0" layoutY="536.0" prefHeight="36.0" prefWidth="263.0" />
+      <Label layoutX="93.0" layoutY="524.0" text="re-enter password" />
+      <Label layoutX="240.0" layoutY="572.0" text="password does not match">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -14,12 +14,12 @@
    <children>
       <AnchorPane layoutX="-1.0" prefHeight="781.0" prefWidth="242.0" style="-fx-background-color: FFFCF2;">
          <children>
-            <ImageView fitHeight="170.0" fitWidth="170.0" layoutX="36.0" layoutY="-5.0">
+            <ImageView fitHeight="170.0" fitWidth="170.0" layoutX="36.0" layoutY="6.0">
                <image>
                   <Image url="@../asset/Monochrome_Modern_Technology_Black_Logo__1_-removebg-preview.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="96.0" layoutY="11.0">
+            <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="96.0" layoutY="22.0">
                <image>
                   <Image url="@../asset/S letter geometric Logo design Linear.  (2).png" />
                </image>
@@ -129,7 +129,7 @@
                </image>
             </ImageView>
             <Line endX="-100.00001525878906" endY="600.7999877929688" layoutX="340.0" layoutY="133.0" startX="-100.00001525878906" startY="-76.79999542236328" />
-            <JFXButton layoutX="86.0" layoutY="727.0" onAction="#btnLogoutOnAction" text="Logout" underline="true">
+            <JFXButton layoutX="86.0" layoutY="712.0" onAction="#btnLogoutOnAction" text="Logout" underline="true">
                <font>
                   <Font name="Arial Bold" size="14.0" />
                </font>
@@ -138,127 +138,56 @@
       </AnchorPane>
       <AnchorPane fx:id="subRoot" layoutX="241.0" layoutY="-1.0" prefHeight="782.0" prefWidth="1293.0" style="-fx-background-color: FFFCF2;">
          <children>
-            <Pane layoutX="63.0" layoutY="407.0" prefHeight="80.0" prefWidth="262.0" style="-fx-background-color: #403D39; -fx-background-radius: 10;">
+            <Pane layoutX="63.0" layoutY="570.0" prefHeight="128.0" prefWidth="262.0" style="-fx-background-color: FFFCF2; -fx-border-color: #403D39; -fx-border-radius: 10;">
                <children>
-                  <Label layoutX="17.0" prefHeight="59.0" prefWidth="200.0" text="CUSTOMERS" textFill="WHITE">
+                  <Label layoutX="14.0" layoutY="64.0" prefHeight="26.0" prefWidth="200.0" text="TODAY'S CUSTOMERS">
                      <font>
                         <Font name="Arial Bold" size="18.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="80.0" fitWidth="82.0" layoutX="180.0" layoutY="14.0" opacity="0.64">
-                     <image>
-                        <Image url="@../icons/clipart1297398.png" />
-                     </image>
-                  </ImageView>
-                  <Label layoutX="17.0" layoutY="51.0" prefHeight="17.0" prefWidth="90.0" text="100" textFill="WHITE">
-                     <font>
-                        <Font name="Arial Bold" size="14.0" />
-                     </font>
-                  </Label>
-               </children></Pane>
-            <Pane layoutX="379.0" layoutY="407.0" prefHeight="80.0" prefWidth="262.0" style="-fx-background-color: #403D39; -fx-background-radius: 10;">
-               <children>
-                  <Label layoutX="17.0" prefHeight="59.0" prefWidth="200.0" text="INCOME" textFill="WHITE">
-                     <font>
-                        <Font name="Arial Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <ImageView fitHeight="91.0" fitWidth="90.0" layoutX="185.0" layoutY="6.0" opacity="0.66">
-                     <image>
-                        <Image url="@../icons/NicePng_sales-icon-png_1864816.png" />
-                     </image>
-                  </ImageView>
-                  <Label layoutX="17.0" layoutY="51.0" prefHeight="17.0" prefWidth="90.0" text="100" textFill="WHITE">
+                  <Label layoutX="17.0" layoutY="97.0" prefHeight="17.0" prefWidth="149.0" text="00">
                      <font>
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
                </children>
             </Pane>
-            <Pane layoutX="695.0" layoutY="407.0" prefHeight="80.0" prefWidth="262.0" style="-fx-background-color: #403D39; -fx-background-radius: 10;">
+            <Pane layoutX="379.0" layoutY="570.0" prefHeight="128.0" prefWidth="262.0" style="-fx-background-color: FFFCF2; -fx-border-color: #403D39; -fx-background-radius: 10; -fx-border-radius: 10;">
                <children>
-                  <Label layoutX="17.0" prefHeight="59.0" prefWidth="200.0" text="PRODUCTS SOLD" textFill="WHITE">
+                  <Label layoutX="17.0" layoutY="64.0" prefHeight="26.0" prefWidth="200.0" text="TODAY'S INCOME">
                      <font>
                         <Font name="Arial Bold" size="18.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="99.0" fitWidth="104.0" layoutX="180.0" layoutY="-2.0" opacity="0.64">
-                     <image>
-                        <Image url="@../icons/filled-box-64.png" />
-                     </image>
-                  </ImageView>
-                  <Label layoutX="17.0" layoutY="51.0" prefHeight="17.0" prefWidth="90.0" text="100" textFill="WHITE">
+                  <Label layoutX="20.0" layoutY="97.0" prefHeight="17.0" prefWidth="183.0" text="00">
                      <font>
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
                </children>
             </Pane>
-            <Pane layoutX="63.0" layoutY="576.0" prefHeight="80.0" prefWidth="262.0" style="-fx-background-color: #403D39; -fx-background-radius: 10;">
+            <Pane layoutX="695.0" layoutY="570.0" prefHeight="128.0" prefWidth="262.0" style="-fx-background-color: FFFCF2; -fx-background-radius: 10; -fx-border-color: #403D39; -fx-border-radius: 10;">
                <children>
-                  <Label layoutX="17.0" prefHeight="59.0" prefWidth="200.0" text="TODAY'S CUSTOMERS" textFill="WHITE">
+                  <Label layoutX="17.0" layoutY="64.0" prefHeight="26.0" prefWidth="242.0" text="TODAY'SPRODUCTS SOLD">
                      <font>
                         <Font name="Arial Bold" size="18.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="80.0" fitWidth="82.0" layoutX="180.0" layoutY="14.0" opacity="0.64">
-                     <image>
-                        <Image url="@../icons/clipart1297398.png" />
-                     </image>
-                  </ImageView>
-                  <Label layoutX="17.0" layoutY="51.0" prefHeight="17.0" prefWidth="90.0" text="100" textFill="WHITE">
+                  <Label layoutX="20.0" layoutY="97.0" prefHeight="17.0" prefWidth="208.0" text="00">
                      <font>
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
                </children>
             </Pane>
-            <Pane layoutX="379.0" layoutY="576.0" prefHeight="80.0" prefWidth="262.0" style="-fx-background-color: #403D39; -fx-background-radius: 10;">
-               <children>
-                  <Label layoutX="17.0" prefHeight="59.0" prefWidth="200.0" text="TODAY'S INCOME" textFill="WHITE">
-                     <font>
-                        <Font name="Arial Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <ImageView fitHeight="91.0" fitWidth="90.0" layoutX="185.0" layoutY="6.0" opacity="0.66">
-                     <image>
-                        <Image url="@../icons/NicePng_sales-icon-png_1864816.png" />
-                     </image>
-                  </ImageView>
-                  <Label layoutX="17.0" layoutY="51.0" prefHeight="17.0" prefWidth="90.0" text="100" textFill="WHITE">
-                     <font>
-                        <Font name="Arial Bold" size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-            <Pane layoutX="695.0" layoutY="576.0" prefHeight="80.0" prefWidth="262.0" style="-fx-background-color: #403D39; -fx-background-radius: 10;">
-               <children>
-                  <Label layoutX="17.0" prefHeight="59.0" prefWidth="242.0" text="TODAY'SPRODUCTS SOLD" textFill="WHITE">
-                     <font>
-                        <Font name="Arial Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <ImageView fitHeight="99.0" fitWidth="104.0" layoutX="180.0" layoutY="-2.0" opacity="0.64">
-                     <image>
-                        <Image url="@../icons/filled-box-64.png" />
-                     </image>
-                  </ImageView>
-                  <Label layoutX="17.0" layoutY="51.0" prefHeight="17.0" prefWidth="90.0" text="100" textFill="WHITE">
-                     <font>
-                        <Font name="Arial Bold" size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-            <Line endX="210.20001220703125" layoutX="164.0" layoutY="540.0" startX="-100.0" />
-            <Line endX="210.20001220703125" layoutX="746.0" layoutY="540.0" startX="-100.0" />
-            <Label layoutX="434.0" layoutY="531.0" prefHeight="18.0" prefWidth="200.0" text="Today - 20 sep 2023, Friday" textAlignment="CENTER">
+            <Line endX="210.20001220703125" layoutX="164.0" layoutY="529.0" startX="-100.0" />
+            <Line endX="210.20001220703125" layoutX="746.0" layoutY="529.0" startX="-100.0" />
+            <Label layoutX="434.0" layoutY="520.0" prefHeight="18.0" prefWidth="200.0" text="Today - 20 sep 2023, Friday" textAlignment="CENTER">
                <font>
                   <Font name="Arial Bold" size="12.0" />
                </font>
             </Label>
-            <Pane layoutX="63.0" layoutY="156.0" prefHeight="128.0" prefWidth="895.0" style="-fx-background-color: #DEE2E6; -fx-background-radius: 10;">
+            <Pane layoutX="63.0" layoutY="118.0" prefHeight="128.0" prefWidth="895.0" style="-fx-background-color: #DEE2E6; -fx-background-radius: 10;">
                <children>
                   <Label layoutX="69.0" layoutY="29.0" prefHeight="35.0" prefWidth="379.0" text="Welcome back Admin!">
                      <font>
@@ -272,27 +201,27 @@
                   </ImageView>
                </children>
             </Pane>
-            <AnchorPane fx:id="subRootAcc" layoutX="1023.0" prefHeight="782.0" prefWidth="270.0" style="-fx-background-color: FFFCF2;">
+            <AnchorPane fx:id="subRootAcc" layoutX="1023.0" layoutY="-10.0" prefHeight="782.0" prefWidth="270.0" style="-fx-background-color: FFFCF2;">
                <children>
-                  <Pane layoutX="66.0" layoutY="68.0" prefHeight="134.0" prefWidth="140.0" style="-fx-background-color: #CCC5B9; -fx-background-radius: 10;" />
-                  <Label alignment="CENTER" layoutX="11.0" layoutY="223.0" prefHeight="24.0" prefWidth="250.0" text="Kamal Silva">
+                  <Pane layoutX="66.0" layoutY="164.0" prefHeight="134.0" prefWidth="140.0" style="-fx-background-color: #CCC5B9; -fx-background-radius: 10;" />
+                  <Label alignment="CENTER" layoutX="11.0" layoutY="319.0" prefHeight="24.0" prefWidth="250.0" text="Kamal Silva">
                      <font>
                         <Font name="Arial Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" layoutX="11.0" layoutY="243.0" prefHeight="18.0" prefWidth="250.0" text="Owner">
+                  <Label alignment="CENTER" layoutX="11.0" layoutY="339.0" prefHeight="18.0" prefWidth="250.0" text="Owner">
                      <font>
                         <Font name="Arial Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Pane layoutX="43.0" layoutY="566.0" prefHeight="80.0" prefWidth="183.0" style="-fx-background-color: #403D39; -fx-background-radius: 10;">
+                  <Pane layoutX="43.0" layoutY="537.0" prefHeight="80.0" prefWidth="183.0" style="-fx-background-color: F8F9FA; -fx-border-color: #403D39;">
                      <children>
-                        <Label alignment="CENTER" layoutX="-9.0" prefHeight="59.0" prefWidth="200.0" text="TOTAL SALES" textFill="WHITE">
+                        <Label alignment="CENTER" layoutX="-9.0" layoutY="3.0" prefHeight="59.0" prefWidth="200.0" text="TOTAL SALES">
                            <font>
                               <Font name="Arial Bold" size="18.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" layoutX="45.0" layoutY="51.0" prefHeight="17.0" prefWidth="90.0" text="100" textFill="WHITE">
+                        <Label alignment="CENTER" layoutX="13.0" layoutY="49.0" prefHeight="17.0" prefWidth="157.0" text="0">
                            <font>
                               <Font name="Arial Bold" size="14.0" />
                            </font>
@@ -304,9 +233,71 @@
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </JFXButton>
+                  <Label alignment="CENTER" layoutX="11.0" layoutY="387.0" prefHeight="24.0" prefWidth="250.0" text="sample@email.com">
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="11.0" layoutY="448.0" prefHeight="18.0" prefWidth="250.0" text="UserID - U001">
+                     <font>
+                        <Font name="Arial Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="11.0" layoutY="468.0" prefHeight="18.0" prefWidth="250.0" text="EmployeeID - E001">
+                     <font>
+                        <Font name="Arial Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="11.0" layoutY="406.0" prefHeight="24.0" prefWidth="250.0" text="sample@email.com">
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
-            <Line endX="-100.00001525878906" endY="600.7999877929688" layoutX="1122.0" layoutY="130.0" startX="-100.00001525878906" startY="-76.79999542236328" />
+            <Line endX="-100.00001525878906" endY="600.7999877929688" layoutX="1122.0" layoutY="120.0" startX="-100.00001525878906" startY="-76.79999542236328" />
+            <Pane layoutX="63.0" layoutY="359.0" prefHeight="128.0" prefWidth="262.0" style="-fx-background-color: FFFCF2; -fx-border-color: #403D39; -fx-background-radius: 10; -fx-border-radius: 10;">
+               <children>
+                  <Label layoutX="14.0" layoutY="64.0" prefHeight="26.0" prefWidth="200.0" text="CUSTOMERS">
+                     <font>
+                        <Font name="Arial Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="17.0" layoutY="97.0" prefHeight="17.0" prefWidth="149.0" text="00">
+                     <font>
+                        <Font name="Arial Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="379.0" layoutY="359.0" prefHeight="128.0" prefWidth="262.0" style="-fx-background-color: FFFCF2; -fx-border-color: #403D39; -fx-background-radius: 10; -fx-border-radius: 10;">
+               <children>
+                  <Label layoutX="17.0" layoutY="64.0" prefHeight="26.0" prefWidth="200.0" text="INCOME">
+                     <font>
+                        <Font name="Arial Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="20.0" layoutY="97.0" prefHeight="17.0" prefWidth="183.0" text="00">
+                     <font>
+                        <Font name="Arial Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="695.0" layoutY="359.0" prefHeight="128.0" prefWidth="262.0" style="-fx-background-color: FFFCF2; -fx-background-radius: 10; -fx-border-color: #403D39; -fx-border-radius: 10;">
+               <children>
+                  <Label layoutX="17.0" layoutY="64.0" prefHeight="26.0" prefWidth="242.0" text="PRODUCTS SOLD">
+                     <font>
+                        <Font name="Arial Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="20.0" layoutY="97.0" prefHeight="17.0" prefWidth="208.0" text="00">
+                     <font>
+                        <Font name="Arial Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
          </children>
       </AnchorPane>
       <Label layoutX="27.0" layoutY="56.0" prefHeight="17.0" prefWidth="90.0" text="100" textFill="WHITE">

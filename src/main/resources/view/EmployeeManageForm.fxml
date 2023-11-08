@@ -50,17 +50,17 @@
             <Font name="Arial Bold" size="13.0" />
          </font>
       </Label>
-      <JFXButton layoutX="1176.0" layoutY="266.0" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Add" textFill="#70ff57">
+      <JFXButton layoutX="1176.0" layoutY="266.0" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Add" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="12.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="1072.0" layoutY="266.0" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Update" textFill="#f0ff4d">
+      <JFXButton layoutX="1072.0" layoutY="266.0" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Update" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="12.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="967.0" layoutY="266.0" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Delete" textFill="#ff6262">
+      <JFXButton layoutX="967.0" layoutY="266.0" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Delete" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="12.0" />
          </font>
