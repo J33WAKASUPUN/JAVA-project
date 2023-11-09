@@ -10,33 +10,34 @@
 
 <AnchorPane prefHeight="782.0" prefWidth="1293.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.HandoverDeviceManageFormController">
    <children>
-      <JFXButton layoutX="1176.0" layoutY="266.0" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Add" textFill="WHITE">
+      <JFXButton layoutX="1176.0" layoutY="266.0" onAction="#btnAddOnAction" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Add" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="12.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="1072.0" layoutY="266.0" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Update" textFill="WHITE">
+      <JFXButton layoutX="1072.0" layoutY="266.0" onAction="#btnUpdateOnAction" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Update" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="12.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="967.0" layoutY="266.0" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Delete" textFill="WHITE">
+      <JFXButton layoutX="967.0" layoutY="266.0" onAction="#btnDeleteOnAction" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Delete" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="12.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="862.0" layoutY="266.0" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Clear" textFill="WHITE">
+      <JFXButton layoutX="862.0" layoutY="266.0" onAction="#btnClearOnAction" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Clear" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="12.0" />
          </font>
       </JFXButton>
-      <TableView layoutX="47.0" layoutY="329.0" prefHeight="402.0" prefWidth="1208.0">
+      <TableView fx:id="tblDevice" layoutX="47.0" layoutY="329.0" prefHeight="402.0" prefWidth="1208.0">
          <columns>
-            <TableColumn prefWidth="111.20001220703125" text="Device ID" />
-            <TableColumn prefWidth="271.1999969482422" text="Device name" />
-            <TableColumn prefWidth="500.00006103515625" text="Problom in device" />
-            <TableColumn prefWidth="167.99993896484375" text="Status" />
-            <TableColumn prefWidth="155.2000732421875" text="Cost" />
+            <TableColumn fx:id="colId" prefWidth="111.20001220703125" text="Device ID" />
+            <TableColumn fx:id="colDeviceName" prefWidth="271.1999969482422" text="Device name" />
+            <TableColumn fx:id="colProblem" prefWidth="364.0" text="Problom in device" />
+            <TableColumn fx:id="colStatus" prefWidth="148.7999267578125" text="Status" />
+            <TableColumn fx:id="colCost" prefWidth="155.20013427734375" text="Cost" />
+            <TableColumn fx:id="colDate" prefWidth="171.1998291015625" text="Date" />
          </columns>
       </TableView>
       <Label layoutX="48.0" layoutY="84.0" text="Device ID">
@@ -69,10 +70,10 @@
             <Font name="Arial Bold" size="20.0" />
          </font>
       </Label>
-      <JFXTextField layoutX="48.0" layoutY="102.0" prefHeight="30.0" prefWidth="198.0" promptText="Enter device ID" unFocusColor="BLACK" />
-      <JFXTextField layoutX="397.0" layoutY="102.0" prefHeight="30.0" prefWidth="415.0" promptText="Enter device name" unFocusColor="BLACK" />
-      <JFXTextField layoutX="47.0" layoutY="197.0" prefHeight="30.0" prefWidth="747.0" promptText="Enter problem in device" unFocusColor="BLACK" />
-      <JFXTextField layoutX="948.0" layoutY="102.0" prefHeight="30.0" prefWidth="304.0" promptText="Status (Repaired / Repairing)" unFocusColor="BLACK" />
-      <JFXTextField layoutX="948.0" layoutY="197.0" prefHeight="30.0" prefWidth="304.0" promptText="Cost for repair device" unFocusColor="BLACK" />
+      <JFXTextField fx:id="txtId" layoutX="48.0" layoutY="102.0" prefHeight="30.0" prefWidth="198.0" promptText="Enter device ID" unFocusColor="BLACK" />
+      <JFXTextField fx:id="txtName" layoutX="397.0" layoutY="102.0" prefHeight="30.0" prefWidth="415.0" promptText="Enter device name" unFocusColor="BLACK" />
+      <JFXTextField fx:id="txtProblem" layoutX="47.0" layoutY="197.0" prefHeight="30.0" prefWidth="747.0" promptText="Enter problem in device" unFocusColor="BLACK" />
+      <JFXTextField fx:id="txtStatus" layoutX="948.0" layoutY="102.0" prefHeight="30.0" prefWidth="304.0" promptText="Status (Repaired / Repairing)" unFocusColor="BLACK" />
+      <JFXTextField fx:id="txtCost" layoutX="948.0" layoutY="197.0" prefHeight="30.0" prefWidth="304.0" promptText="Cost for repair device" unFocusColor="BLACK" />
    </children>
 </AnchorPane>

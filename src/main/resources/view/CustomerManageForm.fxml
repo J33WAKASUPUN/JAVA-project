@@ -10,26 +10,26 @@
 
 <AnchorPane prefHeight="782.0" prefWidth="1293.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.CustomerManageFormController">
    <children>
-      <TableView editable="true" layoutX="47.0" layoutY="329.0" prefHeight="402.0" prefWidth="1208.0">
+      <TableView fx:id="tblCustomer" editable="true" layoutX="47.0" layoutY="329.0" prefHeight="402.0" prefWidth="1208.0">
         <columns>
-          <TableColumn prefWidth="85.60000228881836" text="Customer ID" />
-          <TableColumn prefWidth="339.2000274658203" text="Name" />
-            <TableColumn prefWidth="286.39996337890625" text="Email" />
-            <TableColumn prefWidth="143.20001220703125" text="Contact" />
-            <TableColumn minWidth="0.0" prefWidth="391.199951171875" text="Address" />
+          <TableColumn fx:id="colId" prefWidth="85.60000228881836" text="Customer ID" />
+          <TableColumn fx:id="colName" prefWidth="339.2000274658203" text="Name" />
+            <TableColumn fx:id="colEmail" prefWidth="286.39996337890625" text="Email" />
+            <TableColumn fx:id="colContact" prefWidth="143.20001220703125" text="Contact" />
+            <TableColumn fx:id="colAddress" minWidth="0.0" prefWidth="391.199951171875" text="Address" />
         </columns>
       </TableView>
-      <JFXButton layoutX="1176.0" layoutY="266.0" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Add" textFill="#70ff57">
+      <JFXButton layoutX="1176.0" layoutY="266.0" onAction="#btnAddOnAction" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Add" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="12.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="1072.0" layoutY="266.0" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Update" textFill="#f0ff4d">
+      <JFXButton layoutX="1072.0" layoutY="266.0" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Update" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="12.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="967.0" layoutY="266.0" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Delete" textFill="#ff6262">
+      <JFXButton layoutX="967.0" layoutY="266.0" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Delete" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="12.0" />
          </font>
@@ -64,11 +64,11 @@
             <Font name="Arial Bold" size="13.0" />
          </font>
       </Label>
-      <JFXTextField layoutX="48.0" layoutY="102.0" prefHeight="30.0" prefWidth="198.0" promptText="Enter customer ID" unFocusColor="BLACK" />
-      <JFXTextField layoutX="397.0" layoutY="102.0" prefHeight="30.0" prefWidth="415.0" promptText="Enter customer name" unFocusColor="BLACK" />
-      <JFXTextField layoutX="48.0" layoutY="197.0" prefHeight="30.0" prefWidth="457.0" promptText="Enter employee address" unFocusColor="BLACK" />
-      <JFXTextField layoutX="948.0" layoutY="102.0" prefHeight="30.0" prefWidth="304.0" promptText="Enter contact number" unFocusColor="BLACK" />
-      <JFXTextField layoutX="843.0" layoutY="197.0" prefHeight="30.0" prefWidth="409.0" promptText="Enter email address" unFocusColor="BLACK" />
+      <JFXTextField fx:id="txtCustomerId" layoutX="48.0" layoutY="102.0" prefHeight="30.0" prefWidth="198.0" promptText="Enter customer ID" unFocusColor="BLACK" />
+      <JFXTextField fx:id="txtCustomerName" layoutX="397.0" layoutY="102.0" prefHeight="30.0" prefWidth="415.0" promptText="Enter customer name" unFocusColor="BLACK" />
+      <JFXTextField fx:id="txtAddress" layoutX="48.0" layoutY="197.0" prefHeight="30.0" prefWidth="457.0" promptText="Enter employee address" unFocusColor="BLACK" />
+      <JFXTextField fx:id="txtContactNumber" layoutX="948.0" layoutY="102.0" prefHeight="30.0" prefWidth="304.0" promptText="Enter contact number" unFocusColor="BLACK" />
+      <JFXTextField fx:id="txtEmail" layoutX="843.0" layoutY="197.0" prefHeight="30.0" prefWidth="409.0" promptText="Enter email address" unFocusColor="BLACK" />
       <Label layoutX="41.0" layoutY="24.0" prefHeight="30.0" prefWidth="198.0" text="Manage Customers">
          <font>
             <Font name="Arial Bold" size="20.0" />

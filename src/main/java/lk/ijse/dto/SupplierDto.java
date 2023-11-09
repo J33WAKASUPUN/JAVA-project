@@ -7,11 +7,9 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class CustomerDto {
-    private String cId;
-    private String name;
-    private String email;
+public class SupplierDto {
+    private String supId;
+    private String sName;
     private String address;
     private String contact;
-    private String userId;
 }

@@ -1,15 +1,111 @@
 package lk.ijse.controller;
 
+import com.jfoenix.controls.JFXTextField;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import lk.ijse.dto.CustomerDto;
+import lk.ijse.dto.tm.CustomerTm;
+import lk.ijse.model.CustomerModel;
 
-import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
 
 public class CustomerManageFormController {
-    public void btnAddCustomerOnActoin(ActionEvent actionEvent) throws IOException {
+    public JFXTextField txtCustomerId;
+    public JFXTextField txtCustomerName;
+    public JFXTextField txtAddress;
+    public JFXTextField txtContactNumber;
+    public JFXTextField txtEmail;
+    @FXML
+    private TableColumn<?, ?> colAddress;
 
+    @FXML
+    private TableColumn<?, ?> colContact;
+
+    @FXML
+    private TableColumn<?, ?> colEmail;
+
+    @FXML
+    private TableColumn<?, ?> colId;
+
+    @FXML
+    private TableColumn<?, ?> colName;
+
+    @FXML
+    private TableView<CustomerTm> tblCustomer;
+
+    public  void initialize (){
+        setCellValueFactory();
+        loadAllCustomer();
+    }
+
+    public void setCellValueFactory(){
+        colId.setCellValueFactory(new PropertyValueFactory<>("cId"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+        colContact.setCellValueFactory(new PropertyValueFactory<>("contact"));
+    }
+
+    public void loadAllCustomer() {
+        var model = new CustomerModel();
+
+        ObservableList<CustomerTm> obList = FXCollections.observableArrayList();
+        try {
+            List<CustomerDto> dtoList = CustomerModel.getAllCustomer();
+
+            for(CustomerDto dto : dtoList){
+                obList.add(
+                        new CustomerTm(
+                                dto.getCId(),
+                                dto.getName(),
+                                dto.getEmail(),
+                                dto.getAddress(),
+                                dto.getContact()
+                        )
+                );
+            }
+            tblCustomer.setItems(obList);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void btnAddCustomerOnActoin(ActionEvent actionEvent) {
+    }
+
+    public void btnAddOnAction(ActionEvent actionEvent) {
+        String id = txtCustomerId.getText();
+        String name= txtCustomerName.getText();
+        String address = txtAddress.getText();
+        String contact = txtContactNumber.getText();
+        String email = txtEmail.getText();
+        String uId = "U001";
+
+        if(id.isEmpty() || name.isEmpty() || address.isEmpty() || contact.isEmpty() || email.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Fill all fields");
+            alert.showAndWait();
+            return;
+        }
+        CustomerDto dto = new CustomerDto(id, name, address, contact, email,uId);
+
+        try {
+            boolean isSaved = CustomerModel.setCustomer(dto);
+            if(isSaved){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Succsess");
+                alert.showAndWait();
+            }else{
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Somthing went wrong");
+                alert.showAndWait();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

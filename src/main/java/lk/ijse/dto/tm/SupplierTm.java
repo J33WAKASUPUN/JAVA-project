@@ -1,6 +1,5 @@
 package lk.ijse.dto.tm;
 
-import lk.ijse.dto.CustomerDto;
 import lombok.*;
 
 @Getter
@@ -8,10 +7,9 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class CustomerTm {
-    private String cId;
-    private String name;
-    private String email;
+public class SupplierTm {
+    private String supId;
+    private String sName;
     private String address;
     private String contact;
 }

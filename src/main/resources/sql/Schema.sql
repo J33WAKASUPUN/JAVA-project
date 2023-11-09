@@ -1,4 +1,5 @@
-CREATE DATABASE serisaraNetworks;
+drop database if exists serisaraNetworks;
+CREATE DATABASE if not exists serisaraNetworks;
 
 USE serisaraNetworks;
 
@@ -17,7 +18,6 @@ CREATE TABLE employee(
                          position VARCHAR (50),
                          contact VARCHAR (11),
                          salary INT(15),
-                         salaryStatus VARCHAR (10),
                          userId VARCHAR (25),
                          CONSTRAINT FOREIGN KEY(userId) REFERENCES user(userId) on Delete Cascade on Update Cascade
 );
@@ -38,6 +38,7 @@ CREATE TABLE handoverDevice(
                                problem VARCHAR (200),
                                status VARCHAR (100),
                                cost INT (25),
+                               date DATE,
                                cId VARCHAR (25),
                                CONSTRAINT FOREIGN KEY(cId) REFERENCES customer(cId) on Delete Cascade on Update Cascade
 );
@@ -52,7 +53,6 @@ CREATE TABLE payment(
 CREATE TABLE item(
                      itemId VARCHAR (25) PRIMARY KEY,
                      itemName VARCHAR (150),
-                     itemCategory VARCHAR (50),
                      qtyOnHand INT (20),
                      cost INT (20),
                      unitPrice INT (20)
@@ -92,12 +92,13 @@ CREATE TABLE orders(
                        orderId VARCHAR (25) PRIMARY KEY,
                        qty INT (10),
                        date DATE,
+                       price INT (25),
                        cId VARCHAR (25),
                        pId VARCHAR (25),
                        deliveryId VARCHAR (25),
                        CONSTRAINT FOREIGN KEY(cId) REFERENCES customer(cId) on Delete Cascade on Update Cascade,
                        CONSTRAINT FOREIGN KEY(pId) REFERENCES payment(pId) on Delete Cascade on Update Cascade,
-                       CONSTRAINT FOREIGN KEY(deleveryId) REFERENCES delivery(deliveryId) on Delete Cascade on Update Cascade
+                       CONSTRAINT FOREIGN KEY(deliveryId) REFERENCES delivery(deliveryId) on Delete Cascade on Update Cascade
 );
 
 CREATE TABLE orderItemDetail(

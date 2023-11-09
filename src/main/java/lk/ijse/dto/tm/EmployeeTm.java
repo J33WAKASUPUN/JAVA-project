@@ -1,4 +1,4 @@
-package lk.ijse.dto;
+package lk.ijse.dto.tm;
 
 import lombok.*;
 
@@ -7,11 +7,11 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class CustomerDto {
-    private String cId;
+public class EmployeeTm {
+    private String empId;
     private String name;
-    private String email;
     private String address;
+    private String position;
     private String contact;
-    private String userId;
+    private String salary;
 }

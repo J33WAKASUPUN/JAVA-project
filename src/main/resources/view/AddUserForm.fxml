@@ -58,7 +58,7 @@
             <Font name="Arial Bold" size="12.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="332.0" layoutY="644.0" prefHeight="36.0" prefWidth="90.0" style="-fx-background-color: #FFFCF2; -fx-border-color: #403D39;" text="Comfirm">
+      <JFXButton layoutX="332.0" layoutY="644.0" prefHeight="36.0" prefWidth="90.0" style="-fx-background-color: #FFFCF2; -fx-border-color: #403D39;" text="Cancel">
          <font>
             <Font name="Arial Bold" size="12.0" />
          </font>
