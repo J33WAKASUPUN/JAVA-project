@@ -108,4 +108,68 @@ public class CustomerManageFormController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    void btnClearOnAction(ActionEvent event) {
+        clearFields();
+    }
+
+    @FXML
+    void btnDeleteOnAction(ActionEvent event) {
+        String id = txtCustomerId.getText();
+
+        try {
+            boolean isDeleted = CustomerModel.deleteCustomer(id);
+            if (isDeleted) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Success");
+                alert.showAndWait();
+                loadAllCustomer();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR,"Something went wrong");
+                alert.showAndWait();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    void btnUpdateOnAction(ActionEvent event) {
+        String id = txtCustomerId.getText();
+        String name= txtCustomerName.getText();
+        String address = txtAddress.getText();
+        String contact = txtContactNumber.getText();
+        String email = txtEmail.getText();
+        String uId = "SampleU001";
+
+        if(id.isEmpty() || name.isEmpty() || address.isEmpty() || contact.isEmpty() || email.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Fill all fields");
+            alert.showAndWait();
+            return;
+        }
+        CustomerDto dto = new CustomerDto(id, name, address, contact, email, uId);
+
+        try {
+            boolean isAdded = CustomerModel.setCustomer(dto);
+            if(isAdded){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Succsess");
+                alert.showAndWait();
+                loadAllCustomer();
+                clearFields();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Somthing went wrong");
+                alert.showAndWait();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void clearFields() {
+        txtCustomerId.setText("");
+        txtCustomerName.setText("");
+        txtAddress.setText("");
+        txtContactNumber.setText("");
+        txtEmail.setText("");
+    }
 }

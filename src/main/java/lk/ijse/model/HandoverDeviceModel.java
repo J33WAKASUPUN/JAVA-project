@@ -32,4 +32,41 @@ public class HandoverDeviceModel {
         }
         return list;
     }
+
+    public static boolean setDevice(DeviceDto dto) throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "INSERT INTO handoverDevice VALUES (?,?,?,?,?,?,?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setObject(1, dto.getDeviceId());
+        preparedStatement.setObject(2, dto.getDName());
+        preparedStatement.setObject(3, dto.getProblem());
+        preparedStatement.setObject(4, dto.getStatus());
+        preparedStatement.setObject(5, dto.getCost());
+        preparedStatement.setObject(6, dto.getDate());
+        preparedStatement.setObject(7, dto.getCId());
+        return preparedStatement.executeUpdate() > 0;
+    }
+
+    public static boolean updateDevice(DeviceDto dto) throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+        String sql = "Update handoverDevice SET dName =?, problem =?, status =?, cost =?, date =?, cId =? WHERE deviceId =?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, dto.getDeviceId());
+        preparedStatement.setString(2, dto.getDName());
+        preparedStatement.setString(3, dto.getProblem());
+        preparedStatement.setString(4, dto.getStatus());
+        preparedStatement.setString(5, dto.getCost());
+        preparedStatement.setString(6, dto.getDate());
+        preparedStatement.setString(7, dto.getCId());
+        return preparedStatement.executeUpdate() > 0;
+    }
+
+    public static boolean deleteDevice(String deviceId) throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+        String sql = "DELETE FROM handoverDevice WHERE deviceId =?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, deviceId);
+        return preparedStatement.executeUpdate() > 0;
+    }
 }

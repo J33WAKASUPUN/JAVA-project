@@ -24,17 +24,17 @@
             <Font name="Arial Bold" size="12.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="1072.0" layoutY="266.0" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Update" textFill="WHITE">
+      <JFXButton layoutX="1072.0" layoutY="266.0" onAction="#btnUpdateOnAction" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Update" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="12.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="967.0" layoutY="266.0" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Delete" textFill="WHITE">
+      <JFXButton layoutX="967.0" layoutY="266.0" onAction="#btnDeleteOnAction" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Delete" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="12.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="862.0" layoutY="266.0" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Clear" textFill="WHITE">
+      <JFXButton layoutX="862.0" layoutY="266.0" onAction="#btnClearOnAction" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Clear" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="12.0" />
          </font>

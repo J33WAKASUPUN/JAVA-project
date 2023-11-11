@@ -58,5 +58,30 @@ public class CustomerModel {
         return preparedStatement.executeUpdate() > 0;
     }
 
+    public static boolean deleteCustomer (String id) throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+        String sql = "DELETE FROM customer WHERE id = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1,id );
+        return preparedStatement.executeUpdate() > 0;
+    }
 
+    public static CustomerDto getCustomer(String id) throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+        String sql = "SELECT * FROM customer WHERE id =?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1,id );
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if(resultSet.next()){
+            CustomerDto customerDto = new CustomerDto();
+            customerDto.setCId(resultSet.getString(1));
+            customerDto.setName(resultSet.getString(2));
+            customerDto.setEmail(resultSet.getString(3));
+            customerDto.setAddress(resultSet.getString(4));
+            customerDto.setContact(resultSet.getString(5));
+            customerDto.setUserId(resultSet.getString(6));
+            return customerDto;
+        }
+        return null;
+    }
 }

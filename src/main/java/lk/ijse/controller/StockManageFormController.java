@@ -118,4 +118,68 @@ public class StockManageFormController {
         }
     }
 
+    @FXML
+    void btnClearOnAction(ActionEvent event) {
+        clearFields();
+    }
+
+    @FXML
+    void btnDeleteOnAction(ActionEvent event) {
+        String id = txtId.getText();
+
+        try {
+            boolean isDeleted = ItemModel.deleteItem(id);
+            if (isDeleted) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Success");
+                alert.showAndWait();
+                loadAllItems();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR,"Something went wrong");
+                alert.showAndWait();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    void btnUpdateOnAction(ActionEvent event) {
+        String id = txtId.getText();
+        String name= txtName.getText();
+        String cost = txtCost.getText();
+        String qty = txtQty.getText();
+        String unitPrice = txtUnitPrice.getText();
+
+        if(id.isEmpty() || name.isEmpty() || cost.isEmpty() || qty.isEmpty() || unitPrice.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Fill all fields");
+            alert.showAndWait();
+            return;
+        }
+        ItemDto dto = new ItemDto(id, name, cost, qty, unitPrice);
+
+        try {
+            boolean isUpdated = ItemModel.updateItem(dto);
+
+            if (isUpdated){
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Success");
+                alert.showAndWait();
+                clearFields();
+                loadAllItems();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Something went wrong");
+                alert.showAndWait();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void clearFields() {
+        txtId.setText("");
+        txtName.setText("");
+        txtCost.setText("");
+        txtQty.setText("");
+        txtUnitPrice.setText("");
+    }
+
 }

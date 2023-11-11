@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -91,22 +92,94 @@ public class HandoverDeviceManageFormController {
 
     @FXML
     void btnAddOnAction(ActionEvent event) {
+        try {
+            String id = txtId.getText();
+            String name = txtName.getText();
+            String problem = txtProblem.getText();
+            String status = txtStatus.getText();
+            String cost = txtCost.getText();
+            String date = "2023.12.12";
+            String cId = "null";
 
+            DeviceDto deviceDto = new DeviceDto(id, name, problem, status, cost, date ,cId);
+
+            boolean isAdded = HandoverDeviceModel.setDevice(deviceDto);
+            if (isAdded) {
+                Alert alert =new Alert(Alert.AlertType.CONFIRMATION, "Success");
+                alert.showAndWait();
+                loadAllItems();
+            }else {
+                Alert alert = new Alert(Alert.AlertType.ERROR,"Something went wrong");
+                alert.showAndWait();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
     void btnClearOnAction(ActionEvent event) {
-
+        clearFields();
     }
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
+        String id = txtId.getText();
 
+        try {
+            boolean isDeleted = HandoverDeviceModel.deleteDevice(id);
+            if (isDeleted) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Success");
+                alert.showAndWait();
+                loadAllItems();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR,"Something went wrong");
+                alert.showAndWait();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
+        String id = txtId.getText();
+        String name= txtName.getText();
+        String problem = txtProblem.getText();
+        String status = txtStatus.getText();
+        String cost = txtCost.getText();
+        String date = "2023.12.12";
+        String cId = "null";
 
+        if(id.isEmpty() || name.isEmpty() || problem.isEmpty() || status.isEmpty() || cost.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Fill all fields");
+            alert.showAndWait();
+            return;
+        }
+        DeviceDto dto = new DeviceDto(id, name, problem, status, cost, date ,cId);
+
+        try {
+            boolean isUpdated = HandoverDeviceModel.updateDevice(dto);
+            if (isUpdated){
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Success");
+                alert.showAndWait();
+                loadAllItems();
+                clearFields();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR,"Something went wrong");
+                alert.showAndWait();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void clearFields() {
+        txtId.setText("");
+        txtName.setText("");
+        txtProblem.setText("");
+        txtStatus.setText("");
+        txtCost.setText("");
     }
 
 }

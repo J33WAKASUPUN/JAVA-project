@@ -95,20 +95,20 @@ public class SupplierManageFormController {
         }
         SupplierDto dto = new SupplierDto(id, name, address, contact);
 
-        boolean isSaved = false;
+
         try {
-            isSaved = SupplierModel.setSupplier(dto);
+            boolean isSaved = SupplierModel.setSupplier(dto);
+            if (isSaved) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Succsess");
+                alert.showAndWait();
+                loadAllSupplier();
+                clearFields();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Somthing went wrong");
+                alert.showAndWait();
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }
-        if (isSaved) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Succsess");
-            alert.showAndWait();
-            loadAllSupplier();
-            clearFields();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Somthing went wrong");
-            alert.showAndWait();
         }
     }
 

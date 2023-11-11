@@ -10,14 +10,14 @@
 
 <AnchorPane prefHeight="782.0" prefWidth="1293.0" style="-fx-background-color: FFFCF2;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.EmployeeManageFormController">
    <children>
-      <TableView layoutX="47.0" layoutY="329.0" prefHeight="355.0" prefWidth="1208.0">
+      <TableView fx:id="tblEmployee" layoutX="47.0" layoutY="329.0" prefHeight="355.0" prefWidth="1208.0">
         <columns>
-          <TableColumn prefWidth="111.20001220703125" text="Employee ID" />
-          <TableColumn prefWidth="319.1999816894531" text="Name" />
-            <TableColumn prefWidth="305.5999755859375" text="Address" />
-            <TableColumn prefWidth="131.199951171875" text="Contact" />
-            <TableColumn prefWidth="162.39996337890625" text="Position" />
-            <TableColumn prefWidth="179.2000488281251" text="Salary" />
+          <TableColumn fx:id="colId" prefWidth="111.20001220703125" text="Employee ID" />
+          <TableColumn fx:id="colName" prefWidth="319.1999816894531" text="Name" />
+            <TableColumn fx:id="colAddress" prefWidth="305.5999755859375" text="Address" />
+            <TableColumn fx:id="colContact" prefWidth="131.199951171875" text="Contact" />
+            <TableColumn fx:id="colPosition" prefWidth="162.39996337890625" text="Position" />
+            <TableColumn fx:id="colSalary" prefWidth="179.2000488281251" text="Salary" />
         </columns>
       </TableView>
       <Label layoutX="48.0" layoutY="84.0" text="Employee ID">
@@ -50,17 +50,17 @@
             <Font name="Arial Bold" size="13.0" />
          </font>
       </Label>
-      <JFXButton layoutX="1176.0" layoutY="266.0" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Add" textFill="WHITE">
+      <JFXButton layoutX="1176.0" layoutY="266.0" onAction="#btnAddOnAction" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Add" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="12.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="1072.0" layoutY="266.0" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Update" textFill="WHITE">
+      <JFXButton layoutX="1072.0" layoutY="266.0" onAction="#btnUpdateOnAction" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Update" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="12.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="967.0" layoutY="266.0" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Delete" textFill="WHITE">
+      <JFXButton layoutX="967.0" layoutY="266.0" onAction="#btnDeleteOnAction" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Delete" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="12.0" />
          </font>
@@ -75,13 +75,13 @@
             <Font name="Arial Bold" size="20.0" />
          </font>
       </Label>
-      <JFXTextField layoutX="48.0" layoutY="102.0" prefHeight="30.0" prefWidth="198.0" promptText="Enter emplyee ID" unFocusColor="BLACK" />
-      <JFXTextField layoutX="48.0" layoutY="197.0" prefHeight="30.0" prefWidth="198.0" promptText="Enter salary for month" unFocusColor="BLACK" />
-      <JFXTextField layoutX="378.0" layoutY="102.0" prefHeight="30.0" prefWidth="415.0" promptText="Enter employee name" unFocusColor="BLACK" />
-      <JFXTextField layoutX="379.0" layoutY="197.0" prefHeight="30.0" prefWidth="415.0" promptText="Enter employee address" unFocusColor="BLACK" />
-      <JFXTextField layoutX="929.0" layoutY="102.0" prefHeight="30.0" prefWidth="322.0" promptText="Enter contact number" unFocusColor="BLACK" />
-      <JFXTextField layoutX="929.0" layoutY="197.0" prefHeight="30.0" prefWidth="322.0" promptText="Enter employee position " unFocusColor="BLACK" />
-      <JFXButton layoutX="862.0" layoutY="266.0" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Clear" textFill="WHITE">
+      <JFXTextField fx:id="txtEmployeeId" layoutX="48.0" layoutY="102.0" prefHeight="30.0" prefWidth="198.0" promptText="Enter emplyee ID" unFocusColor="BLACK" />
+      <JFXTextField fx:id="txtSalary" layoutX="48.0" layoutY="197.0" prefHeight="30.0" prefWidth="198.0" promptText="Enter salary for month" unFocusColor="BLACK" />
+      <JFXTextField fx:id="txtName" layoutX="378.0" layoutY="102.0" prefHeight="30.0" prefWidth="415.0" promptText="Enter employee name" unFocusColor="BLACK" />
+      <JFXTextField fx:id="txtAddress" layoutX="379.0" layoutY="197.0" prefHeight="30.0" prefWidth="415.0" promptText="Enter employee address" unFocusColor="BLACK" />
+      <JFXTextField fx:id="txtContact" layoutX="929.0" layoutY="102.0" prefHeight="30.0" prefWidth="322.0" promptText="Enter contact number" unFocusColor="BLACK" />
+      <JFXTextField fx:id="txtPosition" layoutX="929.0" layoutY="197.0" prefHeight="30.0" prefWidth="322.0" promptText="Enter employee position " unFocusColor="BLACK" />
+      <JFXButton layoutX="862.0" layoutY="266.0" onAction="#btnClearOnAction" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Clear" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="12.0" />
          </font>
