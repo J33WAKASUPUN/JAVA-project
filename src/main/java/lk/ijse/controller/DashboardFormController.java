@@ -84,4 +84,8 @@ public class DashboardFormController {
         stage.show();
         //btnMyAccount.setDisable(true);
     }
+
+    /*public void btnMyAccountSetDisable (Boolean value) {
+        btnMyAccount.setDisable(value);
+    }*/
 }

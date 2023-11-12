@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="701.0" prefWidth="565.0" style="-fx-background-color: FFFCF2;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.AddUserFormController">
+<AnchorPane fx:id="root" prefHeight="701.0" prefWidth="565.0" style="-fx-background-color: FFFCF2;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.AddUserFormController">
    <children>
       <Pane layoutX="214.0" layoutY="109.0" prefHeight="134.0" prefWidth="140.0" style="-fx-background-color: #CCC5B9; -fx-background-radius: 10;" />
       <JFXButton layoutX="243.0" layoutY="251.0" prefHeight="29.0" prefWidth="79.0" style="-fx-background-color: #403D39;" text="Set photo" textFill="WHITE">
@@ -48,30 +48,30 @@
          </font>
       </Label>
       <Line endX="250.4000244140625" endY="7.62939453125E-6" layoutX="284.0" layoutY="99.0" startX="-250.39999389648438" startY="7.62939453125E-6" />
-      <Label alignment="CENTER" layoutX="32.0" layoutY="68.0" prefHeight="30.0" prefWidth="502.0" text="Employee- details">
+      <Label fx:id="lblEmployeeDetails" alignment="CENTER" layoutX="32.0" layoutY="68.0" prefHeight="30.0" prefWidth="502.0" text="Employee- details">
          <font>
             <Font name="Arial Bold" size="13.0" />
          </font>
       </Label>
-      <JFXButton layoutX="443.0" layoutY="644.0" prefHeight="36.0" prefWidth="90.0" style="-fx-background-color: #403D39;" text="Comfirm" textFill="WHITE">
+      <JFXButton layoutX="443.0" layoutY="644.0" onAction="#btnComfirmOnAction" prefHeight="36.0" prefWidth="90.0" style="-fx-background-color: #403D39;" text="Comfirm" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="12.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="332.0" layoutY="644.0" prefHeight="36.0" prefWidth="90.0" style="-fx-background-color: #FFFCF2; -fx-border-color: #403D39;" text="Cancel">
+      <JFXButton layoutX="332.0" layoutY="644.0" onAction="#btnCancelOnAction" prefHeight="36.0" prefWidth="90.0" style="-fx-background-color: #FFFCF2; -fx-border-color: #403D39;" text="Cancel">
          <font>
             <Font name="Arial Bold" size="12.0" />
          </font>
       </JFXButton>
-      <Label layoutX="204.0" layoutY="599.0" prefHeight="18.0" prefWidth="116.0" text="Password does not match">
+      <Label fx:id="lblPasswordDoesNotMatch" layoutX="204.0" layoutY="599.0" prefHeight="18.0" prefWidth="116.0" text="Password does not match">
          <font>
             <Font name="Arial" size="10.0" />
          </font>
       </Label>
-      <JFXTextField layoutX="35.0" layoutY="323.0" prefHeight="36.0" prefWidth="286.0" promptText="Enter user name" />
-      <JFXTextField layoutX="393.0" layoutY="323.0" prefHeight="36.0" prefWidth="140.0" promptText="Enter user id" />
-      <JFXTextField layoutX="35.0" layoutY="402.0" prefHeight="36.0" prefWidth="342.0" promptText="Enter email address" />
-      <JFXPasswordField layoutX="35.0" layoutY="483.0" prefHeight="36.0" prefWidth="286.0" promptText="Enter new password" />
-      <JFXPasswordField layoutX="34.0" layoutY="563.0" prefHeight="36.0" prefWidth="286.0" promptText="Re-enter password" />
+      <JFXTextField fx:id="txtUserName" layoutX="35.0" layoutY="323.0" prefHeight="36.0" prefWidth="286.0" promptText="Enter user name" />
+      <JFXTextField fx:id="txtUserId" layoutX="393.0" layoutY="323.0" prefHeight="36.0" prefWidth="140.0" promptText="Enter user id" />
+      <JFXTextField fx:id="txtEmail" layoutX="35.0" layoutY="402.0" prefHeight="36.0" prefWidth="342.0" promptText="Enter email address" />
+      <JFXPasswordField fx:id="txtPassword" layoutX="35.0" layoutY="483.0" prefHeight="36.0" prefWidth="286.0" promptText="Enter new password" />
+      <JFXPasswordField fx:id="txtRePassword" layoutX="34.0" layoutY="563.0" prefHeight="36.0" prefWidth="286.0" promptText="Re-enter password" />
    </children>
 </AnchorPane>
