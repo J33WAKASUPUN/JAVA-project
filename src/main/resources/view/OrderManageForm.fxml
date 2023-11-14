@@ -55,8 +55,8 @@
          </font>
       </Label>
       <JFXTextField fx:id="txtId" layoutX="48.0" layoutY="102.0" prefHeight="30.0" prefWidth="198.0" promptText="Enter order ID" unFocusColor="BLACK" />
-      <JFXTextField fx:id="txtQuantity" layoutX="48.0" layoutY="197.0" prefHeight="30.0" prefWidth="198.0" promptText="Item quantity" unFocusColor="BLACK" />
-      <JFXTextField fx:id="txtItemCode" layoutX="699.0" layoutY="102.0" prefHeight="30.0" prefWidth="191.0" promptText="Quantity" text="Enter item or repaired device" unFocusColor="BLACK" />
+      <JFXTextField fx:id="txtQuantity" layoutX="48.0" layoutY="197.0" prefHeight="30.0" prefWidth="170.0" promptText="Item quantity" unFocusColor="BLACK" />
+      <JFXTextField fx:id="txtItemCode" layoutX="699.0" layoutY="102.0" prefHeight="30.0" prefWidth="191.0" promptText="Item ID" unFocusColor="BLACK" />
       <JFXButton layoutX="708.0" layoutY="266.0" onAction="#btnClearOnAction" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Clear" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="12.0" />
@@ -67,12 +67,12 @@
             <Font name="Arial Bold" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="316.0" layoutY="180.0" text="Unit price">
+      <Label layoutX="295.0" layoutY="180.0" text="Unit price">
          <font>
             <Font name="Arial Bold" size="13.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txtUnitPrice" layoutX="316.0" layoutY="197.0" prefHeight="30.0" prefWidth="198.0" promptText="Item unit price" unFocusColor="BLACK" />
+      <JFXTextField fx:id="txtUnitPrice" layoutX="295.0" layoutY="197.0" prefHeight="30.0" prefWidth="162.0" promptText="Item unit price" unFocusColor="BLACK" />
       <Label layoutX="694.0" layoutY="180.0" text="Customer ID">
          <font>
             <Font name="Arial Bold" size="13.0" />
@@ -122,11 +122,17 @@
             <Font name="Arial Bold" size="12.0" />
          </font>
       </Label>
-      <JFXComboBox fx:id="cmbItem" layoutX="316.0" layoutY="101.0" prefHeight="30.0" prefWidth="318.0" unFocusColor="BLACK" />
+      <JFXComboBox fx:id="cmbItem" layoutX="316.0" layoutY="101.0" onAction="#cmbItemNameOnAction" prefHeight="30.0" prefWidth="318.0" promptText="Select Item" unFocusColor="BLACK" />
       <JFXButton layoutX="997.0" layoutY="717.0" onAction="#btnCancelOnAction" prefHeight="30.0" prefWidth="104.0" style="-fx-background-color: FFFCF2; -fx-border-color: #403D39;" text="Cancel">
          <font>
             <Font name="Arial Bold" size="12.0" />
          </font>
       </JFXButton>
+      <Label layoutX="493.0" layoutY="180.0" text="Price">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtRepairPrice" layoutX="493.0" layoutY="197.0" prefHeight="30.0" prefWidth="162.0" promptText="Cost for repair" unFocusColor="BLACK" />
    </children>
 </AnchorPane>

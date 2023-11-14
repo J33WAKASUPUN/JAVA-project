@@ -73,11 +73,11 @@ public class ItemModel {
         return preparedStatement.executeUpdate() > 0;
     }
 
-    public static ItemDto getItem(String itemId) throws SQLException {
+    public static ItemDto getItem(String itemName) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "SELECT * FROM item WHERE itemId =?";
+        String sql = "SELECT * FROM item WHERE itemName = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1, itemId);
+        preparedStatement.setString(1, itemName);
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()){
             ItemDto itemDto = new ItemDto();

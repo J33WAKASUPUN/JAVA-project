@@ -14,6 +14,7 @@ public class OrderTm {
     private String itemName;
     private String qty;
     private String price;
+    private String unitPrice;
     private String date;
     private JFXButton btnRemove;
 
@@ -23,14 +24,15 @@ public class OrderTm {
         btnRemove.setStyle("-fx-background-color: #403D39; -fx-text-fill: #ffffff");
 
         btnRemove.setPrefWidth(100);
-        btnRemove.setPrefHeight(30);
+        btnRemove.setPrefHeight(20);
     }
 
-    public OrderTm(String orderId, String itemName, String qty, String price, String date) {
+    public OrderTm(String orderId, String itemName, String qty, String price,String unitPrice, String date) {
         this.orderId = orderId;
         this.itemName = itemName;
         this.qty = qty;
         this.price = price;
+        this.unitPrice = unitPrice;
         this.date = date;
     }
 }
