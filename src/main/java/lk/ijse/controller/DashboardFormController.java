@@ -2,14 +2,17 @@ package lk.ijse.controller;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class DashboardFormController {
     public JFXButton btnOrders;
@@ -19,8 +22,11 @@ public class DashboardFormController {
     public AnchorPane subRootAcc;
     public JFXButton btnMyAccount;
 
-    public void initializer(){
+    @FXML
+    private Label lblDate;
 
+    public void initializer(){
+        setDate();
     }
 
 
@@ -88,4 +94,9 @@ public class DashboardFormController {
     /*public void btnMyAccountSetDisable (Boolean value) {
         btnMyAccount.setDisable(value);
     }*/
+
+    private void setDate() {
+//        LocalDate now = LocalDate.now();
+        lblDate.setText(String.valueOf(LocalDate.now()));
+    }
 }

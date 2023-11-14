@@ -4,35 +4,25 @@ import com.jfoenix.controls.JFXButton;
 import lombok.*;
 
 import java.awt.*;
-
+@Getter
+@Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString
 @Data
 public class OrderTm {
-    private String orderId;
+    private String ItemId;
     private String itemName;
-    private String qty;
-    private String price;
-    private String unitPrice;
-    private String date;
-    private JFXButton btnRemove;
+    private int qty;
+    private double price;
+    private double unitPrice;
+    private JFXButton btn;
 
-    {
-        btnRemove = new JFXButton("Remove");
-        btnRemove.setCursor(javafx.scene.Cursor.HAND);
-        btnRemove.setStyle("-fx-background-color: #403D39; -fx-text-fill: #ffffff");
-
-        btnRemove.setPrefWidth(100);
-        btnRemove.setPrefHeight(20);
-    }
-
-    public OrderTm(String orderId, String itemName, String qty, String price,String unitPrice, String date) {
-        this.orderId = orderId;
+    public OrderTm(String itemId, String itemName, int qty, double price,double unitPrice, JFXButton btn) {
+        this.ItemId = itemId;
         this.itemName = itemName;
         this.qty = qty;
         this.price = price;
         this.unitPrice = unitPrice;
-        this.date = date;
+        this.btn = btn;
     }
 }

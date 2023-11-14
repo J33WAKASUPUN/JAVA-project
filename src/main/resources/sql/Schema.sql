@@ -43,13 +43,6 @@ CREATE TABLE handoverDevice(
                                CONSTRAINT FOREIGN KEY(cId) REFERENCES customer(cId) on Delete Cascade on Update Cascade
 );
 
-CREATE TABLE payment(
-                        pId VARCHAR (25) PRIMARY KEY,
-                        amount INT (25),
-                        status VARCHAR (50),
-                        date DATE
-);
-
 CREATE TABLE item(
                      itemId VARCHAR (25) PRIMARY KEY,
                      itemName VARCHAR (150),
@@ -65,43 +58,26 @@ CREATE TABLE supplier(
                          contact INT (10)
 );
 
-CREATE TABLE driver(
-                       driverId VARCHAR (25) PRIMARY KEY,
-                       name VARCHAR (100),
-                       contact INT (10),
-                       address VARCHAR (150)
-);
-
-CREATE TABLE vehicle(
-                        vId VARCHAR (25) PRIMARY KEY,
-                        vehicleName VARCHAR (100),
-                        vehicleNum VARCHAR (20),
-                        driverId VARCHAR (25),
-                        CONSTRAINT FOREIGN KEY(driverId) REFERENCES driver(driverId) on Delete Cascade on Update Cascade
-);
-
-CREATE TABLE delivery(
-                         deliveryId VARCHAR (25) PRIMARY KEY,
-                         address VARCHAR (150),
-                         contact INT (10),
-                         vId VARCHAR (25),
-                         CONSTRAINT FOREIGN KEY(vId) REFERENCES vehicle(vId) on Delete Cascade on Update Cascade
-);
-
 CREATE TABLE orders(
                        orderId VARCHAR (25) PRIMARY KEY,
-                       qty INT (10),
                        date DATE,
-                       price INT (25),
                        cId VARCHAR (25),
-                       pId VARCHAR (25),
-                       deliveryId VARCHAR (25),
-                       CONSTRAINT FOREIGN KEY(cId) REFERENCES customer(cId) on Delete Cascade on Update Cascade,
-                       CONSTRAINT FOREIGN KEY(pId) REFERENCES payment(pId) on Delete Cascade on Update Cascade,
-                       CONSTRAINT FOREIGN KEY(deliveryId) REFERENCES delivery(deliveryId) on Delete Cascade on Update Cascade
+                       CONSTRAINT FOREIGN KEY(cId) REFERENCES customer(cId) on Delete Cascade on Update Cascade
+);
+
+CREATE TABLE payment(
+                        pId VARCHAR (25) PRIMARY KEY,
+                        amount INT (25),
+                        status VARCHAR (50),
+                        date DATE,
+                        orderId VARCHAR (25),
+                        CONSTRAINT FOREIGN KEY(orderId) REFERENCES orders(orderId) on Delete Cascade on Update Cascade
+
 );
 
 CREATE TABLE orderItemDetail(
+                                qty INT (25),
+                                unitPrice INT (25),
                                 itemId VARCHAR (25),
                                 orderId VARCHAR (25),
                                 CONSTRAINT FOREIGN KEY(itemId) REFERENCES item(itemId) on Delete Cascade on Update Cascade,

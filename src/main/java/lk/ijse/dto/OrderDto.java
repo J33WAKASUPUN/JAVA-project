@@ -1,6 +1,11 @@
 package lk.ijse.dto;
 
+import lk.ijse.dto.tm.OrderTm;
 import lombok.*;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -9,10 +14,10 @@ import lombok.*;
 @ToString
 public class OrderDto {
     private String orderId;
-    private String qty;
-    private String date;
-    private String price;
+    private LocalDate date;
     private String cId;
     private String pId;
     private String deliveryId;
+
+    private List<OrderTm> orderTmList = new ArrayList<>();
 }

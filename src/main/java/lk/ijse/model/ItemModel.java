@@ -2,6 +2,7 @@ package lk.ijse.model;
 
 import lk.ijse.db.DBConnection;
 import lk.ijse.dto.ItemDto;
+import lk.ijse.dto.tm.OrderTm;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -56,13 +57,26 @@ public class ItemModel {
         return preparedStatement.executeUpdate() > 0;
     }
 
-    public static boolean updateItemQty(ItemDto dto) throws SQLException {
+    public boolean updateItem(List<OrderTm> orderTmList) throws SQLException {
+        for(OrderTm tm : orderTmList) {
+            System.out.println("Item: " + tm);
+            if(!updateQty(tm.getItemId(), tm.getQty())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean updateQty(String code, int qty) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "UPDATE item SET qtyOnHand =? WHERE itemId =?";
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1, dto.getQtyOnHand());
-        preparedStatement.setString(2, dto.getItemId());
-        return preparedStatement.executeUpdate() > 0;
+
+        String sql = "UPDATE item SET qtyOnHand = qtyOnHand - ? WHERE itemId = ?";
+        PreparedStatement pstm = connection.prepareStatement(sql);
+
+        pstm.setInt(1, qty);
+        pstm.setString(2, code);
+
+        return pstm.executeUpdate() > 0; //false
     }
 
     public static boolean deleteItem(String itemId) throws SQLException {

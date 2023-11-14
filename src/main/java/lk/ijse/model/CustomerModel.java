@@ -84,4 +84,23 @@ public class CustomerModel {
         }
         return null;
     }
+
+    public static CustomerDto getCustomerByName(String name) throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+        String sql = "SELECT * FROM customer WHERE name =?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1,name );
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if(resultSet.next()){
+            CustomerDto customerDto = new CustomerDto();
+            customerDto.setCId(resultSet.getString(1));
+            customerDto.setName(resultSet.getString(2));
+            customerDto.setEmail(resultSet.getString(3));
+            customerDto.setAddress(resultSet.getString(4));
+            customerDto.setContact(resultSet.getString(5));
+            customerDto.setUserId(resultSet.getString(6));
+            return customerDto;
+        }
+        return null;
+    }
 }

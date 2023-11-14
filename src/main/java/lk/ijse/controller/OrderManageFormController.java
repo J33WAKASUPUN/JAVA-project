@@ -1,29 +1,36 @@
 package lk.ijse.controller;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.Cursor;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lk.ijse.dto.CustomerDto;
 import lk.ijse.dto.ItemDto;
 import lk.ijse.dto.OrderDto;
+import lk.ijse.dto.tm.CustomerTm;
 import lk.ijse.dto.tm.OrderTm;
+import lk.ijse.model.CustomerModel;
 import lk.ijse.model.ItemModel;
+import lk.ijse.model.OrdersModel;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class OrderManageFormController {
 
     @FXML
     private JFXComboBox<String> cmbItem;
+
+    @FXML
+    private JFXComboBox<String> cmbCustomerName;
 
     @FXML
     private TableColumn<?, ?> colAction;
@@ -64,13 +71,22 @@ public class OrderManageFormController {
     @FXML
     private JFXTextField txtUnitPrice;
 
+    @FXML
+    private JFXTextField txtCustomerID;
+
+    @FXML
+    private Label lblPrice;
+
+    @FXML
+    private Label lblTotal;
+
     public void initialize(){
         setCellValueFactory();
-        if(cmbItem.equals("Device repair")){
-            txtRepairPrice.setDisable(false);
-        } else {
-            txtRepairPrice.setDisable(true);
-        }
+        loadItemCodes();
+        loadCustomerIds();
+        generateNextOrderId();
+        lblPrice.setDisable(true);
+        txtRepairPrice.setDisable(true);
     }
 
     ObservableList<OrderTm> obList = FXCollections.observableArrayList();
@@ -82,31 +98,79 @@ public class OrderManageFormController {
         colUnitPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
         colQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
         colAction.setCellValueFactory(new PropertyValueFactory<>("btnRemove"));
+    }
 
+    private void generateNextOrderId() {
         try {
-            List<ItemDto> item = ItemModel.getAllItems();
-            ObservableList<String> list = FXCollections.observableArrayList();
-            for (ItemDto dto : item) {
-                list.add(dto.getItemName());
-            }
-            cmbItem.setItems(list);
+            String orderId = OrdersModel.generateNextOrderId();
+            txtId.setText(orderId);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+    }
 
-            cmbItem.getSelectionModel().selectedItemProperty().addListener((observableValue, s, t1) -> {
-                try {
-                    ItemDto itemdto = ItemModel.getItem(t1);
-                        if(cmbItem.equals("Device repair")){
-                            txtRepairPrice.setDisable(false);
-                        }
-                        txtItemCode.setText(itemdto.getItemId());
-                        txtUnitPrice.setText(itemdto.getUnitPrice());
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            });
+    private void loadItemCodes() {
+        ObservableList<String> obList = FXCollections.observableArrayList();
+        try {
+            List<ItemDto> itemDtos = ItemModel.getAllItems();
+
+            for (ItemDto dto : itemDtos) {
+                obList.add(dto.getItemName());
+            }
+            cmbItem.setItems(obList);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
 
+    @FXML
+    void cmbItemNameOnAction(ActionEvent event) {
+        String name = cmbItem.getValue();
+
+        if (name != null && !name.isEmpty()) {
+            try {
+                ItemDto dto = ItemModel.getItem(name);
+                txtItemCode.setText(dto.getItemId());
+                txtUnitPrice.setText(dto.getUnitPrice());
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            System.out.println("Item name is null or empty");
+        }
+    }
+
+    private void loadCustomerIds() {
+        ObservableList<String> obList = FXCollections.observableArrayList();
+
+        try {
+            List<CustomerDto> idList = CustomerModel.getAllCustomer();
+
+            for (CustomerDto dto : idList) {
+                obList.add(dto.getName());
+            }
+
+            cmbCustomerName.setItems(obList);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    void cmbCustomerOnAction(ActionEvent event) {
+        String name = cmbCustomerName.getValue();
+
+        if (name!= null &&!name.isEmpty()) {
+            try {
+                CustomerDto customerDto = CustomerModel.getCustomerByName(name);
+                txtCustomerID.setText(customerDto.getCId());
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            System.out.println("Customer name is null or empty");
+        }
     }
 
     @FXML
@@ -117,48 +181,63 @@ public class OrderManageFormController {
         String quantity = txtQuantity.getText();
         String unitPrice = txtUnitPrice.getText();
         String date = "2023/11/13";
-        String price = "";
+        Button btn = new Button("Remove");
+        int qty = Integer.parseInt(txtQuantity.getText());
+        double unitPriceint=Integer.parseInt(txtQuantity.getText());
+        double tot = unitPriceint * qty;
 
-        if (itemName.equals("Device repair")){
-            txtRepairPrice.setDisable(false);
-            price = txtRepairPrice.getText();
-        }else {
-            int unitprice = Integer.parseInt(unitPrice);
-            int qty = Integer.parseInt(quantity);
-            int priceint = unitprice * qty;
 
-            price = String.valueOf(priceint);
-            txtRepairPrice.setDisable(true);
+        setRemoveBtnAction(btn);
+        btn.setCursor(Cursor.HAND);
+
+
+        if (!obList.isEmpty()) {
+            for (int i = 0; i < tblOrders.getItems().size(); i++) {
+                if (colItem.getCellData(i).equals(itemCode)) {
+                    int col_qty = (int) colQty.getCellData(i);
+                    qty += col_qty;
+                    tot = unitPriceint * qty;
+
+                    obList.get(i).setQty(qty);
+                    obList.get(i).setPrice(tot);
+
+                    calculateTotal();
+                    tblOrders.refresh();
+                    return;
+                }
+            }
         }
+       var orderTm = new OrderTm(itemCode, itemName, qty, unitPriceint, tot, (JFXButton) btn);
 
-        if(id.isEmpty() || itemCode.isEmpty() || price.isEmpty() || quantity.isEmpty() || unitPrice.isEmpty()){
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Fill all fields");
-            alert.showAndWait();
-            return;
-        }
+       obList.add(orderTm);
 
-        List<OrderDto> dtoList = new ArrayList<>();
-        OrderDto dto = new OrderDto(id, itemCode, itemName, price, quantity, unitPrice, date);
-
-        obList.add(
-                new OrderTm(
-                        id,
-                        itemName,
-                        quantity,
-                        price,
-                        unitPrice,
-                        date
-                )
-        );
         tblOrders.setItems(obList);
+        calculateTotal();
+    }
 
-        for (int i = 0; i < obList.size(); i++) {
-            //List<TaskDto> finalDtoList = dtoList;
-            int finalI = i;
-            obList.get(i).getBtnRemove().setOnAction((ActionEvent event) -> {
-            });
+    private void setRemoveBtnAction(Button btn) {
+        btn.setOnAction((e) -> {
+            ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+            ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+            Optional<ButtonType> type = new Alert(Alert.AlertType.INFORMATION, "Are you sure to remove?", yes, no).showAndWait();
+
+            if (type.orElse(no) == yes) {
+                int focusedIndex = tblOrders.getSelectionModel().getSelectedIndex();
+
+                obList.remove(focusedIndex);
+                tblOrders.refresh();
+                calculateTotal();
+            }
+        });
+    }
+
+    private void calculateTotal() {
+        double total = 0;
+        for (int i = 0; i < tblOrders.getItems().size(); i++) {
+            total += (double) colPrice.getCellData(i);
         }
-        tblOrders.setItems(obList);
+        lblTotal.setText(String.valueOf(total));
     }
 
     @FXML
@@ -167,33 +246,8 @@ public class OrderManageFormController {
     }
 
     @FXML
-    void btnComfirmOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void btnCancelOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
     void btnPlaceOrderOnAction(ActionEvent event) {
 
-    }
-
-    @FXML
-    void cmbItemNameOnAction(ActionEvent event) {
-        /*String id = cmbItem.getValue();
-
-        try {
-            ItemDto itemDto = ItemModel.getItem(id);
-            if(itemDto == null) {
-                txtItemCode.setText(itemDto.getItemId());
-                txtUnitPrice.setText(itemDto.getUnitPrice());
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }*/
     }
 
 }

@@ -182,7 +182,7 @@
             </Pane>
             <Line endX="210.20001220703125" layoutX="164.0" layoutY="529.0" startX="-100.0" />
             <Line endX="210.20001220703125" layoutX="746.0" layoutY="529.0" startX="-100.0" />
-            <Label layoutX="434.0" layoutY="520.0" prefHeight="18.0" prefWidth="200.0" text="Today - 20 sep 2023, Friday" textAlignment="CENTER">
+            <Label fx:id="lblDate" layoutX="434.0" layoutY="520.0" prefHeight="18.0" prefWidth="200.0" text="Today - 20 sep 2023, Friday" textAlignment="CENTER">
                <font>
                   <Font name="Arial Bold" size="12.0" />
                </font>
