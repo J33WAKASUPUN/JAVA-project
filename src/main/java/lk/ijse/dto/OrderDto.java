@@ -16,8 +16,6 @@ public class OrderDto {
     private String orderId;
     private LocalDate date;
     private String cId;
-    private String pId;
-    private String deliveryId;
 
     private List<OrderTm> orderTmList = new ArrayList<>();
 }

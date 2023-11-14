@@ -77,7 +77,7 @@ CREATE TABLE payment(
 
 CREATE TABLE orderItemDetail(
                                 qty INT (25),
-                                unitPrice INT (25),
+                                unitPrice DOUBLE,
                                 itemId VARCHAR (25),
                                 orderId VARCHAR (25),
                                 CONSTRAINT FOREIGN KEY(itemId) REFERENCES item(itemId) on Delete Cascade on Update Cascade,
@@ -90,3 +90,5 @@ CREATE TABLE itemSupplierDetail(
                                    CONSTRAINT FOREIGN KEY(itemId) REFERENCES item(itemId) on Delete Cascade on Update Cascade,
                                    CONSTRAINT FOREIGN KEY(supId) REFERENCES supplier(supId) on Delete Cascade on Update Cascade
 );
+
+INSERT INTO user VALUES ("U001","Admin","1234","admin@gmail.com","C:\Users\ASUS\Downloads\image_processing20191016-29931-xs2onq.jpg");

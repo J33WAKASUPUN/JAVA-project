@@ -1,9 +1,9 @@
 package lk.ijse.dto.tm;
 
-import com.jfoenix.controls.JFXButton;
 import lombok.*;
 
-import java.awt.*;
+import javafx.scene.control.Button;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -15,9 +15,9 @@ public class OrderTm {
     private int qty;
     private double price;
     private double unitPrice;
-    private JFXButton btn;
+    private Button btn;
 
-    public OrderTm(String itemId, String itemName, int qty, double price,double unitPrice, JFXButton btn) {
+    public OrderTm(String itemId, String itemName, int qty, double price,double unitPrice, Button btn) {
         this.ItemId = itemId;
         this.itemName = itemName;
         this.qty = qty;

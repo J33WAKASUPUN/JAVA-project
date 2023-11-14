@@ -18,8 +18,10 @@ import lk.ijse.dto.tm.OrderTm;
 import lk.ijse.model.CustomerModel;
 import lk.ijse.model.ItemModel;
 import lk.ijse.model.OrdersModel;
+import lk.ijse.model.PlaceOrderModel;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -80,10 +82,14 @@ public class OrderManageFormController {
     @FXML
     private Label lblTotal;
 
+    @FXML
+    private Label lblOrderDate;
+
     public void initialize(){
         setCellValueFactory();
-        loadItemCodes();
-        loadCustomerIds();
+        loadItemNames();
+        setDate();
+        loadCustomerNames();
         generateNextOrderId();
         lblPrice.setDisable(true);
         txtRepairPrice.setDisable(true);
@@ -92,12 +98,12 @@ public class OrderManageFormController {
     ObservableList<OrderTm> obList = FXCollections.observableArrayList();
 
     public void setCellValueFactory(){
-        colId.setCellValueFactory(new PropertyValueFactory<>("orderId"));
+        colId.setCellValueFactory(new PropertyValueFactory<>("itemId"));
         colItem.setCellValueFactory(new PropertyValueFactory<>("itemName"));
         colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         colUnitPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
         colQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
-        colAction.setCellValueFactory(new PropertyValueFactory<>("btnRemove"));
+        colAction.setCellValueFactory(new PropertyValueFactory<>("btn"));
     }
 
     private void generateNextOrderId() {
@@ -109,7 +115,7 @@ public class OrderManageFormController {
         }
     }
 
-    private void loadItemCodes() {
+    private void loadItemNames() {
         ObservableList<String> obList = FXCollections.observableArrayList();
         try {
             List<ItemDto> itemDtos = ItemModel.getAllItems();
@@ -140,7 +146,7 @@ public class OrderManageFormController {
         }
     }
 
-    private void loadCustomerIds() {
+    private void loadCustomerNames() {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
@@ -176,14 +182,14 @@ public class OrderManageFormController {
     @FXML
     void btnAddOnAction() {
         String id = txtId.getText();
-        String itemCode = txtItemCode.getText();
         String itemName = cmbItem.getValue();
+        String itemId = txtItemCode.getText();
         String quantity = txtQuantity.getText();
         String unitPrice = txtUnitPrice.getText();
         String date = "2023/11/13";
         Button btn = new Button("Remove");
         int qty = Integer.parseInt(txtQuantity.getText());
-        double unitPriceint=Integer.parseInt(txtQuantity.getText());
+        double unitPriceint=Integer.parseInt(txtUnitPrice.getText());
         double tot = unitPriceint * qty;
 
 
@@ -193,7 +199,7 @@ public class OrderManageFormController {
 
         if (!obList.isEmpty()) {
             for (int i = 0; i < tblOrders.getItems().size(); i++) {
-                if (colItem.getCellData(i).equals(itemCode)) {
+                if (colItem.getCellData(i).equals(itemId)) {
                     int col_qty = (int) colQty.getCellData(i);
                     qty += col_qty;
                     tot = unitPriceint * qty;
@@ -207,7 +213,7 @@ public class OrderManageFormController {
                 }
             }
         }
-       var orderTm = new OrderTm(itemCode, itemName, qty, unitPriceint, tot, (JFXButton) btn);
+       var orderTm = new OrderTm(itemId, itemName, qty, tot, unitPriceint,  btn);
 
        obList.add(orderTm);
 
@@ -247,7 +253,33 @@ public class OrderManageFormController {
 
     @FXML
     void btnPlaceOrderOnAction(ActionEvent event) {
+        String orderId = txtId.getText();
+        LocalDate date = LocalDate.parse(lblOrderDate.getText());
+        String customerId = txtCustomerID.getText();
 
+        List<OrderTm> orderTmList = new ArrayList<>();
+        for (int i = 0; i < tblOrders.getItems().size(); i++) {
+            OrderTm cartTm = obList.get(i);
+
+            orderTmList.add(cartTm);
+        }
+
+        System.out.println("Place order form controller: " + orderTmList);
+        var placeOrderDto = new OrderDto(orderId, date, customerId, orderTmList);
+        try {
+            boolean isSuccess = PlaceOrderModel.placeOrder(placeOrderDto);
+            if (isSuccess) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Order Success!").show();
+            } else{
+                new Alert(Alert.AlertType.ERROR, "Order Failed!").show();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void setDate() {
+        lblOrderDate.setText(String.valueOf(LocalDate.now()));
     }
 
 }

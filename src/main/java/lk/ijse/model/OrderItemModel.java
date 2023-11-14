@@ -12,7 +12,7 @@ public class OrderItemModel {
     private boolean saveOrderDetails(String orderId, OrderTm tm) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
-        String sql = "INSERT INTO order_detail VALUES(?, ?, ?, ?)";
+        String sql = "INSERT INTO orderItemDetail VALUES(?, ?, ?, ?)";
         PreparedStatement pstm = connection.prepareStatement(sql);
 
         pstm.setInt(1, tm.getQty());

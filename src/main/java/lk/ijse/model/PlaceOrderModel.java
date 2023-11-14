@@ -8,11 +8,11 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class PlaceOrderModel {
-    private OrdersModel orderModel = new OrdersModel();
-    private ItemModel itemModel = new ItemModel();
-    private OrderItemModel orderItemModel = new OrderItemModel();
+    private static OrdersModel orderModel = new OrdersModel();
+    private static ItemModel itemModel = new ItemModel();
+    private static OrderItemModel orderItemModel = new OrderItemModel();
 
-    public boolean placeOrder(OrderDto orderDto) throws SQLException {
+    public static boolean placeOrder(OrderDto orderDto) throws SQLException {
 
         String orderId = orderDto.getOrderId();
         String customerId = orderDto.getCId();
@@ -30,8 +30,15 @@ public class PlaceOrderModel {
                     boolean isOrderDetailSaved = orderItemModel.saveOrderDetails(orderDto.getOrderId(), orderDto.getOrderTmList());
                     if (isOrderDetailSaved) {
                         connection.commit();
+                        return true;
+                    } else {
+                        connection.rollback();
                     }
+                }else {
+                    connection.rollback();
                 }
+            } else {
+                connection.rollback();
             }
         } catch (SQLException e) {
             connection.rollback();
@@ -39,6 +46,6 @@ public class PlaceOrderModel {
             connection.setAutoCommit(true);
         }
 
-        return true;
+        return false;
     }
 }

@@ -99,5 +99,10 @@
             </Label>
          </children>
       </Pane>
+      <Label fx:id="lblOrderDate" layoutX="47.0" layoutY="266.0" prefHeight="30.0" prefWidth="184.0" text="date">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
