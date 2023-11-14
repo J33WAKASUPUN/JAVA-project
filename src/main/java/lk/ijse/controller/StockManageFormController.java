@@ -109,6 +109,8 @@ public class StockManageFormController {
             if (isSaved) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Succsess");
                 alert.showAndWait();
+                loadAllItems();
+                clearFields();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Somthing went wrong");
                 alert.showAndWait();

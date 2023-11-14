@@ -63,7 +63,8 @@ public class EmployeeManageFormController {
     private JFXTextField txtSalary;
 
     public void initialize (){
-
+        setCellValueFactory();
+        loadAllEmployee();
     }
 
     private void setCellValueFactory(){
@@ -118,9 +119,9 @@ public class EmployeeManageFormController {
         String contact = txtContact.getText();
         String position = txtPosition.getText();
         String salary = txtSalary.getText();
-        String cId = "null";
+        String userId = "U001";
 
-        EmployeeDto employeeDto = new EmployeeDto(id, name, address, contact, position, salary, cId);
+        EmployeeDto employeeDto = new EmployeeDto(id, name, address, contact, position, salary, userId);
 
         if(id.isEmpty() || name.isEmpty() || address.isEmpty() || contact.isEmpty() || position.isEmpty() || salary.isEmpty()){
             Alert alert = new Alert(Alert.AlertType.ERROR,"Fill all fields");
@@ -134,6 +135,7 @@ public class EmployeeManageFormController {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Employee Added");
                 alert.showAndWait();
                 clearFields();
+                loadAllEmployee();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Employee Not Added");
                 alert.showAndWait();
@@ -159,6 +161,7 @@ public class EmployeeManageFormController {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Employee Deleted");
                 alert.showAndWait();
                 clearFields();
+                loadAllEmployee();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Employee Not Deleted");
                 alert.showAndWait();
@@ -176,9 +179,9 @@ public class EmployeeManageFormController {
         String contact = txtContact.getText();
         String position = txtPosition.getText();
         String salary = txtSalary.getText();
-        String cId = "null";
+        String userId = "U001";
 
-        EmployeeDto employeeDto = new EmployeeDto(id, name, address, contact, position, salary, cId);
+        EmployeeDto employeeDto = new EmployeeDto(id, name, address, contact, position, salary, userId);
 
         if(id.isEmpty() || name.isEmpty() || address.isEmpty() || contact.isEmpty() || position.isEmpty() || salary.isEmpty()){
             Alert alert = new Alert(Alert.AlertType.ERROR,"Fill all fields");
@@ -192,6 +195,7 @@ public class EmployeeManageFormController {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Employee Updated");
                 alert.showAndWait();
                 clearFields();
+                loadAllEmployee();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Employee Not Updated");
                 alert.showAndWait();

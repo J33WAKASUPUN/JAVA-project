@@ -46,21 +46,21 @@ public class CustomerModel {
 
     public static boolean updateCustomer(CustomerDto dto) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "Update customer SET name=?, email = ?, address = ?, contact = ?, userId= ? WHERE id = ?";
+        String sql = "Update customer SET name=?, email = ?, address = ?, contact = ?, userId= ? WHERE cId = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1, dto.getCId());
-        preparedStatement.setString(2, dto.getName());
-        preparedStatement.setString(3, dto.getEmail());
-        preparedStatement.setString(4, dto.getAddress());
-        preparedStatement.setString(5, dto.getContact());
-        preparedStatement.setString(6, dto.getUserId());
+        preparedStatement.setString(1, dto.getName());
+        preparedStatement.setString(2, dto.getEmail());
+        preparedStatement.setString(3, dto.getAddress());
+        preparedStatement.setString(4, dto.getContact());
+        preparedStatement.setString(5, dto.getUserId());
+        preparedStatement.setString(6, dto.getCId());
 
         return preparedStatement.executeUpdate() > 0;
     }
 
     public static boolean deleteCustomer (String id) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "DELETE FROM customer WHERE id = ?";
+        String sql = "DELETE FROM customer WHERE cId = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1,id );
         return preparedStatement.executeUpdate() > 0;

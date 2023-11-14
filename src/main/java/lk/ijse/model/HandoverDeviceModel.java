@@ -26,8 +26,8 @@ public class HandoverDeviceModel {
                 deviceDto.setDName(resultSet.getString(2));
                 deviceDto.setProblem(resultSet.getString(3));
                 deviceDto.setStatus(resultSet.getString(4));
-                deviceDto.setCost(resultSet.getString(5));
-                deviceDto.setDate(resultSet.getString(6));
+                deviceDto.setCost(String.valueOf(resultSet.getString(5)));
+                deviceDto.setDate(String.valueOf(resultSet.getDate(6)));
                 deviceDto.setCId(resultSet.getString(7));
         }
         return list;

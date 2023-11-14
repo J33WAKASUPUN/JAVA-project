@@ -39,4 +39,24 @@ public class PaymentModel {
         preparedStatement.setObject(4,dto.getDate());
         return preparedStatement.executeUpdate() > 0;
     }
+    public static boolean updatePayment(PaymentDto dto) throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "UPDATE payment SET amount=?, status=?, date=? WHERE pId=?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setObject(1,dto.getAmount());
+        preparedStatement.setObject(2,dto.getStatus());
+        preparedStatement.setObject(3,dto.getDate());
+        preparedStatement.setObject(4,dto.getPId());
+        return preparedStatement.executeUpdate() > 0;
+    }
+
+    public static boolean deletePayment(String pId) throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "DELETE FROM payment WHERE pId=?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setObject(1,pId);
+        return preparedStatement.executeUpdate() > 0;
+    }
 }

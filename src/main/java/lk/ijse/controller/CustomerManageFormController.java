@@ -93,7 +93,7 @@ public class CustomerManageFormController {
             alert.showAndWait();
             return;
         }
-        CustomerDto dto = new CustomerDto(id, name, address, contact, email,uId);
+        CustomerDto dto = new CustomerDto(id, name, email,address,contact,uId);
 
         try {
             boolean isSaved = CustomerModel.setCustomer(dto);
@@ -140,7 +140,7 @@ public class CustomerManageFormController {
         String address = txtAddress.getText();
         String contact = txtContactNumber.getText();
         String email = txtEmail.getText();
-        String uId = "SampleU001";
+        String uId = "U001";
 
         if(id.isEmpty() || name.isEmpty() || address.isEmpty() || contact.isEmpty() || email.isEmpty()){
             Alert alert = new Alert(Alert.AlertType.ERROR, "Fill all fields");
@@ -150,7 +150,7 @@ public class CustomerManageFormController {
         CustomerDto dto = new CustomerDto(id, name, address, contact, email, uId);
 
         try {
-            boolean isAdded = CustomerModel.setCustomer(dto);
+            boolean isAdded = CustomerModel.updateCustomer(dto);
             if(isAdded){
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Succsess");
                 alert.showAndWait();

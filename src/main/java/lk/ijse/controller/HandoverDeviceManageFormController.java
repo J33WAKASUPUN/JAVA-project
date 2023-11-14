@@ -55,7 +55,8 @@ public class HandoverDeviceManageFormController {
     private JFXTextField txtStatus;
 
     public void initialize(){
-
+        setCellValueFactory();
+        loadAllItems();
     }
 
     public void setCellValueFactory(){
@@ -71,8 +72,9 @@ public class HandoverDeviceManageFormController {
         ObservableList<DeviceTm> obList = FXCollections.observableArrayList();
 
         try {
-            List<DeviceDto> obLlist = HandoverDeviceModel.getAllDevices();
-            for(DeviceDto dto : obLlist){
+            List<DeviceDto> dtolist = HandoverDeviceModel.getAllDevices();
+
+            for(DeviceDto dto : dtolist){
                 obList.add(
                         new DeviceTm(
                                 dto.getDeviceId(),
@@ -99,7 +101,7 @@ public class HandoverDeviceManageFormController {
             String status = txtStatus.getText();
             String cost = txtCost.getText();
             String date = "2023.12.12";
-            String cId = "null";
+            String cId = "C001";
 
             DeviceDto deviceDto = new DeviceDto(id, name, problem, status, cost, date ,cId);
 
@@ -149,7 +151,7 @@ public class HandoverDeviceManageFormController {
         String status = txtStatus.getText();
         String cost = txtCost.getText();
         String date = "2023.12.12";
-        String cId = "null";
+        String cId = "C001";
 
         if(id.isEmpty() || name.isEmpty() || problem.isEmpty() || status.isEmpty() || cost.isEmpty()){
             Alert alert = new Alert(Alert.AlertType.ERROR, "Fill all fields");

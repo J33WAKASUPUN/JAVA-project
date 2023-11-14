@@ -19,7 +19,6 @@ public class EmployeeModel {
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
-            list.add(new EmployeeDto());
             EmployeeDto employeeDto = new EmployeeDto();
                 employeeDto.setEmpId(resultSet.getString(1));
                 employeeDto.setName(resultSet.getString(2));
@@ -28,6 +27,8 @@ public class EmployeeModel {
                 employeeDto.setContact(resultSet.getString(5));
                 employeeDto.setSalary(resultSet.getString(6));
                 employeeDto.setUserId(resultSet.getString(7));
+
+                list.add(employeeDto);
         }
         return list;
     }

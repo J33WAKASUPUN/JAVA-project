@@ -48,11 +48,20 @@ public class ItemModel {
         Connection connection = DBConnection.getInstance().getConnection();
         String sql = "Update item SET itemName=?, qtyOnHand =?, cost =?, unitPrice =? WHERE itemId =?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1, dto.getItemId());
-        preparedStatement.setString(2, dto.getItemName());
-        preparedStatement.setString(3, dto.getQtyOnHand());
-        preparedStatement.setString(4, dto.getCost());
-        preparedStatement.setString(5, dto.getUnitPrice());
+        preparedStatement.setString(1, dto.getItemName());
+        preparedStatement.setString(2, dto.getQtyOnHand());
+        preparedStatement.setString(3, dto.getCost());
+        preparedStatement.setString(4, dto.getUnitPrice());
+        preparedStatement.setString(5, dto.getItemId());
+        return preparedStatement.executeUpdate() > 0;
+    }
+
+    public static boolean updateItemQty(ItemDto dto) throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+        String sql = "UPDATE item SET qtyOnHand =? WHERE itemId =?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, dto.getQtyOnHand());
+        preparedStatement.setString(2, dto.getItemId());
         return preparedStatement.executeUpdate() > 0;
     }
 
