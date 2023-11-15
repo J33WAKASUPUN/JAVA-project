@@ -9,8 +9,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import lk.ijse.dto.CustomerDto;
 import lk.ijse.dto.DeviceDto;
 import lk.ijse.dto.tm.DeviceTm;
+import lk.ijse.model.CustomerModel;
 import lk.ijse.model.HandoverDeviceModel;
 
 import java.sql.SQLException;
@@ -53,6 +55,9 @@ public class HandoverDeviceManageFormController {
 
     @FXML
     private JFXTextField txtStatus;
+
+    @FXML
+    private JFXTextField txtSearch;
 
     public void initialize(){
         setCellValueFactory();
@@ -176,12 +181,40 @@ public class HandoverDeviceManageFormController {
         }
     }
 
+    @FXML
+    void btnSearchOnAction(ActionEvent event) {
+        String id = txtSearch.getText();
+
+        if (id!= null &&!id.isEmpty()) {
+            try {
+                DeviceDto deviceDto = HandoverDeviceModel.getDevice(id);
+
+                if(deviceDto != null){
+                    txtId.setText(deviceDto.getCId());
+                    txtName.setText(deviceDto.getDName());
+                    txtProblem.setText(deviceDto.getProblem());
+                    txtStatus.setText(deviceDto.getStatus());
+                    txtCost.setText(deviceDto.getCost());
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Customer not found");
+                    alert.showAndWait();
+                }
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            System.out.println("Customer name is null or empty");
+        }
+    }
+
     private void clearFields() {
         txtId.setText("");
         txtName.setText("");
         txtProblem.setText("");
         txtStatus.setText("");
         txtCost.setText("");
+        txtSearch.setText("");
     }
 
 }

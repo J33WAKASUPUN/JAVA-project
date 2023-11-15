@@ -105,4 +105,23 @@ public class ItemModel {
             return null;
         }
     }
+
+    public static ItemDto getItemById (String id) throws SQLException {
+        Connection connection =DBConnection.getInstance().getConnection();
+        String sql = "SELECT * FROM item WHERE itemId =?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()){
+            ItemDto itemDto = new ItemDto();
+            itemDto.setItemId(resultSet.getString(1));
+            itemDto.setItemName(resultSet.getString(2));
+            itemDto.setQtyOnHand(resultSet.getString(3));
+            itemDto.setCost(resultSet.getString(4));
+            itemDto.setUnitPrice(resultSet.getString(5));
+            return itemDto;
+        } else {
+            return null;
+        }
+    }
 }

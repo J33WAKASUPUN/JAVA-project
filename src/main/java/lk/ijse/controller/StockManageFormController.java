@@ -12,6 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import lk.ijse.dto.CustomerDto;
 import lk.ijse.dto.ItemDto;
 import lk.ijse.dto.tm.StockTm;
+import lk.ijse.model.CustomerModel;
 import lk.ijse.model.ItemModel;
 
 import java.sql.SQLException;
@@ -52,6 +53,9 @@ public class StockManageFormController {
     @FXML
     private JFXTextField txtUnitPrice;
 
+    @FXML
+    private JFXTextField txtSearch;
+
     public void initialize(){
         setCellValueFactory();
         loadAllItems();
@@ -77,8 +81,8 @@ public class StockManageFormController {
                         new StockTm(
                                 dto.getItemId(),
                                 dto.getItemName(),
-                                dto.getCost(),
                                 dto.getQtyOnHand(),
+                                dto.getCost(),
                                 dto.getUnitPrice()
                         )
                 );
@@ -102,7 +106,7 @@ public class StockManageFormController {
             alert.showAndWait();
             return;
         }
-        ItemDto itemDto = new ItemDto(id, name, cost, qty, unitPrice);
+        ItemDto itemDto = new ItemDto(id, name, qty, cost, unitPrice);
 
         try {
             boolean isSaved = ItemModel.setItem(itemDto);
@@ -176,12 +180,40 @@ public class StockManageFormController {
         }
     }
 
+    @FXML
+    void btnSearchOnAction(ActionEvent event) {
+        String id = txtSearch.getText();
+
+        if (id!= null &&!id.isEmpty()) {
+            try {
+                ItemDto itemDto = ItemModel.getItemById(id);
+
+                if(itemDto != null){
+                    txtId.setText(itemDto.getItemId());
+                    txtName.setText(itemDto.getItemName());
+                    txtQty.setText(itemDto.getQtyOnHand());
+                    txtCost.setText(itemDto.getCost());
+                    txtUnitPrice.setText(itemDto.getUnitPrice());
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Customer not found");
+                    alert.showAndWait();
+                }
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            System.out.println("Customer name is null or empty");
+        }
+    }
+
     private void clearFields() {
         txtId.setText("");
         txtName.setText("");
         txtCost.setText("");
         txtQty.setText("");
         txtUnitPrice.setText("");
+        txtSearch.setText("");
     }
 
 }

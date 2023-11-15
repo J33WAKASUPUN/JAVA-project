@@ -15,8 +15,8 @@
           <TableColumn fx:id="colId" prefWidth="111.20001220703125" text="Employee ID" />
           <TableColumn fx:id="colName" prefWidth="319.1999816894531" text="Name" />
             <TableColumn fx:id="colAddress" prefWidth="305.5999755859375" text="Address" />
-            <TableColumn fx:id="colContact" prefWidth="131.199951171875" text="Contact" />
             <TableColumn fx:id="colPosition" prefWidth="162.39996337890625" text="Position" />
+            <TableColumn fx:id="colContact" prefWidth="131.199951171875" text="Contact" />
             <TableColumn fx:id="colSalary" prefWidth="179.2000488281251" text="Salary" />
         </columns>
       </TableView>
@@ -86,5 +86,11 @@
             <Font name="Arial Bold" size="12.0" />
          </font>
       </JFXButton>
+      <JFXButton layoutX="270.0" layoutY="266.0" onAction="#btnSearchOnAction" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Search" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <JFXTextField fx:id="txtSearch" layoutX="46.0" layoutY="266.0" prefHeight="30.0" prefWidth="224.0" promptText="Enter employee ID" />
    </children>
 </AnchorPane>

@@ -74,5 +74,11 @@
          </font>
       </Label>
       <JFXTextField fx:id="txtQty" layoutX="1053.0" layoutY="102.0" prefHeight="30.0" prefWidth="198.0" promptText="Qty" unFocusColor="BLACK" />
+      <JFXButton layoutX="272.0" layoutY="266.0" onAction="#btnSearchOnAction" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Search" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <JFXTextField fx:id="txtSearch" layoutX="48.0" layoutY="266.0" prefHeight="30.0" prefWidth="224.0" promptText="Enter item ID" />
    </children>
 </AnchorPane>

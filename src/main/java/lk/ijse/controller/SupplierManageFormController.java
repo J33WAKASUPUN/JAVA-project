@@ -9,6 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import lk.ijse.dto.CustomerDto;
 import lk.ijse.dto.SupplierDto;
 import lk.ijse.dto.tm.CustomerTm;
 import lk.ijse.dto.tm.SupplierTm;
@@ -46,6 +47,9 @@ public class SupplierManageFormController {
 
     @FXML
     private JFXTextField txtName;
+
+    @FXML
+    private JFXTextField txtSearch;
 
     public void initialize() {
         setCellValueFactory();
@@ -167,11 +171,38 @@ public class SupplierManageFormController {
         }
     }
 
+    @FXML
+    void btnSearchOnAction(ActionEvent event) {
+        String id = txtSearch.getText();
+
+        if (id!= null &&!id.isEmpty()) {
+            try {
+                SupplierDto supplierDto = SupplierModel.getSupplier(id);
+
+                if(supplierDto != null){
+                    txtId.setText(supplierDto.getSupId());
+                    txtName.setText(supplierDto.getSName());
+                    txtAddress.setText(supplierDto.getAddress());
+                    txtContactNumber.setText(supplierDto.getContact());
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Customer not found");
+                    alert.showAndWait();
+                }
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            System.out.println("Customer name is null or empty");
+        }
+    }
+
     private void clearFields() {
         txtId.setText("");
         txtName.setText("");
         txtAddress.setText("");
         txtContactNumber.setText("");
+        txtSearch.setText("");
     }
 
 }

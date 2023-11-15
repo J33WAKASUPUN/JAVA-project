@@ -20,7 +20,6 @@ public class HandoverDeviceModel {
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
-            list.add(new DeviceDto());
             DeviceDto deviceDto = new DeviceDto();
                 deviceDto.setDeviceId(resultSet.getString(1));
                 deviceDto.setDName(resultSet.getString(2));
@@ -29,6 +28,8 @@ public class HandoverDeviceModel {
                 deviceDto.setCost(String.valueOf(resultSet.getString(5)));
                 deviceDto.setDate(String.valueOf(resultSet.getDate(6)));
                 deviceDto.setCId(resultSet.getString(7));
+
+                list.add(deviceDto);
         }
         return list;
     }
@@ -68,5 +69,24 @@ public class HandoverDeviceModel {
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, deviceId);
         return preparedStatement.executeUpdate() > 0;
+    }
+
+    public static DeviceDto getDevice(String deviceId) throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+        String sql = "SELECT * FROM handoverDevice WHERE deviceId =?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, deviceId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        DeviceDto deviceDto = new DeviceDto();
+        while (resultSet.next()) {
+            deviceDto.setDeviceId(resultSet.getString(1));
+            deviceDto.setDName(resultSet.getString(2));
+            deviceDto.setProblem(resultSet.getString(3));
+            deviceDto.setStatus(resultSet.getString(4));
+            deviceDto.setCost(String.valueOf(resultSet.getString(5)));
+            deviceDto.setDate(String.valueOf(resultSet.getDate(6)));
+            deviceDto.setCId(resultSet.getString(7));
+        }
+        return deviceDto;
     }
 }

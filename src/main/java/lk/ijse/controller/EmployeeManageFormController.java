@@ -13,8 +13,10 @@ package lk.ijse.controller;
         import javafx.scene.control.TableView;
         import javafx.scene.control.cell.PropertyValueFactory;
         import javafx.stage.Stage;
+        import lk.ijse.dto.CustomerDto;
         import lk.ijse.dto.EmployeeDto;
         import lk.ijse.dto.tm.EmployeeTm;
+        import lk.ijse.model.CustomerModel;
         import lk.ijse.model.EmployeeModel;
 
         import java.io.IOException;
@@ -62,6 +64,9 @@ public class EmployeeManageFormController {
     @FXML
     private JFXTextField txtSalary;
 
+    @FXML
+    private JFXTextField txtSearch;
+
     public void initialize (){
         setCellValueFactory();
         loadAllEmployee();
@@ -71,8 +76,8 @@ public class EmployeeManageFormController {
         colId.setCellValueFactory(new PropertyValueFactory<>("empId"));
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
-        colContact.setCellValueFactory(new PropertyValueFactory<>("contact"));
         colPosition.setCellValueFactory(new PropertyValueFactory<>("position"));
+        colContact.setCellValueFactory(new PropertyValueFactory<>("contact"));
         colSalary.setCellValueFactory(new PropertyValueFactory<>("salary"));
     }
 
@@ -88,8 +93,8 @@ public class EmployeeManageFormController {
                                 dto.getEmpId(),
                                 dto.getName(),
                                 dto.getAddress(),
-                                dto.getContact(),
                                 dto.getPosition(),
+                                dto.getContact(),
                                 dto.getSalary()
                         )
                 );
@@ -121,7 +126,7 @@ public class EmployeeManageFormController {
         String salary = txtSalary.getText();
         String userId = "U001";
 
-        EmployeeDto employeeDto = new EmployeeDto(id, name, address, contact, position, salary, userId);
+        EmployeeDto employeeDto = new EmployeeDto(id, name, address,position, contact, salary, userId);
 
         if(id.isEmpty() || name.isEmpty() || address.isEmpty() || contact.isEmpty() || position.isEmpty() || salary.isEmpty()){
             Alert alert = new Alert(Alert.AlertType.ERROR,"Fill all fields");
@@ -205,6 +210,34 @@ public class EmployeeManageFormController {
         }
     }
 
+    @FXML
+    void btnSearchOnAction(ActionEvent event) {
+        String id = txtSearch.getText();
+
+        if (id!= null &&!id.isEmpty()) {
+            try {
+                EmployeeDto employeeDto = EmployeeModel.getEmployee(id);
+
+                if(employeeDto != null){
+                    txtEmployeeId.setText(employeeDto.getEmpId());
+                    txtName.setText(employeeDto.getName());
+                    txtAddress.setText(employeeDto.getAddress());
+                    txtContact.setText(employeeDto.getContact());
+                    txtPosition.setText(employeeDto.getPosition());
+                    txtSalary.setText(employeeDto.getSalary());
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Customer not found");
+                    alert.showAndWait();
+                }
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            System.out.println("Customer name is null or empty");
+        }
+    }
+
     private void clearFields() {
         txtEmployeeId.setText("");
         txtName.setText("");
@@ -212,6 +245,7 @@ public class EmployeeManageFormController {
         txtContact.setText("");
         txtPosition.setText("");
         txtSalary.setText("");
+        txtSearch.setText("");
     }
 }
 

@@ -22,6 +22,10 @@ public class CustomerManageFormController {
     public JFXTextField txtAddress;
     public JFXTextField txtContactNumber;
     public JFXTextField txtEmail;
+
+    @FXML
+    private JFXTextField txtSearch;
+
     @FXML
     private TableColumn<?, ?> colAddress;
 
@@ -162,6 +166,33 @@ public class CustomerManageFormController {
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    void btnSearchOnAction(ActionEvent event) {
+        String id = txtSearch.getText();
+
+        if (id!= null &&!id.isEmpty()) {
+            try {
+                CustomerDto customerDto = CustomerModel.getCustomer(id);
+
+                if(customerDto != null){
+                txtCustomerId.setText(customerDto.getCId());
+                txtCustomerName.setText(customerDto.getName());
+                txtAddress.setText(customerDto.getAddress());
+                txtContactNumber.setText(customerDto.getContact());
+                txtEmail.setText(customerDto.getEmail());
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Customer not found");
+                    alert.showAndWait();
+                }
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            System.out.println("Customer name is null or empty");
         }
     }
 

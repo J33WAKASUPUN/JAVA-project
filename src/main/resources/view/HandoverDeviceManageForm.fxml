@@ -75,5 +75,11 @@
       <JFXTextField fx:id="txtProblem" layoutX="47.0" layoutY="197.0" prefHeight="30.0" prefWidth="747.0" promptText="Enter problem in device" unFocusColor="BLACK" />
       <JFXTextField fx:id="txtStatus" layoutX="948.0" layoutY="102.0" prefHeight="30.0" prefWidth="304.0" promptText="Status (Repaired / Repairing)" unFocusColor="BLACK" />
       <JFXTextField fx:id="txtCost" layoutX="948.0" layoutY="197.0" prefHeight="30.0" prefWidth="304.0" promptText="Cost for repair device" unFocusColor="BLACK" />
+      <JFXButton layoutX="272.0" layoutY="266.0" onAction="#btnSearchOnAction" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Search" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <JFXTextField fx:id="txtSearch" layoutX="48.0" layoutY="266.0" prefHeight="30.0" prefWidth="224.0" promptText="Enter device ID" />
    </children>
 </AnchorPane>

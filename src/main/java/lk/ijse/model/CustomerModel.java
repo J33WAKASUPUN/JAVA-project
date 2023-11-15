@@ -68,7 +68,7 @@ public class CustomerModel {
 
     public static CustomerDto getCustomer(String id) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "SELECT * FROM customer WHERE id =?";
+        String sql = "SELECT * FROM customer WHERE cId =?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1,id );
         ResultSet resultSet = preparedStatement.executeQuery();
