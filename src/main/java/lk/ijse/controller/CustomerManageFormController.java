@@ -9,6 +9,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.BoxBlur;
+import javafx.scene.layout.AnchorPane;
 import lk.ijse.dto.CustomerDto;
 import lk.ijse.dto.tm.CustomerTm;
 import lk.ijse.model.CustomerModel;
@@ -44,6 +46,9 @@ public class CustomerManageFormController {
 
     @FXML
     private TableView<CustomerTm> tblCustomer;
+
+    @FXML
+    private AnchorPane root;
 
     public  void initialize (){
         setCellValueFactory();
@@ -105,7 +110,10 @@ public class CustomerManageFormController {
 
         if(id.isEmpty() || name.isEmpty() || address.isEmpty() || contact.isEmpty() || email.isEmpty()){
             Alert alert = new Alert(Alert.AlertType.ERROR, "Fill all fields");
+            BoxBlur blur = new BoxBlur(3, 3, 1);
+            root.setEffect(blur);
             alert.showAndWait();
+            root.setEffect(null);
             return;
         }
         CustomerDto dto = new CustomerDto(id, name, email,address,contact,uId);
@@ -114,7 +122,10 @@ public class CustomerManageFormController {
             boolean isSaved = CustomerModel.setCustomer(dto);
             if(isSaved){
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Succsess");
+                BoxBlur blur = new BoxBlur(5, 5, 2);
+                root.setEffect(blur);
                 alert.showAndWait();
+                root.setEffect(null);
                 loadAllCustomer();
                 clearFields();
             }else{

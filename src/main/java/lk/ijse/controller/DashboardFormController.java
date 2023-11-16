@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
@@ -15,6 +16,9 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 public class DashboardFormController {
+
+    @FXML
+    private Pane CustomerCountPane;
     public JFXButton btnOrders;
     public AnchorPane subRoot;
     public JFXButton btnDashboard;

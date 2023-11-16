@@ -271,7 +271,7 @@
                </children>
             </AnchorPane>
             <Line endX="-100.00001525878906" endY="600.7999877929688" layoutX="1122.0" layoutY="120.0" startX="-100.00001525878906" startY="-76.79999542236328" />
-            <Pane layoutX="63.0" layoutY="359.0" prefHeight="128.0" prefWidth="262.0" style="-fx-background-color: FFFCF2; -fx-border-color: #403D39; -fx-background-radius: 10; -fx-border-radius: 10;">
+            <Pane fx:id="CustomerCountPane" layoutX="63.0" layoutY="359.0" prefHeight="128.0" prefWidth="262.0" style="-fx-background-color: FFFCF2; -fx-border-color: #403D39; -fx-background-radius: 10; -fx-border-radius: 10;">
                <children>
                   <Label layoutX="14.0" layoutY="64.0" prefHeight="26.0" prefWidth="200.0" text="CUSTOMERS">
                      <font>

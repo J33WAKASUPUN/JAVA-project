@@ -12,6 +12,8 @@ package lk.ijse.controller;
         import javafx.scene.control.TableColumn;
         import javafx.scene.control.TableView;
         import javafx.scene.control.cell.PropertyValueFactory;
+        import javafx.scene.effect.BoxBlur;
+        import javafx.scene.layout.AnchorPane;
         import javafx.stage.Stage;
         import lk.ijse.dto.CustomerDto;
         import lk.ijse.dto.EmployeeDto;
@@ -25,6 +27,9 @@ package lk.ijse.controller;
         import java.util.List;
 
 public class EmployeeManageFormController {
+
+    @FXML
+    private AnchorPane root;
 
     @FXML
     private TableColumn<?, ?> colAddress;
@@ -109,13 +114,19 @@ public class EmployeeManageFormController {
 
     @FXML
     void btnAddAsUserOnAction(ActionEvent event) throws IOException {
+        BoxBlur blur = new BoxBlur(3, 3, 1);
+        root.setEffect(blur);
         Parent parent = FXMLLoader.load(getClass().getResource("/view/AddUserForm.fxml"));
         Scene scene =new Scene(parent);
 
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.setTitle("Add User");
-        stage.show();
+        stage.showAndWait();
+        root.setEffect(null);
+        stage.setOnCloseRequest(e -> {
+            root.setEffect(null);
+        });
     }
 
     @FXML
