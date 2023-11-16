@@ -31,13 +31,37 @@ public class UserModel {
     public static boolean setUser(UserDto dto) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
-        String sql = "INSERT INTO user VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO user VALUES (?,?,?,?)";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setObject(1,dto.getUserId());
         preparedStatement.setObject(2,dto.getUserName());
         preparedStatement.setObject(3,dto.getPassword());
         preparedStatement.setObject(4,dto.getEmail());
-        preparedStatement.setObject(5,dto.getImg());
         return preparedStatement.executeUpdate() > 0;
+    }
+
+    public static String generateNextUserId() throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT userId FROM user ORDER BY userId DESC LIMIT 1";
+        PreparedStatement pstm = connection.prepareStatement(sql);
+
+        ResultSet resultSet = pstm.executeQuery();
+        if(resultSet.next()) {
+            return splitUserId(resultSet.getString(1));
+        }
+        return splitUserId(null);
+    }
+
+    private static String splitUserId(String currentUserId) {
+        if(currentUserId != null) {
+            String[] split = currentUserId.split("U0");
+
+            int id = Integer.parseInt(split[1]); //01
+            id++;
+            return "U00" + id;
+        } else {
+            return "U001";
+        }
     }
 }

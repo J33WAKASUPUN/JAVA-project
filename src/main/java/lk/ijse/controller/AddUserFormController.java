@@ -7,10 +7,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import lk.ijse.dto.UserDto;
+import lk.ijse.model.OrdersModel;
+import lk.ijse.model.UserModel;
 
 import java.awt.*;
+import java.sql.SQLException;
 
 public class AddUserFormController {
 
@@ -38,6 +42,11 @@ public class AddUserFormController {
     @FXML
     private JFXTextField txtUserName;
 
+    public void initialize(){
+        generateNextUserId();
+        lblPasswordDoesNotMatch.setVisible(false);
+    }
+
     @FXML
     void btnCancelOnAction(ActionEvent event) {
         ((Stage) root.getScene().getWindow()).close();
@@ -48,16 +57,49 @@ public class AddUserFormController {
         String userName = txtUserName.getText();
         String userId = txtUserId.getText();
         String email = txtEmail.getText();
-        String password = txtPassword.getText();
+        String fristpassword = txtPassword.getText();
         String rePassword = txtRePassword.getText();
+        String password = "";
 
-        if(userName.isEmpty() || userId.isEmpty() || email.isEmpty() || password.isEmpty() || rePassword.isEmpty()){
+        if(userName.isEmpty() || userId.isEmpty() || email.isEmpty() || fristpassword.isEmpty() || rePassword.isEmpty()){
             Alert alert = new Alert(Alert.AlertType.ERROR, "Fill all fields");
             alert.showAndWait();
             return;
         }
 
-        //UserDto dto = new UserDto(userId,userName,password,email
+        if (fristpassword.equals(rePassword)){
+            password=fristpassword;
+        } else {
+            Paint unFocusColor = Paint.valueOf("#BA181B");
+            lblPasswordDoesNotMatch.setVisible(true);
+            txtRePassword.setUnFocusColor(unFocusColor);
+            return;
+        }
+
+        UserDto dto = new UserDto(userId,userName,password,email);
+
+        try {
+            boolean isAdded = UserModel.setUser(dto);
+            if (isAdded) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Succsess");
+                alert.showAndWait();
+                ((Stage) root.getScene().getWindow()).close();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Something went wrong");
+                alert.showAndWait();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void generateNextUserId() {
+        try {
+            String userId = UserModel.generateNextUserId();
+            txtUserId.setText(userId);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
     }
 
 }

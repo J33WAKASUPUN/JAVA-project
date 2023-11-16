@@ -229,9 +229,9 @@ public class OrderManageFormController {
             Optional<ButtonType> type = new Alert(Alert.AlertType.INFORMATION, "Are you sure to remove?", yes, no).showAndWait();
 
             if (type.orElse(no) == yes) {
-                int focusedIndex = tblOrders.getSelectionModel().getSelectedIndex();
+                OrderTm selectedIndex = tblOrders.getSelectionModel().getSelectedItem();
 
-                obList.remove(focusedIndex);
+                obList. remove(selectedIndex);
                 tblOrders.refresh();
                 calculateTotal();
             }
