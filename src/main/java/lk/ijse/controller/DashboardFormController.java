@@ -25,7 +25,7 @@ public class DashboardFormController {
     @FXML
     private Label lblDate;
 
-    public void initializer(){
+    public void initialize(){
         setDate();
     }
 
@@ -96,7 +96,6 @@ public class DashboardFormController {
     }*/
 
     private void setDate() {
-//        LocalDate now = LocalDate.now();
         lblDate.setText(String.valueOf(LocalDate.now()));
     }
 }

@@ -150,6 +150,11 @@
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
+                  <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="14.0" layoutY="14.0">
+                     <image>
+                        <Image url="@../icons/man.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
             <Pane layoutX="379.0" layoutY="570.0" prefHeight="128.0" prefWidth="262.0" style="-fx-background-color: FFFCF2; -fx-border-color: #403D39; -fx-background-radius: 10; -fx-border-radius: 10;">
@@ -164,6 +169,11 @@
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
+                  <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="17.0" layoutY="14.0">
+                     <image>
+                        <Image url="@../icons/profits.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
             <Pane layoutX="695.0" layoutY="570.0" prefHeight="128.0" prefWidth="262.0" style="-fx-background-color: FFFCF2; -fx-background-radius: 10; -fx-border-color: #403D39; -fx-border-radius: 10;">
@@ -178,11 +188,16 @@
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
+                  <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="14.0" layoutY="14.0">
+                     <image>
+                        <Image url="@../icons/new-product.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
             <Line endX="210.20001220703125" layoutX="164.0" layoutY="529.0" startX="-100.0" />
             <Line endX="210.20001220703125" layoutX="746.0" layoutY="529.0" startX="-100.0" />
-            <Label fx:id="lblDate" layoutX="434.0" layoutY="520.0" prefHeight="18.0" prefWidth="200.0" text="Today - 20 sep 2023, Friday" textAlignment="CENTER">
+            <Label fx:id="lblDate" contentDisplay="CENTER" layoutX="478.0" layoutY="520.0" prefHeight="18.0" prefWidth="67.0" text="0000-00-00" textAlignment="CENTER">
                <font>
                   <Font name="Arial Bold" size="12.0" />
                </font>
@@ -201,7 +216,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <AnchorPane fx:id="subRootAcc" layoutX="1023.0" layoutY="-10.0" prefHeight="782.0" prefWidth="270.0" style="-fx-background-color: FFFCF2;">
+            <AnchorPane fx:id="subRootAcc" layoutX="1023.0" prefHeight="782.0" prefWidth="270.0" style="-fx-background-color: FFFCF2;">
                <children>
                   <Pane layoutX="66.0" layoutY="164.0" prefHeight="134.0" prefWidth="140.0" style="-fx-background-color: #CCC5B9; -fx-background-radius: 10;" />
                   <Label alignment="CENTER" layoutX="11.0" layoutY="319.0" prefHeight="24.0" prefWidth="250.0" text="Kamal Silva">
@@ -268,6 +283,11 @@
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
+                  <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="11.0" layoutY="12.0">
+                     <image>
+                        <Image url="@../icons/man.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
             <Pane layoutX="379.0" layoutY="359.0" prefHeight="128.0" prefWidth="262.0" style="-fx-background-color: FFFCF2; -fx-border-color: #403D39; -fx-background-radius: 10; -fx-border-radius: 10;">
@@ -282,6 +302,11 @@
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
+                  <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="17.0" layoutY="14.0">
+                     <image>
+                        <Image url="@../icons/profits.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
             <Pane layoutX="695.0" layoutY="359.0" prefHeight="128.0" prefWidth="262.0" style="-fx-background-color: FFFCF2; -fx-background-radius: 10; -fx-border-color: #403D39; -fx-border-radius: 10;">
@@ -296,6 +321,11 @@
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
+                  <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="14.0" layoutY="14.0">
+                     <image>
+                        <Image url="@../icons/new-product.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
          </children>

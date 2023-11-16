@@ -14,6 +14,7 @@ import lk.ijse.dto.ItemDto;
 import lk.ijse.dto.tm.StockTm;
 import lk.ijse.model.CustomerModel;
 import lk.ijse.model.ItemModel;
+import lk.ijse.model.OrdersModel;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -58,6 +59,7 @@ public class StockManageFormController {
 
     public void initialize(){
         setCellValueFactory();
+        generateNextItemId();
         loadAllItems();
     }
 
@@ -204,6 +206,15 @@ public class StockManageFormController {
             }
         } else {
             System.out.println("Customer name is null or empty");
+        }
+    }
+
+    private void generateNextItemId() {
+        try {
+            String itemId = ItemModel.generateNextItemId();
+            txtId.setText(itemId);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 

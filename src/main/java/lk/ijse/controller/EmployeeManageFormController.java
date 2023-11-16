@@ -18,6 +18,7 @@ package lk.ijse.controller;
         import lk.ijse.dto.tm.EmployeeTm;
         import lk.ijse.model.CustomerModel;
         import lk.ijse.model.EmployeeModel;
+        import lk.ijse.model.OrdersModel;
 
         import java.io.IOException;
         import java.sql.SQLException;
@@ -69,6 +70,7 @@ public class EmployeeManageFormController {
 
     public void initialize (){
         setCellValueFactory();
+        generateNextEmployeeId();
         loadAllEmployee();
     }
 
@@ -235,6 +237,15 @@ public class EmployeeManageFormController {
             }
         } else {
             System.out.println("Customer name is null or empty");
+        }
+    }
+
+    private void generateNextEmployeeId() {
+        try {
+            String employeeId = EmployeeModel.generateNextEmployeeId();
+            txtEmployeeId.setText(employeeId);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 

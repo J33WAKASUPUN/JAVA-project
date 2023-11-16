@@ -12,6 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import lk.ijse.dto.CustomerDto;
 import lk.ijse.dto.tm.CustomerTm;
 import lk.ijse.model.CustomerModel;
+import lk.ijse.model.OrdersModel;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -46,6 +47,7 @@ public class CustomerManageFormController {
 
     public  void initialize (){
         setCellValueFactory();
+        generateNextCustomerId();
         loadAllCustomer();
     }
 
@@ -81,6 +83,15 @@ public class CustomerManageFormController {
         }
     }
 
+    private void generateNextCustomerId() {
+        try {
+            String customerId = CustomerModel.generateNextCustomerId();
+            txtCustomerId.setText(customerId);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+    }
+
     public void btnAddCustomerOnActoin(ActionEvent actionEvent) {
     }
 
@@ -104,6 +115,8 @@ public class CustomerManageFormController {
             if(isSaved){
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Succsess");
                 alert.showAndWait();
+                loadAllCustomer();
+                clearFields();
             }else{
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Somthing went wrong");
                 alert.showAndWait();

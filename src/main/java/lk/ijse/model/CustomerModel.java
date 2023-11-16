@@ -103,4 +103,29 @@ public class CustomerModel {
         }
         return null;
     }
+
+    public static String generateNextCustomerId() throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT cId FROM customer ORDER BY cId DESC LIMIT 1";
+        PreparedStatement pstm = connection.prepareStatement(sql);
+
+        ResultSet resultSet = pstm.executeQuery();
+        if(resultSet.next()) {
+            return splitCustomerId(resultSet.getString(1));
+        }
+        return splitCustomerId(null);
+    }
+
+    private static String splitCustomerId(String currentCustomerId) {
+        if(currentCustomerId != null) {
+            String[] split = currentCustomerId.split("C0");
+
+            int id = Integer.parseInt(split[1]); //01
+            id++;
+            return "C00" + id;
+        } else {
+            return "C001";
+        }
+    }
 }

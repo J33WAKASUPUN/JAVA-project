@@ -14,6 +14,7 @@ import lk.ijse.dto.SupplierDto;
 import lk.ijse.dto.tm.CustomerTm;
 import lk.ijse.dto.tm.SupplierTm;
 import lk.ijse.model.CustomerModel;
+import lk.ijse.model.OrdersModel;
 import lk.ijse.model.SupplierModel;
 
 import java.sql.SQLException;
@@ -53,6 +54,7 @@ public class SupplierManageFormController {
 
     public void initialize() {
         setCellValueFactory();
+        generateNextSupplierId();
         loadAllSupplier();
     }
 
@@ -194,6 +196,15 @@ public class SupplierManageFormController {
             }
         } else {
             System.out.println("Customer name is null or empty");
+        }
+    }
+
+    private void generateNextSupplierId() {
+        try {
+            String supplierId = SupplierModel.generateNextSupplierId();
+            txtId.setText(supplierId);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 

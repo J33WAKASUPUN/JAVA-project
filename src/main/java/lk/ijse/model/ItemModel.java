@@ -124,4 +124,29 @@ public class ItemModel {
             return null;
         }
     }
+
+    public static String generateNextItemId() throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT itemId FROM item ORDER BY itemId DESC LIMIT 1";
+        PreparedStatement pstm = connection.prepareStatement(sql);
+
+        ResultSet resultSet = pstm.executeQuery();
+        if(resultSet.next()) {
+            return splitItemId(resultSet.getString(1));
+        }
+        return splitItemId(null);
+    }
+
+    private static String splitItemId(String currentItemId) {
+        if(currentItemId != null) {
+            String[] split = currentItemId.split("I0");
+
+            int id = Integer.parseInt(split[1]); //01
+            id++;
+            return "I00" + id;
+        } else {
+            return "I001";
+        }
+    }
 }

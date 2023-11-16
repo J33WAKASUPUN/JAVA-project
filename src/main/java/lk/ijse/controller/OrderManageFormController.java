@@ -85,6 +85,9 @@ public class OrderManageFormController {
     @FXML
     private Label lblOrderDate;
 
+    @FXML
+    private Label lblQuantity;
+
     public void initialize(){
         setCellValueFactory();
         loadItemNames();
@@ -93,6 +96,8 @@ public class OrderManageFormController {
         generateNextOrderId();
         lblPrice.setDisable(true);
         txtRepairPrice.setDisable(true);
+        txtQuantity.setDisable(false);
+        lblQuantity.setDisable(false);
     }
 
     ObservableList<OrderTm> obList = FXCollections.observableArrayList();
@@ -135,6 +140,18 @@ public class OrderManageFormController {
 
         if (name != null && !name.isEmpty()) {
             try {
+                if(name.equals("Device repair")) {
+                    txtRepairPrice.setDisable(false);
+                    lblPrice.setDisable(false);
+                    txtQuantity.setDisable(true);
+                    lblQuantity.setDisable(true);
+                }else {
+                    txtRepairPrice.setDisable(true);
+                    lblPrice.setDisable(true);
+                    txtQuantity.setDisable(false);
+                    lblQuantity.setDisable(false);
+                }
+
                 ItemDto dto = ItemModel.getItem(name);
                 txtItemCode.setText(dto.getItemId());
                 txtUnitPrice.setText(dto.getUnitPrice());
@@ -186,11 +203,11 @@ public class OrderManageFormController {
         String itemId = txtItemCode.getText();
         String quantity = txtQuantity.getText();
         String unitPrice = txtUnitPrice.getText();
-        String date = "2023/11/13";
+        String date = lblOrderDate.getText();
         Button btn = new Button("Remove");
-        int qty = Integer.parseInt(txtQuantity.getText());
-        double unitPriceint=Integer.parseInt(txtUnitPrice.getText());
-        double tot = unitPriceint * qty;
+        int qty = 0;
+        double unitPriceInt= 0;
+        double tot = unitPriceInt * qty;
 
 
         setRemoveBtnAction(btn);
@@ -201,24 +218,61 @@ public class OrderManageFormController {
             for (int i = 0; i < tblOrders.getItems().size(); i++) {
                 if (colItem.getCellData(i).equals(itemId)) {
                     int col_qty = (int) colQty.getCellData(i);
-                    qty += col_qty;
-                    tot = unitPriceint * qty;
 
-                    obList.get(i).setQty(qty);
-                    obList.get(i).setPrice(tot);
+                    if(itemName.equals("Device repair")){
+                        txtRepairPrice.setDisable(false);
+                        lblPrice.setDisable(false);
+                        txtQuantity.setDisable(true);
+                        lblQuantity.setDisable(true);
+
+                        int devicePrice = Integer.parseInt(txtRepairPrice.getText());
+
+                        qty = 0;
+                        tot = devicePrice;
+
+                        obList.get(i).setQty(qty);
+                        obList.get(i).setPrice(tot);
+                    } else {
+                        qty = Integer.parseInt(txtQuantity.getText());
+                        unitPriceInt=Integer.parseInt(txtUnitPrice.getText());
+
+                        qty += col_qty;
+                        tot = unitPriceInt * qty;
+
+                        obList.get(i).setQty(qty);
+                        obList.get(i).setPrice(tot);
+                    }
 
                     calculateTotal();
                     tblOrders.refresh();
                     return;
                 }
             }
+        } else {
+            if(itemName.equals("Device repair")){
+                txtRepairPrice.setDisable(false);
+                lblPrice.setDisable(false);
+                txtQuantity.setDisable(true);
+                lblQuantity.setDisable(true);
+
+                int devicePrice = Integer.parseInt(txtRepairPrice.getText());
+
+                qty = 0;
+                tot = devicePrice;
+            } else {
+                qty = Integer.parseInt(txtQuantity.getText());
+                unitPriceInt=Integer.parseInt(txtUnitPrice.getText());
+
+                tot = unitPriceInt * qty;
+            }
         }
-       var orderTm = new OrderTm(itemId, itemName, qty, tot, unitPriceint,  btn);
+       var orderTm = new OrderTm(itemId, itemName, qty, tot, unitPriceInt,  btn);
 
        obList.add(orderTm);
 
         tblOrders.setItems(obList);
         calculateTotal();
+        clearFields();
     }
 
     private void setRemoveBtnAction(Button btn) {
@@ -248,7 +302,7 @@ public class OrderManageFormController {
 
     @FXML
     void btnClearOnAction(ActionEvent event) {
-
+        clearFields();
     }
 
     @FXML
@@ -270,6 +324,7 @@ public class OrderManageFormController {
             boolean isSuccess = PlaceOrderModel.placeOrder(placeOrderDto);
             if (isSuccess) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Order Success!").show();
+                generateNextOrderId();
             } else{
                 new Alert(Alert.AlertType.ERROR, "Order Failed!").show();
             }
@@ -280,6 +335,16 @@ public class OrderManageFormController {
 
     private void setDate() {
         lblOrderDate.setText(String.valueOf(LocalDate.now()));
+    }
+
+    @FXML
+    void btnCancelOnAction(ActionEvent event) {
+        tblOrders.refresh();
+    }
+
+    private void clearFields() {
+        txtQuantity.setText("");
+        txtRepairPrice.setText("");
     }
 
 }

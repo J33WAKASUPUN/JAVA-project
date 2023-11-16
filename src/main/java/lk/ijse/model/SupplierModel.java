@@ -76,4 +76,29 @@ public class SupplierModel {
         }
         return null;
     }
+
+    public static String generateNextSupplierId() throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT supId FROM supplier ORDER BY supId DESC LIMIT 1";
+        PreparedStatement pstm = connection.prepareStatement(sql);
+
+        ResultSet resultSet = pstm.executeQuery();
+        if(resultSet.next()) {
+            return splitSupplierId(resultSet.getString(1));
+        }
+        return splitSupplierId(null);
+    }
+
+    private static String splitSupplierId(String currentSupplierId) {
+        if(currentSupplierId != null) {
+            String[] split = currentSupplierId.split("S0");
+
+            int id = Integer.parseInt(split[1]); //01
+            id++;
+            return "S00" + id;
+        } else {
+            return "S001";
+        }
+    }
 }

@@ -89,4 +89,29 @@ public class HandoverDeviceModel {
         }
         return deviceDto;
     }
+
+    public static String generateNextDeviceId() throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT deviceId FROM handoverdevice ORDER BY deviceId DESC LIMIT 1";
+        PreparedStatement pstm = connection.prepareStatement(sql);
+
+        ResultSet resultSet = pstm.executeQuery();
+        if(resultSet.next()) {
+            return splitDeviceId(resultSet.getString(1));
+        }
+        return splitDeviceId(null);
+    }
+
+    private static String splitDeviceId(String currentDeviceId) {
+        if(currentDeviceId != null) {
+            String[] split = currentDeviceId.split("D0");
+
+            int id = Integer.parseInt(split[1]); //01
+            id++;
+            return "D00" + id;
+        } else {
+            return "D001";
+        }
+    }
 }

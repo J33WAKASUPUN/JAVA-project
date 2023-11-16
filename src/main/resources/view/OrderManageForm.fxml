@@ -12,7 +12,7 @@
 
 <AnchorPane prefHeight="782.0" prefWidth="1293.0" style="-fx-background-color: FFFCF2;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.OrderManageFormController">
    <children>
-      <TableView fx:id="tblOrders" layoutX="47.0" layoutY="329.0" prefHeight="355.0" prefWidth="1210.0">
+      <TableView fx:id="tblOrders" layoutX="47.0" layoutY="329.0" prefHeight="355.0" prefWidth="1210.0" style="-fx-background-color: #FFFCF2;">
          <columns>
             <TableColumn fx:id="colId" prefWidth="146.39995956420898" text="Item ID" />
             <TableColumn fx:id="colItem" prefWidth="491.20008850097656" text="Item / Service" />
@@ -32,7 +32,7 @@
             <Font name="Arial Bold" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="48.0" layoutY="180.0" text="Quantity">
+      <Label fx:id="lblQuantity" layoutX="48.0" layoutY="180.0" text="Quantity">
          <font>
             <Font name="Arial Bold" size="13.0" />
          </font>
@@ -90,9 +90,14 @@
          </font>
       </Label>
       <JFXTextField fx:id="txtCustomerID" layoutX="629.0" layoutY="197.0" prefHeight="30.0" prefWidth="210.0" promptText="Cost for repair" unFocusColor="BLACK" />
-      <Pane layoutX="950.0" layoutY="716.0" prefHeight="30.0" prefWidth="200.0" style="-fx-border-color: #403D39;">
+      <Pane layoutX="847.0" layoutY="716.0" prefHeight="30.0" prefWidth="200.0" style="-fx-border-color: #403D39;">
          <children>
-            <Label fx:id="lblTotal" layoutX="16.0" prefHeight="30.0" prefWidth="184.0" text="Total : ">
+            <Label fx:id="lblTotal" layoutX="55.0" prefHeight="30.0" prefWidth="144.0">
+               <font>
+                  <Font name="Arial Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblTotal1" layoutX="11.0" layoutY="-1.0" prefHeight="30.0" prefWidth="53.0" text="Total : ">
                <font>
                   <Font name="Arial Bold" size="14.0" />
                </font>
@@ -104,5 +109,10 @@
             <Font name="Arial Bold" size="14.0" />
          </font>
       </Label>
+      <JFXButton layoutX="1067.0" layoutY="717.0" onAction="#btnCancelOnAction" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: FFFCF2; -fx-border-color: #403D39;" text="Cancel">
+         <font>
+            <Font name="Arial Bold" size="12.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>

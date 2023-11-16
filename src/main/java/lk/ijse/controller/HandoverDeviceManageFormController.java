@@ -14,6 +14,7 @@ import lk.ijse.dto.DeviceDto;
 import lk.ijse.dto.tm.DeviceTm;
 import lk.ijse.model.CustomerModel;
 import lk.ijse.model.HandoverDeviceModel;
+import lk.ijse.model.OrdersModel;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -61,6 +62,7 @@ public class HandoverDeviceManageFormController {
 
     public void initialize(){
         setCellValueFactory();
+        generateNextDeviceId();
         loadAllItems();
     }
 
@@ -205,6 +207,15 @@ public class HandoverDeviceManageFormController {
             }
         } else {
             System.out.println("Customer name is null or empty");
+        }
+    }
+
+    private void generateNextDeviceId() {
+        try {
+            String deviceId = HandoverDeviceModel.generateNextDeviceId();
+            txtId.setText(deviceId);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 

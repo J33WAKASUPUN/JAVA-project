@@ -93,4 +93,29 @@ public class EmployeeModel {
         }
         return employeeDto;
     }
+
+    public static String generateNextEmployeeId() throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT empId FROM employee ORDER BY empId DESC LIMIT 1";
+        PreparedStatement pstm = connection.prepareStatement(sql);
+
+        ResultSet resultSet = pstm.executeQuery();
+        if(resultSet.next()) {
+            return splitEmployeeId(resultSet.getString(1));
+        }
+        return splitEmployeeId(null);
+    }
+
+    private static String splitEmployeeId(String currentEmployeeId) {
+        if(currentEmployeeId != null) {
+            String[] split = currentEmployeeId.split("E0");
+
+            int id = Integer.parseInt(split[1]); //01
+            id++;
+            return "E00" + id;
+        } else {
+            return "E001";
+        }
+    }
 }
