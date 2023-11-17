@@ -18,6 +18,7 @@ import lk.ijse.model.OrdersModel;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class HandoverDeviceManageFormController {
 
@@ -110,6 +111,16 @@ public class HandoverDeviceManageFormController {
             String date = "2023.12.12";
             String cId = "C001";
 
+            if(id.isEmpty() || name.isEmpty() || cost.isEmpty() || problem.isEmpty() || status.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR,"Fill all fields");
+                alert.showAndWait();
+                return;
+            }
+
+            if(!validateDevice()){
+                return;
+            }
+
             DeviceDto deviceDto = new DeviceDto(id, name, problem, status, cost, date ,cId);
 
             boolean isAdded = HandoverDeviceModel.setDevice(deviceDto);
@@ -124,6 +135,45 @@ public class HandoverDeviceManageFormController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private boolean validateDevice(){
+
+        boolean matches = Pattern.matches("[E][0-9]{3,}", txtId.getText());
+        if (!matches){
+            Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid device id");
+            alert.showAndWait();
+            return false;
+        }
+
+        boolean matches1 = Pattern.matches("[A-Za-z]{3,}", txtName.getText());
+        if(!matches1){
+            Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid name");
+            alert.showAndWait();
+            return false;
+        }
+
+        boolean matches2 = Pattern.matches("[A-Za-z]{3,}", txtProblem.getText());
+        if (!matches2) {
+            Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid Problem");
+            alert.showAndWait();
+            return false;
+        }
+
+        boolean matches3 = Pattern.matches("\\w\\D", txtStatus.getText());
+        if (!matches3) {
+            Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid status");
+            alert.showAndWait();
+            return false;
+        }
+
+        boolean matches4 = Pattern.matches("[0-9]{0,}\\W", txtCost.getText());
+        if (!matches4) {
+            Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid cost");
+            alert.showAndWait();
+            return false;
+        }
+        return true;
     }
 
     @FXML

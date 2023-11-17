@@ -25,6 +25,7 @@ package lk.ijse.controller;
         import java.io.IOException;
         import java.sql.SQLException;
         import java.util.List;
+        import java.util.regex.Pattern;
 
 public class EmployeeManageFormController {
 
@@ -139,13 +140,16 @@ public class EmployeeManageFormController {
         String salary = txtSalary.getText();
         String userId = "U001";
 
-        EmployeeDto employeeDto = new EmployeeDto(id, name, address,position, contact, salary, userId);
-
         if(id.isEmpty() || name.isEmpty() || address.isEmpty() || contact.isEmpty() || position.isEmpty() || salary.isEmpty()){
             Alert alert = new Alert(Alert.AlertType.ERROR,"Fill all fields");
             alert.showAndWait();
             return;
         }
+
+        if(!validateEmployee()){
+            return;
+        }
+        EmployeeDto employeeDto = new EmployeeDto(id, name, address,position, contact, salary, userId);
 
         try {
             boolean isAdded = EmployeeModel.saveEmployee(employeeDto);
@@ -162,6 +166,52 @@ public class EmployeeManageFormController {
             throw new RuntimeException(e);
         }
 
+    }
+
+    private boolean validateEmployee(){
+
+        boolean matches = Pattern.matches("[E][0-9]{3,}", txtEmployeeId.getText());
+        if (!matches){
+            Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid employee id");
+            alert.showAndWait();
+            return false;
+        }
+
+        boolean matches1 = Pattern.matches("[A-Za-z]{3,}", txtName.getText());
+        if(!matches1){
+            Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid name");
+            alert.showAndWait();
+            return false;
+        }
+
+        boolean matches2 = Pattern.matches("[A-Za-z]{3,}", txtAddress.getText());
+        if (!matches2) {
+            Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid Address");
+            alert.showAndWait();
+            return false;
+        }
+
+        boolean matches3 = Pattern.matches("\\w\\D", txtPosition.getText());
+        if (!matches3) {
+            Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid position");
+            alert.showAndWait();
+            return false;
+        }
+
+        boolean matches4 = Pattern.matches("\\d{10}", txtContact.getText());
+        if (!matches4) {
+            Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid Contact number");
+            alert.showAndWait();
+            return false;
+        }
+
+        boolean matches5 = Pattern.matches("\\d\\W", txtSalary.getText());
+        if (!matches5) {
+            Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid salary");
+            alert.showAndWait();
+            return false;
+        }
+        return true;
     }
 
     @FXML

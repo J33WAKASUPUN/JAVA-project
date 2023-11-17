@@ -18,6 +18,7 @@ import lk.ijse.model.OrdersModel;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class StockManageFormController {
 
@@ -108,6 +109,11 @@ public class StockManageFormController {
             alert.showAndWait();
             return;
         }
+
+        if(!validateItem()){
+            return;
+        }
+
         ItemDto itemDto = new ItemDto(id, name, qty, cost, unitPrice);
 
         try {
@@ -124,6 +130,45 @@ public class StockManageFormController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private boolean validateItem(){
+
+        boolean matches = Pattern.matches("[I][0-9]{3,}", txtId.getText());
+        if (!matches){
+            Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid item id");
+            alert.showAndWait();
+            return false;
+        }
+
+        boolean matches1 = Pattern.matches("[A-Za-z]{3,}", txtName.getText());
+        if(!matches1){
+            Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid name");
+            alert.showAndWait();
+            return false;
+        }
+
+        boolean matches2 = Pattern.matches("\\d{0,}", txtQty.getText());
+        if (!matches2) {
+            Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid qty");
+            alert.showAndWait();
+            return false;
+        }
+
+        boolean matches3 = Pattern.matches("\\d{0,}", txtCost.getText());
+        if (!matches3) {
+            Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid cost");
+            alert.showAndWait();
+            return false;
+        }
+
+        boolean matches4 = Pattern.matches("\\d{0,}", txtUnitPrice.getText());
+        if (!matches4) {
+            Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid unitprice");
+            alert.showAndWait();
+            return false;
+        }
+        return true;
     }
 
     @FXML

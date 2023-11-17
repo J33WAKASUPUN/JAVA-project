@@ -19,6 +19,7 @@ import lk.ijse.model.SupplierModel;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class SupplierManageFormController {
 
@@ -99,8 +100,12 @@ public class SupplierManageFormController {
             alert.showAndWait();
             return;
         }
-        SupplierDto dto = new SupplierDto(id, name, address, contact);
 
+        if(!validateSupplier()){
+            return;
+        }
+
+        SupplierDto dto = new SupplierDto(id, name, address, contact);
 
         try {
             boolean isSaved = SupplierModel.setSupplier(dto);
@@ -116,6 +121,38 @@ public class SupplierManageFormController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private boolean validateSupplier(){
+
+        boolean matches = Pattern.matches("[S][0-9]{3,}", txtId.getText());
+        if (!matches){
+            Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid supplier id");
+            alert.showAndWait();
+            return false;
+        }
+
+        boolean matches1 = Pattern.matches("[A-Za-z]{3,}", txtName.getText());
+        if(!matches1){
+            Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid name");
+            alert.showAndWait();
+            return false;
+        }
+
+        boolean matches2 = Pattern.matches("[A-Za-z]{3,}", txtAddress.getText());
+        if (!matches2) {
+            Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid Address");
+            alert.showAndWait();
+            return false;
+        }
+
+        boolean matches3 = Pattern.matches("\\d{10}", txtContactNumber.getText());
+        if (!matches3) {
+            Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid contact number");
+            alert.showAndWait();
+            return false;
+        }
+        return true;
     }
 
     @FXML
