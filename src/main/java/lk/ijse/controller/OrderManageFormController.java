@@ -13,12 +13,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import lk.ijse.dto.CustomerDto;
 import lk.ijse.dto.ItemDto;
 import lk.ijse.dto.OrderDto;
+import lk.ijse.dto.PaymentDto;
 import lk.ijse.dto.tm.CustomerTm;
 import lk.ijse.dto.tm.OrderTm;
-import lk.ijse.model.CustomerModel;
-import lk.ijse.model.ItemModel;
-import lk.ijse.model.OrdersModel;
-import lk.ijse.model.PlaceOrderModel;
+import lk.ijse.model.*;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -266,9 +264,9 @@ public class OrderManageFormController {
                 tot = unitPriceInt * qty;
             }
         }
-       var orderTm = new OrderTm(itemId, itemName, qty, tot, unitPriceInt,  btn);
+        var orderTm = new OrderTm(itemId, itemName, qty, tot, unitPriceInt,  btn);
 
-       obList.add(orderTm);
+        obList.add(orderTm);
 
         tblOrders.setItems(obList);
         calculateTotal();
@@ -306,10 +304,13 @@ public class OrderManageFormController {
     }
 
     @FXML
-    void btnPlaceOrderOnAction(ActionEvent event) {
+    void btnPlaceOrderOnAction(ActionEvent event) throws SQLException {
         String orderId = txtId.getText();
         LocalDate date = LocalDate.parse(lblOrderDate.getText());
         String customerId = txtCustomerID.getText();
+        String paymentId = PaymentModel.generateNextPaymentId();
+        double amount = Double.parseDouble((lblTotal.getText()));
+        String status = "paid";
 
         List<OrderTm> orderTmList = new ArrayList<>();
         for (int i = 0; i < tblOrders.getItems().size(); i++) {
@@ -318,12 +319,20 @@ public class OrderManageFormController {
             orderTmList.add(cartTm);
         }
 
-        System.out.println("Place order form controller: " + orderTmList);
         var placeOrderDto = new OrderDto(orderId, date, customerId, orderTmList);
+        PaymentDto paymentDto = new PaymentDto(paymentId, amount, status, date, orderId);
+
         try {
             boolean isSuccess = PlaceOrderModel.placeOrder(placeOrderDto);
             if (isSuccess) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Order Success!").show();
+                Alert alert=new Alert(Alert.AlertType.CONFIRMATION, "Order Success!");
+                alert.showAndWait();
+                boolean isSaved = PaymentModel.setPayment(paymentDto);
+                if (!isSaved) {
+                    Alert alert1 = new Alert(Alert.AlertType.ERROR, "Payment details not saved");
+                    alert.showAndWait();
+                }
+                obList.clear();
                 generateNextOrderId();
             } else{
                 new Alert(Alert.AlertType.ERROR, "Order Failed!").show();

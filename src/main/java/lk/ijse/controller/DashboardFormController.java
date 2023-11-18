@@ -29,6 +29,9 @@ public class DashboardFormController {
     @FXML
     private Label lblDate;
 
+    @FXML
+    private Label lblUserId;
+
     public void initialize(){
         setDate();
     }

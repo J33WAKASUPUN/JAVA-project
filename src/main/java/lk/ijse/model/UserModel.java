@@ -28,6 +28,24 @@ public class UserModel {
         return list;
     }
 
+    public static UserDto getUserDtoList(String userId) throws SQLException {
+        List<UserDto> list = new ArrayList<>();
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT * FROM user WHERE userId = ?;";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setObject(1,userId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()){
+            UserDto userDto = new UserDto();
+            userDto.setUserId(resultSet.getString(1));
+            userDto.setUserName(resultSet.getString(2));
+            userDto.setPassword(resultSet.getString(3));
+            return userDto;
+        }
+        return null;
+    }
+
     public static boolean setUser(UserDto dto) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
@@ -37,6 +55,15 @@ public class UserModel {
         preparedStatement.setObject(2,dto.getUserName());
         preparedStatement.setObject(3,dto.getPassword());
         preparedStatement.setObject(4,dto.getEmail());
+        return preparedStatement.executeUpdate() > 0;
+    }
+
+    public static boolean updateUser (String password, String userId) throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+        String sql = "Update user SET password = ? WHERE userId =?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, password);
+        preparedStatement.setString(2, userId);
         return preparedStatement.executeUpdate() > 0;
     }
 

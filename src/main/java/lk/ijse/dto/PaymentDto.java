@@ -2,6 +2,8 @@ package lk.ijse.dto;
 
 import lombok.*;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -9,7 +11,8 @@ import lombok.*;
 @ToString
 public class PaymentDto {
     private String pId;
-    private String amount;
+    private double amount;
     private String status;
-    private String date;
+    private LocalDate date;
+    private String oId;
 }
