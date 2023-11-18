@@ -5,10 +5,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.BoxBlur;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import lk.ijse.dto.CustomerDto;
 import lk.ijse.dto.ItemDto;
 import lk.ijse.dto.tm.StockTm;
@@ -16,11 +22,15 @@ import lk.ijse.model.CustomerModel;
 import lk.ijse.model.ItemModel;
 import lk.ijse.model.OrdersModel;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.regex.Pattern;
 
 public class StockManageFormController {
+
+    @FXML
+    private AnchorPane root;
 
     @FXML
     private TableColumn<?, ?> colCost;
@@ -141,13 +151,6 @@ public class StockManageFormController {
             return false;
         }
 
-        boolean matches1 = Pattern.matches("[A-Za-z]{3,}", txtName.getText());
-        if(!matches1){
-            Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid name");
-            alert.showAndWait();
-            return false;
-        }
-
         boolean matches2 = Pattern.matches("\\d{0,}", txtQty.getText());
         if (!matches2) {
             Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid qty");
@@ -174,6 +177,7 @@ public class StockManageFormController {
     @FXML
     void btnClearOnAction(ActionEvent event) {
         clearFields();
+        generateNextItemId();
     }
 
     @FXML
@@ -254,6 +258,24 @@ public class StockManageFormController {
         }
     }
 
+    @FXML
+    void btnReStockOnAction(ActionEvent event) throws IOException {
+        BoxBlur blur = new BoxBlur(3, 3, 1);
+        root.setEffect(blur);
+        Parent parent = FXMLLoader.load(getClass().getResource("/view/ReStockForm.fxml"));
+        Scene scene =new Scene(parent);
+
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.showAndWait();
+        root.setEffect(null);
+        stage.setOnCloseRequest(e -> {
+            root.setEffect(null);
+        });
+        loadAllItems();
+        generateNextItemId();
+    }
+
     private void generateNextItemId() {
         try {
             String itemId = ItemModel.generateNextItemId();
@@ -270,6 +292,7 @@ public class StockManageFormController {
         txtQty.setText("");
         txtUnitPrice.setText("");
         txtSearch.setText("");
+        generateNextItemId();
     }
 
 }

@@ -77,6 +77,23 @@ public class SupplierModel {
         return null;
     }
 
+    public static SupplierDto getSupplierByName(String name) throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+        String sql = "SELECT * FROM supplier WHERE sName = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, name);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+            SupplierDto supplierDto = new SupplierDto();
+            supplierDto.setSupId(resultSet.getString(1));
+            supplierDto.setSName(resultSet.getString(2));
+            supplierDto.setAddress(resultSet.getString(3));
+            supplierDto.setContact(resultSet.getString(4));
+            return supplierDto;
+        }
+        return null;
+    }
+
     public static String generateNextSupplierId() throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 

@@ -57,6 +57,16 @@ public class ItemModel {
         return preparedStatement.executeUpdate() > 0;
     }
 
+    public  static  boolean updateItemBySupply(ItemDto dto) throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+        String sql = "Update item SET qtyOnHand = qtyOnHand + ?, cost =? WHERE itemId =?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, dto.getQtyOnHand());
+        preparedStatement.setString(2, dto.getCost());
+        preparedStatement.setString(3, dto.getItemId());
+        return preparedStatement.executeUpdate() > 0;
+    }
+
     public boolean updateItem(List<OrderTm> orderTmList) throws SQLException {
         for(OrderTm tm : orderTmList) {
             System.out.println("Item: " + tm);

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="782.0" prefWidth="1293.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.StockManageFormController">
+<AnchorPane fx:id="root" prefHeight="782.0" prefWidth="1293.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.StockManageFormController">
    <children>
       <JFXButton layoutX="1176.0" layoutY="266.0" onAction="#btnAddOnAction" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Add" textFill="WHITE">
          <font>
@@ -30,7 +30,7 @@
             <Font name="Arial Bold" size="12.0" />
          </font>
       </JFXButton>
-      <TableView fx:id="tblItems" layoutX="47.0" layoutY="329.0" prefHeight="402.0" prefWidth="1208.0">
+      <TableView fx:id="tblItems" layoutX="47.0" layoutY="329.0" prefHeight="361.0" prefWidth="1208.0">
          <columns>
             <TableColumn fx:id="colId" prefWidth="143.99999618530273" text="Item ID" />
             <TableColumn fx:id="colName" prefWidth="627.2000579833984" text="Item name" />
@@ -80,5 +80,10 @@
          </font>
       </JFXButton>
       <JFXTextField fx:id="txtSearch" layoutX="48.0" layoutY="266.0" prefHeight="30.0" prefWidth="224.0" promptText="Enter item ID" />
+      <JFXButton layoutX="1142.0" layoutY="722.0" onAction="#btnReStockOnAction" prefHeight="30.0" prefWidth="112.0" style="-fx-background-color: #403D39;" text="ReStock" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="12.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>
