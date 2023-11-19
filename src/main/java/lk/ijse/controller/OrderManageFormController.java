@@ -199,78 +199,70 @@ public class OrderManageFormController {
         String id = txtId.getText();
         String itemName = cmbItem.getValue();
         String itemId = txtItemCode.getText();
-        String quantity = txtQuantity.getText();
-        String unitPrice = txtUnitPrice.getText();
-        String date = lblOrderDate.getText();
-        Button btn = new Button("Remove");
-        int qty = 0;
-        double unitPriceInt= 0;
-        double tot = unitPriceInt * qty;
+
+        if(!itemName.equals("Device repair")) {
+            int quantity = Integer.parseInt(txtQuantity.getText());
+            Double unitPrice = Double.valueOf(txtUnitPrice.getText());
+            String date = lblOrderDate.getText();
+            Button btn = new Button("Remove");
+            double tot = unitPrice * quantity;
 
 
-        setRemoveBtnAction(btn);
-        btn.setCursor(Cursor.HAND);
+            setRemoveBtnAction(btn);
+            btn.setCursor(Cursor.HAND);
 
+            txtRepairPrice.setDisable(true);
+            lblPrice.setDisable(true);
+            txtQuantity.setDisable(false);
+            lblQuantity.setDisable(false);
 
-        if (!obList.isEmpty()) {
-            for (int i = 0; i < tblOrders.getItems().size(); i++) {
-                if (colItem.getCellData(i).equals(itemId)) {
-                    int col_qty = (int) colQty.getCellData(i);
+            if (!obList.isEmpty()) {
+                for (int i = 0; i < tblOrders.getItems().size(); i++) {
+                    if (colId.getCellData(i).equals(id)) {
+                        int col_qty = (int) colQty.getCellData(i);
+                        quantity += col_qty;
+                        tot = unitPrice * quantity;
 
-                    if(itemName.equals("Device repair")){
-                        txtRepairPrice.setDisable(false);
-                        lblPrice.setDisable(false);
-                        txtQuantity.setDisable(true);
-                        lblQuantity.setDisable(true);
-
-                        int devicePrice = Integer.parseInt(txtRepairPrice.getText());
-
-                        qty = 0;
-                        tot = devicePrice;
-
-                        obList.get(i).setQty(qty);
+                        obList.get(i).setQty(quantity);
                         obList.get(i).setPrice(tot);
-                    } else {
-                        qty = Integer.parseInt(txtQuantity.getText());
-                        unitPriceInt=Integer.parseInt(txtUnitPrice.getText());
 
-                        qty += col_qty;
-                        tot = unitPriceInt * qty;
-
-                        obList.get(i).setQty(qty);
-                        obList.get(i).setPrice(tot);
+                        calculateTotal();
+                        tblOrders.refresh();
+                        return;
                     }
-
-                    calculateTotal();
-                    tblOrders.refresh();
-                    return;
                 }
             }
-        } else {
-            if(itemName.equals("Device repair")){
-                txtRepairPrice.setDisable(false);
-                lblPrice.setDisable(false);
-                txtQuantity.setDisable(true);
-                lblQuantity.setDisable(true);
+            var cartTm = new OrderTm(itemId, itemName, quantity, tot, unitPrice, btn);
 
-                int devicePrice = Integer.parseInt(txtRepairPrice.getText());
+            obList.add(cartTm);
+            tblOrders.setItems(obList);
+            calculateTotal();
+        }else{
+            String date = lblOrderDate.getText();
+            Button btn = new Button("Remove");
+            int qty = 0;
+            double unitPriceInt = 0;
+            double tot = 0;
 
-                qty = 0;
-                tot = devicePrice;
-            } else {
-                qty = Integer.parseInt(txtQuantity.getText());
-                unitPriceInt=Integer.parseInt(txtUnitPrice.getText());
+            setRemoveBtnAction(btn);
+            btn.setCursor(Cursor.HAND);
 
-                tot = unitPriceInt * qty;
-            }
+            txtRepairPrice.setDisable(false);
+            lblPrice.setDisable(false);
+            txtQuantity.setDisable(true);
+            lblQuantity.setDisable(true);
+
+            int devicePrice = Integer.parseInt(txtRepairPrice.getText());
+
+            qty = 0;
+            tot = devicePrice;
+
+            var cartTm = new OrderTm(itemId, itemName, qty, tot, unitPriceInt, btn);
+
+            obList.add(cartTm);
+            tblOrders.setItems(obList);
+            calculateTotal();
         }
-        var orderTm = new OrderTm(itemId, itemName, qty, tot, unitPriceInt,  btn);
-
-        obList.add(orderTm);
-
-        tblOrders.setItems(obList);
-        calculateTotal();
-        clearFields();
     }
 
     private void setRemoveBtnAction(Button btn) {
@@ -281,11 +273,16 @@ public class OrderManageFormController {
             Optional<ButtonType> type = new Alert(Alert.AlertType.INFORMATION, "Are you sure to remove?", yes, no).showAndWait();
 
             if (type.orElse(no) == yes) {
-                OrderTm selectedIndex = tblOrders.getSelectionModel().getSelectedItem();
+                int selectedIndex = tblOrders.getSelectionModel().getSelectedIndex();
 
-                obList. remove(selectedIndex);
-                tblOrders.refresh();
-                calculateTotal();
+                if (selectedIndex >= 0) {
+                    obList.remove(selectedIndex);
+                    tblOrders.refresh();
+                    calculateTotal();
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Please select row to remove");
+                    alert.showAndWait();
+                }
             }
         });
     }

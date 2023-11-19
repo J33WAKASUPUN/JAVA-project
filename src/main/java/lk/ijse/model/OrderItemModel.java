@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class OrderItemModel {
-    private boolean saveOrderDetails(String orderId, OrderTm tm) throws SQLException {
+    private static boolean saveOrderDetails(String orderId, OrderTm tm) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
         String sql = "INSERT INTO orderItemDetail VALUES(?, ?, ?, ?)";
@@ -23,7 +23,7 @@ public class OrderItemModel {
         return pstm.executeUpdate() > 0;
     }
 
-    public boolean saveOrderDetails(String orderId, List<OrderTm> cartTmList) throws SQLException {
+    public static boolean saveOrderDetails(String orderId, List<OrderTm> cartTmList) throws SQLException {
         for(OrderTm tm : cartTmList) {
             if(!saveOrderDetails(orderId, tm)) {
                 return false;

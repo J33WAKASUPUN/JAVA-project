@@ -40,7 +40,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton layoutX="18.0" layoutY="281.0" onAction="#btnCustomersOnAction" prefHeight="38.0" prefWidth="218.0" style="-fx-background-color: FFFCF2;" text="Customers">
+            <JFXButton fx:id="btnCustomer" layoutX="18.0" layoutY="281.0" onAction="#btnCustomersOnAction" prefHeight="38.0" prefWidth="218.0" style="-fx-background-color: FFFCF2;" text="Customers">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
@@ -48,7 +48,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton layoutX="18.0" layoutY="328.0" onAction="#btnDeviceOnAction" prefHeight="38.0" prefWidth="218.0" style="-fx-background-color: FFFCF2;" text="Devices">
+            <JFXButton fx:id="btnDevice" layoutX="18.0" layoutY="328.0" onAction="#btnDeviceOnAction" prefHeight="38.0" prefWidth="218.0" style="-fx-background-color: FFFCF2;" text="Devices">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
@@ -56,7 +56,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton layoutX="18.0" layoutY="375.0" onAction="#btnStockOnActoin" prefHeight="38.0" prefWidth="218.0" style="-fx-background-color: FFFCF2;" text="Stock">
+            <JFXButton fx:id="btnStock" layoutX="18.0" layoutY="375.0" onAction="#btnStockOnActoin" prefHeight="38.0" prefWidth="218.0" style="-fx-background-color: FFFCF2;" text="Stock">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
@@ -64,7 +64,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton layoutX="17.0" layoutY="422.0" onAction="#btnSupplierOnAction" prefHeight="38.0" prefWidth="218.0" style="-fx-background-color: FFFCF2;" text="Supplier">
+            <JFXButton fx:id="btnSupplier" layoutX="17.0" layoutY="422.0" onAction="#btnSupplierOnAction" prefHeight="38.0" prefWidth="218.0" style="-fx-background-color: FFFCF2;" text="Supplier">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
@@ -72,7 +72,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton layoutX="17.0" layoutY="469.0" onAction="#btnReportsOnAction" prefHeight="38.0" prefWidth="218.0" style="-fx-background-color: FFFCF2;" text="Reports">
+            <JFXButton fx:id="btnReports" layoutX="17.0" layoutY="469.0" onAction="#btnReportsOnAction" prefHeight="38.0" prefWidth="218.0" style="-fx-background-color: FFFCF2;" text="Reports">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
@@ -80,7 +80,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton layoutX="17.0" layoutY="516.0" onAction="#btnEmployeesOnAction" prefHeight="38.0" prefWidth="218.0" style="-fx-background-color: FFFCF2;" text="Employees">
+            <JFXButton fx:id="btnEmployee" layoutX="17.0" layoutY="516.0" onAction="#btnEmployeesOnAction" prefHeight="38.0" prefWidth="218.0" style="-fx-background-color: FFFCF2;" text="Employees">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
@@ -155,7 +155,7 @@
                         <Font name="Arial Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="17.0" layoutY="97.0" prefHeight="17.0" prefWidth="149.0" text="00">
+                  <Label fx:id="lblTodayCustomerCount" layoutX="17.0" layoutY="97.0" prefHeight="17.0" prefWidth="149.0" text="00">
                      <font>
                         <Font name="Arial Bold" size="14.0" />
                      </font>
@@ -174,7 +174,7 @@
                         <Font name="Arial Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="20.0" layoutY="97.0" prefHeight="17.0" prefWidth="183.0" text="00">
+                  <Label fx:id="lblTodayIncome" layoutX="20.0" layoutY="97.0" prefHeight="17.0" prefWidth="183.0" text="00">
                      <font>
                         <Font name="Arial Bold" size="14.0" />
                      </font>
@@ -188,12 +188,12 @@
             </Pane>
             <Pane layoutX="695.0" layoutY="570.0" prefHeight="128.0" prefWidth="262.0" style="-fx-background-color: FFFCF2; -fx-background-radius: 10; -fx-border-color: #403D39; -fx-border-radius: 10;">
                <children>
-                  <Label layoutX="17.0" layoutY="64.0" prefHeight="26.0" prefWidth="242.0" text="TODAY'SPRODUCTS SOLD">
+                  <Label layoutX="17.0" layoutY="64.0" prefHeight="26.0" prefWidth="242.0" text="TODAY'S SALES">
                      <font>
                         <Font name="Arial Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="20.0" layoutY="97.0" prefHeight="17.0" prefWidth="208.0" text="00">
+                  <Label fx:id="lblTodaySales" layoutX="20.0" layoutY="97.0" prefHeight="17.0" prefWidth="208.0" text="00">
                      <font>
                         <Font name="Arial Bold" size="14.0" />
                      </font>
@@ -234,7 +234,7 @@
                         <Font name="Arial Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="17.0" layoutY="97.0" prefHeight="17.0" prefWidth="149.0" text="00">
+                  <Label fx:id="lblCustomerCount" layoutX="17.0" layoutY="97.0" prefHeight="17.0" prefWidth="149.0" text="00">
                      <font>
                         <Font name="Arial Bold" size="14.0" />
                      </font>
@@ -253,7 +253,7 @@
                         <Font name="Arial Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="20.0" layoutY="97.0" prefHeight="17.0" prefWidth="183.0" text="00">
+                  <Label fx:id="lblIncomeCount" layoutX="20.0" layoutY="97.0" prefHeight="17.0" prefWidth="183.0" text="00">
                      <font>
                         <Font name="Arial Bold" size="14.0" />
                      </font>
@@ -267,12 +267,12 @@
             </Pane>
             <Pane layoutX="695.0" layoutY="359.0" prefHeight="128.0" prefWidth="262.0" style="-fx-background-color: FFFCF2; -fx-background-radius: 10; -fx-border-color: #403D39; -fx-border-radius: 10;">
                <children>
-                  <Label layoutX="17.0" layoutY="64.0" prefHeight="26.0" prefWidth="242.0" text="PRODUCTS SOLD">
+                  <Label layoutX="17.0" layoutY="64.0" prefHeight="26.0" prefWidth="242.0" text="SALES">
                      <font>
                         <Font name="Arial Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="20.0" layoutY="97.0" prefHeight="17.0" prefWidth="208.0" text="00">
+                  <Label fx:id="lblSales" layoutX="20.0" layoutY="97.0" prefHeight="17.0" prefWidth="208.0" text="00">
                      <font>
                         <Font name="Arial Bold" size="14.0" />
                      </font>

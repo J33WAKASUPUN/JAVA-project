@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrdersModel {
-    public boolean saveOrder(String orderId,LocalDate date, String customerId ) throws SQLException {
+    public static boolean saveOrder(String orderId,LocalDate date, String customerId ) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
         String sql = "INSERT INTO orders VALUES(?, ?, ?)";
@@ -17,7 +17,6 @@ public class OrdersModel {
         pstm.setString(1, orderId);
         pstm.setDate(2, Date.valueOf(date));
         pstm.setString(3, customerId);
-
 
         return pstm.executeUpdate() > 0;
     }

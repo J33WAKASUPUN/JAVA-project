@@ -67,7 +67,7 @@ public class ItemModel {
         return preparedStatement.executeUpdate() > 0;
     }
 
-    public boolean updateItem(List<OrderTm> orderTmList) throws SQLException {
+    public static boolean updateItem(List<OrderTm> orderTmList) throws SQLException {
         for(OrderTm tm : orderTmList) {
             System.out.println("Item: " + tm);
             if(!updateQty(tm.getItemId(), tm.getQty())) {
@@ -77,7 +77,7 @@ public class ItemModel {
         return true;
     }
 
-    public boolean updateQty(String code, int qty) throws SQLException {
+    public static boolean updateQty(String code, int qty) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
         String sql = "UPDATE item SET qtyOnHand = qtyOnHand - ? WHERE itemId = ?";
