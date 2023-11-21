@@ -177,35 +177,28 @@ public class EmployeeManageFormController {
             return false;
         }
 
-        boolean matches1 = Pattern.matches("[A-Za-z]{3,}", txtName.getText());
+        boolean matches1 = Pattern.matches("^([ \\u00c0-\\u01ffa-zA-Z'\\-]{2,})+$", txtName.getText());
         if(!matches1){
             Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid name");
             alert.showAndWait();
             return false;
         }
 
-        boolean matches2 = Pattern.matches("[A-Za-z]{3,}", txtAddress.getText());
-        if (!matches2) {
-            Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid Address");
-            alert.showAndWait();
-            return false;
-        }
-
-        boolean matches3 = Pattern.matches("\\w\\D", txtPosition.getText());
+        boolean matches3 = Pattern.matches("^([ \\u00c0-\\u01ffa-zA-Z'\\-]{5,})+$", txtPosition.getText());
         if (!matches3) {
             Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid position");
             alert.showAndWait();
             return false;
         }
 
-        boolean matches4 = Pattern.matches("\\d{10}", txtContact.getText());
+        boolean matches4 = Pattern.matches("^\\s*(?:\\+?(\\d{1,3}))?[-. (]*(\\d{3})[-. )]*(\\d{3})[-. ]*(\\d{4})(?: *x(\\d+))?\\s*$", txtContact.getText());
         if (!matches4) {
             Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid Contact number");
             alert.showAndWait();
             return false;
         }
 
-        boolean matches5 = Pattern.matches("\\d\\W", txtSalary.getText());
+        boolean matches5 = Pattern.matches("[0-9][1-9.]*[0-9]+[1-9]*", txtSalary.getText());
         if (!matches5) {
             Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid salary");
             alert.showAndWait();

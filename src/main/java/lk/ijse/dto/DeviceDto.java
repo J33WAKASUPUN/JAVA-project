@@ -2,6 +2,8 @@ package lk.ijse.dto;
 
 import lombok.*;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -13,6 +15,6 @@ public class DeviceDto {
     private String problem;
     private String status;
     private String cost;
-    private String date;
+    private LocalDate date;
     private String cId;
 }

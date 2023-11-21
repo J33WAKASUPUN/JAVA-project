@@ -151,22 +151,29 @@ public class StockManageFormController {
             return false;
         }
 
-        boolean matches2 = Pattern.matches("\\d{0,}", txtQty.getText());
+        boolean matches2 = Pattern.matches("^([ \\u00c0-\\u01ffa-zA-Z'\\-]{2,})+$", txtName.getText());
         if (!matches2) {
+            Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid name");
+            alert.showAndWait();
+            return false;
+        }
+
+        boolean matches3 = Pattern.matches("\\d{0,}", txtQty.getText());
+        if (!matches3) {
             Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid qty");
             alert.showAndWait();
             return false;
         }
 
-        boolean matches3 = Pattern.matches("\\d{0,}", txtCost.getText());
-        if (!matches3) {
+        boolean matches4 = Pattern.matches("\\d{1,}(?:[.,]\\d{1})*(?:[.,]\\d{2})?", txtCost.getText());
+        if (!matches4) {
             Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid cost");
             alert.showAndWait();
             return false;
         }
 
-        boolean matches4 = Pattern.matches("\\d{0,}", txtUnitPrice.getText());
-        if (!matches4) {
+        boolean matches5 = Pattern.matches("\\d{1,}(?:[.,]\\d{1})*(?:[.,]\\d{2})?", txtUnitPrice.getText());
+        if (!matches5) {
             Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid unitprice");
             alert.showAndWait();
             return false;

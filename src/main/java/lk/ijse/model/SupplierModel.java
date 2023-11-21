@@ -113,7 +113,13 @@ public class SupplierModel {
 
             int id = Integer.parseInt(split[1]); //01
             id++;
-            return "S00" + id;
+            if(id < 10) {
+                return "S00" + id;
+            } else if (id < 100) {
+                return "S0" + id;
+            } else {
+                return "S" + id;
+            }
         } else {
             return "S001";
         }

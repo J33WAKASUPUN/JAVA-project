@@ -26,10 +26,34 @@ public class HandoverDeviceModel {
                 deviceDto.setProblem(resultSet.getString(3));
                 deviceDto.setStatus(resultSet.getString(4));
                 deviceDto.setCost(String.valueOf(resultSet.getString(5)));
-                deviceDto.setDate(String.valueOf(resultSet.getDate(6)));
+                deviceDto.setDate(resultSet.getDate(6).toLocalDate());
                 deviceDto.setCId(resultSet.getString(7));
 
                 list.add(deviceDto);
+        }
+        return list;
+    }
+
+    public static List<DeviceDto> getAllDevicesByStatus(String status) throws SQLException {
+        List<DeviceDto> list = new ArrayList<>();
+
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT * FROM handoverDevice WHERE status = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, status);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            DeviceDto deviceDto = new DeviceDto();
+            deviceDto.setDeviceId(resultSet.getString(1));
+            deviceDto.setDName(resultSet.getString(2));
+            deviceDto.setProblem(resultSet.getString(3));
+            deviceDto.setStatus(resultSet.getString(4));
+            deviceDto.setCost(String.valueOf(resultSet.getString(5)));
+            deviceDto.setDate(resultSet.getDate(6).toLocalDate());
+            deviceDto.setCId(resultSet.getString(7));
+
+            list.add(deviceDto);
         }
         return list;
     }
@@ -58,7 +82,7 @@ public class HandoverDeviceModel {
         preparedStatement.setString(3, dto.getProblem());
         preparedStatement.setString(4, dto.getStatus());
         preparedStatement.setString(5, dto.getCost());
-        preparedStatement.setString(6, dto.getDate());
+        preparedStatement.setString(6, String.valueOf(dto.getDate()));
         preparedStatement.setString(7, dto.getCId());
         return preparedStatement.executeUpdate() > 0;
     }
@@ -84,7 +108,7 @@ public class HandoverDeviceModel {
             deviceDto.setProblem(resultSet.getString(3));
             deviceDto.setStatus(resultSet.getString(4));
             deviceDto.setCost(String.valueOf(resultSet.getString(5)));
-            deviceDto.setDate(String.valueOf(resultSet.getDate(6)));
+            deviceDto.setDate(resultSet.getDate(6).toLocalDate());
             deviceDto.setCId(resultSet.getString(7));
         }
         return deviceDto;
@@ -109,7 +133,13 @@ public class HandoverDeviceModel {
 
             int id = Integer.parseInt(split[1]); //01
             id++;
-            return "D00" + id;
+            if(id < 10) {
+                return "D00" + id;
+            } else if (id < 100) {
+                return "D0" + id;
+            } else {
+                return "D" + id;
+            }
         } else {
             return "D001";
         }

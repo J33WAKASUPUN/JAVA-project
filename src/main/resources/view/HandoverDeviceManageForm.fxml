@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -50,7 +51,7 @@
             <Font name="Arial Bold" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="398.0" layoutY="84.0" text="Name">
+      <Label layoutX="348.0" layoutY="84.0" text="Name">
          <font>
             <Font name="Arial Bold" size="13.0" />
          </font>
@@ -60,7 +61,7 @@
             <Font name="Arial Bold" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="47.0" layoutY="180.0" text="Problem">
+      <Label layoutX="347.0" layoutY="180.0" text="Problem">
          <font>
             <Font name="Arial Bold" size="13.0" />
          </font>
@@ -71,9 +72,8 @@
          </font>
       </Label>
       <JFXTextField fx:id="txtId" layoutX="48.0" layoutY="102.0" prefHeight="30.0" prefWidth="198.0" promptText="Enter device ID" unFocusColor="BLACK" />
-      <JFXTextField fx:id="txtName" layoutX="397.0" layoutY="102.0" prefHeight="30.0" prefWidth="415.0" promptText="Enter device name" unFocusColor="BLACK" />
-      <JFXTextField fx:id="txtProblem" layoutX="47.0" layoutY="197.0" prefHeight="30.0" prefWidth="747.0" promptText="Enter problem in device" unFocusColor="BLACK" />
-      <JFXTextField fx:id="txtStatus" layoutX="948.0" layoutY="102.0" prefHeight="30.0" prefWidth="304.0" promptText="Status (Repaired / Repairing)" unFocusColor="BLACK" />
+      <JFXTextField fx:id="txtName" layoutX="347.0" layoutY="102.0" prefHeight="30.0" prefWidth="294.0" promptText="Enter device name" unFocusColor="BLACK" />
+      <JFXTextField fx:id="txtProblem" layoutX="347.0" layoutY="197.0" prefHeight="30.0" prefWidth="483.0" promptText="Enter problem in device" unFocusColor="BLACK" />
       <JFXTextField fx:id="txtCost" layoutX="948.0" layoutY="197.0" prefHeight="30.0" prefWidth="304.0" promptText="Cost for repair device" unFocusColor="BLACK" />
       <JFXButton layoutX="272.0" layoutY="266.0" onAction="#btnSearchOnAction" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Search" textFill="WHITE">
          <font>
@@ -81,5 +81,23 @@
          </font>
       </JFXButton>
       <JFXTextField fx:id="txtSearch" layoutX="48.0" layoutY="266.0" prefHeight="30.0" prefWidth="224.0" promptText="Enter device ID" />
+      <JFXComboBox fx:id="cmbStatus" layoutX="948.0" layoutY="102.0" prefHeight="30.0" prefWidth="304.0" promptText="Status (Repaired / Repairing)" unFocusColor="BLACK" />
+      <Label layoutX="701.0" layoutY="84.0" text="Customer Name">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Label>
+      <JFXComboBox fx:id="cmbCustomerName" layoutX="700.0" layoutY="102.0" onAction="#cmbCustomerOnAction" prefHeight="30.0" prefWidth="198.0" promptText="Select Customer" unFocusColor="BLACK" />
+      <Label fx:id="lblPrice1" layoutX="48.0" layoutY="180.0" text="Customer ID">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtCustomerID" layoutX="48.0" layoutY="197.0" prefHeight="30.0" prefWidth="210.0" promptText="Select customer name frist" unFocusColor="BLACK" />
+      <Label fx:id="lblOrderDate" layoutX="1182.0" layoutY="34.0" text="0000.00.00">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

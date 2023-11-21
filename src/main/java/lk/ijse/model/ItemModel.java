@@ -154,7 +154,13 @@ public class ItemModel {
 
             int id = Integer.parseInt(split[1]); //01
             id++;
-            return "I00" + id;
+            if(id < 10) {
+                return "I00" + id;
+            } else if (id < 100) {
+                return "I0" + id;
+            } else {
+                return "I" + id;
+            }
         } else {
             return "I001";
         }

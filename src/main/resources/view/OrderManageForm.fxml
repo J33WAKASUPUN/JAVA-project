@@ -89,7 +89,7 @@
             <Font name="Arial Bold" size="13.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txtCustomerID" layoutX="629.0" layoutY="197.0" prefHeight="30.0" prefWidth="210.0" promptText="Cost for repair" unFocusColor="BLACK" />
+      <JFXTextField fx:id="txtCustomerID" layoutX="629.0" layoutY="197.0" prefHeight="30.0" prefWidth="210.0" promptText="Select Customer name frist" unFocusColor="BLACK" />
       <Pane layoutX="847.0" layoutY="716.0" prefHeight="30.0" prefWidth="200.0" style="-fx-border-color: #403D39;">
          <children>
             <Label fx:id="lblTotal" layoutX="55.0" prefHeight="30.0" prefWidth="144.0">

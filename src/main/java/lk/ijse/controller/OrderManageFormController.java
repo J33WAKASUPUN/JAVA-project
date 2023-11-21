@@ -332,7 +332,8 @@ public class OrderManageFormController {
                 obList.clear();
                 generateNextOrderId();
             } else{
-                new Alert(Alert.AlertType.ERROR, "Order Failed!").show();
+                Alert alert = new Alert(Alert.AlertType.ERROR,"Oder not saved");
+                alert.showAndWait();
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

@@ -113,7 +113,13 @@ public class EmployeeModel {
 
             int id = Integer.parseInt(split[1]); //01
             id++;
-            return "E00" + id;
+            if(id < 10) {
+                return "E00" + id;
+            } else if (id < 100) {
+                return "E0" + id;
+            } else {
+                return "E" + id;
+            }
         } else {
             return "E001";
         }

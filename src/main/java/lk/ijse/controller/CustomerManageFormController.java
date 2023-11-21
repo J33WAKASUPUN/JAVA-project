@@ -150,21 +150,14 @@ public class CustomerManageFormController {
             return false;
         }
 
-        boolean matches1 = Pattern.matches("[A-Za-z]{3,}", txtCustomerName.getText());
+        boolean matches1 = Pattern.matches("^([ \\u00c0-\\u01ffa-zA-Z'\\-]{5,})+$", txtCustomerName.getText());
         if(!matches1){
             Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid name");
             alert.showAndWait();
             return false;
         }
 
-        boolean matches2 = Pattern.matches("[A-Za-z]{3,}", txtAddress.getText());
-        if (!matches2) {
-            Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid Address");
-            alert.showAndWait();
-            return false;
-        }
-
-        boolean matches3 = Pattern.matches("\\d{10}", txtContactNumber.getText());
+        boolean matches3 = Pattern.matches("^\\s*(?:\\+?(\\d{1,3}))?[-. (]*(\\d{3})[-. )]*(\\d{3})[-. ]*(\\d{4})(?: *x(\\d+))?\\s*$", txtContactNumber.getText());
         if (!matches3) {
             Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid contact number");
             alert.showAndWait();

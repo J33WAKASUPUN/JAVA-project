@@ -80,7 +80,13 @@ public class PaymentModel {
 
             int id = Integer.parseInt(split[1]); //01
             id++;
-            return "P00" + id;
+            if(id < 10) {
+                return "P00" + id;
+            } else if (id < 100) {
+                return "P0" + id;
+            } else {
+                return "P" + id;
+            }
         } else {
             return "P001";
         }

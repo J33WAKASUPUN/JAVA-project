@@ -22,24 +22,20 @@ public class PlaceOrderModel {
         try {
             connection = DBConnection.getInstance().getConnection();
             connection.setAutoCommit(false);
-            System.out.println("Hari 00");
 
             boolean isOrderSaved = OrdersModel.saveOrder(orderId, date, customerId);
-            System.out.println("Hari 00.00");
             if (isOrderSaved) {
-                System.out.println("Hari 01");
                 boolean isUpdated = ItemModel.updateItem(orderDto.getOrderTmList());
                 if(isUpdated) {
-                    System.out.println("Hari 02");
                     boolean isOrderDetailSaved = OrderItemModel.saveOrderDetails(orderDto.getOrderId(), orderDto.getOrderTmList());
                     if (isOrderDetailSaved) {
-                        System.out.println("Hari 03");
                         connection.commit();
                         return true;
                     }
                 }
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             connection.rollback();
         } finally {
             connection.setAutoCommit(true);

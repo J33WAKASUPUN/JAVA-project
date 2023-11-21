@@ -5,10 +5,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 import lk.ijse.dto.CustomerDto;
 import lk.ijse.dto.SupplierDto;
 import lk.ijse.dto.tm.CustomerTm;
@@ -16,7 +20,9 @@ import lk.ijse.dto.tm.SupplierTm;
 import lk.ijse.model.CustomerModel;
 import lk.ijse.model.OrdersModel;
 import lk.ijse.model.SupplierModel;
+import org.controlsfx.control.Notifications;
 
+import java.awt.*;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -112,6 +118,13 @@ public class SupplierManageFormController {
             if (isSaved) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Succsess");
                 alert.showAndWait();
+                Notifications.create()
+                        .graphic(new ImageView(new Image("/icons/icons8-search-64.png")))
+                        .text("Employee Added")
+                        .title("success")
+                        .hideAfter(Duration.seconds(5))
+                        .position(Pos.TOP_RIGHT)
+                        .show();
                 loadAllSupplier();
                 clearFields();
             } else {
@@ -132,21 +145,14 @@ public class SupplierManageFormController {
             return false;
         }
 
-        boolean matches1 = Pattern.matches("[A-Za-z]{3,}", txtName.getText());
+        boolean matches1 = Pattern.matches("^([ \\u00c0-\\u01ffa-zA-Z'\\-]{5,})+$", txtName.getText());
         if(!matches1){
             Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid name");
             alert.showAndWait();
             return false;
         }
 
-        boolean matches2 = Pattern.matches("[A-Za-z]{3,}", txtAddress.getText());
-        if (!matches2) {
-            Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid Address");
-            alert.showAndWait();
-            return false;
-        }
-
-        boolean matches3 = Pattern.matches("\\d{10}", txtContactNumber.getText());
+        boolean matches3 = Pattern.matches("^\\s*(?:\\+?(\\d{1,3}))?[-. (]*(\\d{3})[-. )]*(\\d{3})[-. ]*(\\d{4})(?: *x(\\d+))?\\s*$", txtContactNumber.getText());
         if (!matches3) {
             Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid contact number");
             alert.showAndWait();

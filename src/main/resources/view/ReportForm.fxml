@@ -14,16 +14,16 @@
    <children>
       <Pane layoutX="72.0" layoutY="107.0" prefHeight="611.0" prefWidth="345.0" style="-fx-border-color: #403D39; -fx-border-width: 2px; -fx-background-color: #CCC5B9;">
          <children>
+            <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="73.0" layoutY="77.0">
+               <image>
+                  <Image url="@../asset/logo%20qqqqqq.png" />
+               </image>
+            </ImageView>
             <Label layoutX="128.0" layoutY="237.0" prefHeight="30.0" prefWidth="90.0" text="Stock Report">
                <font>
                   <Font name="Arial Bold" size="14.0" />
                </font>
             </Label>
-            <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="73.0" layoutY="79.0">
-               <image>
-                  <Image url="@../asset/Monochrome_Modern_Technology_Black_Logo__1_-removebg-preview.png" />
-               </image>
-            </ImageView>
             <ImageView fitHeight="74.0" fitWidth="74.0" layoutX="136.0" layoutY="79.0">
                <image>
                   <Image url="@../asset/S%20letter%20geometric%20Logo%20design%20Linear.%20%20(2).png" />
@@ -56,16 +56,16 @@
       </Label>
       <Pane layoutX="474.0" layoutY="107.0" prefHeight="611.0" prefWidth="345.0" style="-fx-border-color: #403D39; -fx-border-width: 2px; -fx-background-color: #CCC5B9;">
          <children>
+            <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="73.0" layoutY="77.0">
+               <image>
+                  <Image url="@../asset/logo%20qqqqqq.png" />
+               </image>
+            </ImageView>
             <Label layoutX="128.0" layoutY="237.0" prefHeight="30.0" prefWidth="90.0" text="Stock Report">
                <font>
                   <Font name="Arial Bold" size="14.0" />
                </font>
             </Label>
-            <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="73.0" layoutY="79.0">
-               <image>
-                  <Image url="@../asset/Monochrome_Modern_Technology_Black_Logo__1_-removebg-preview.png" />
-               </image>
-            </ImageView>
             <ImageView fitHeight="74.0" fitWidth="74.0" layoutX="136.0" layoutY="79.0">
                <image>
                   <Image url="@../asset/S%20letter%20geometric%20Logo%20design%20Linear.%20%20(2).png" />
@@ -94,16 +94,16 @@
       </Pane>
       <Pane layoutX="875.0" layoutY="107.0" prefHeight="611.0" prefWidth="345.0" style="-fx-border-color: #403D39; -fx-border-width: 2px; -fx-background-color: #CCC5B9;">
          <children>
-            <Label layoutX="128.0" layoutY="237.0" prefHeight="30.0" prefWidth="90.0" text="Stock Report">
+            <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="73.0" layoutY="78.0">
+               <image>
+                  <Image url="@../asset/logo%20qqqqqq.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="128.0" layoutY="235.0" prefHeight="30.0" prefWidth="90.0" text="Oder report">
                <font>
                   <Font name="Arial Bold" size="14.0" />
                </font>
             </Label>
-            <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="73.0" layoutY="79.0">
-               <image>
-                  <Image url="@../asset/Monochrome_Modern_Technology_Black_Logo__1_-removebg-preview.png" />
-               </image>
-            </ImageView>
             <ImageView fitHeight="74.0" fitWidth="74.0" layoutX="136.0" layoutY="79.0">
                <image>
                   <Image url="@../asset/S%20letter%20geometric%20Logo%20design%20Linear.%20%20(2).png" />

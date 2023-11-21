@@ -1,6 +1,7 @@
 package lk.ijse.model;
 
 import lk.ijse.db.DBConnection;
+import lk.ijse.dto.CustomerDto;
 import lk.ijse.dto.OrderDto;
 
 import java.sql.*;
@@ -9,6 +10,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrdersModel {
+    public static List<OrderDto> getAllOders() throws SQLException {
+        List<OrderDto> list = new ArrayList<>();
+        Connection connection = DBConnection.getInstance().getConnection();
+        PreparedStatement ps = connection.prepareStatement("SELECT * FROM orders");
+        ResultSet resultSet = ps.executeQuery();
+        while(resultSet.next()){
+            OrderDto orderDto= new OrderDto();
+
+            orderDto.setCId(resultSet.getString(1));
+            orderDto.setDate(LocalDate.parse(resultSet.getString(2)));
+            orderDto.setCId(resultSet.getString(3));
+            list.add(orderDto);
+        }
+        return list;
+    }
+
+    public static List<OrderDto> getAllOdersByDate(String date) throws SQLException {
+        List<OrderDto> list = new ArrayList<>();
+        Connection connection = DBConnection.getInstance().getConnection();
+        PreparedStatement ps = connection.prepareStatement("SELECT * FROM orders WHERE date = ?");
+        ps.setString(1, date);
+        ResultSet resultSet = ps.executeQuery();
+        while(resultSet.next()){
+            OrderDto orderDto= new OrderDto();
+
+            orderDto.setCId(resultSet.getString(1));
+            orderDto.setDate(LocalDate.parse(resultSet.getString(2)));
+            orderDto.setCId(resultSet.getString(3));
+            list.add(orderDto);
+        }
+        return list;
+    }
     public static boolean saveOrder(String orderId,LocalDate date, String customerId ) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
@@ -40,7 +73,13 @@ public class OrdersModel {
 
             int id = Integer.parseInt(split[1]); //01
             id++;
-            return "O00" + id;
+            if(id < 10) {
+                return "O00" + id;
+            } else if (id < 100) {
+                return "O0" + id;
+            } else {
+                return "O" + id;
+            }
         } else {
             return "O001";
         }

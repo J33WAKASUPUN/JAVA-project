@@ -1,11 +1,13 @@
 package lk.ijse.controller;
 
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -17,10 +19,17 @@ import lk.ijse.model.HandoverDeviceModel;
 import lk.ijse.model.OrdersModel;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.regex.Pattern;
 
 public class HandoverDeviceManageFormController {
+
+    @FXML
+    private JFXComboBox<String> cmbCustomerName;
+
+    @FXML
+    private JFXComboBox<String> cmbStatus;
 
     @FXML
     private TableColumn<?, ?> colCost;
@@ -56,15 +65,21 @@ public class HandoverDeviceManageFormController {
     private JFXTextField txtProblem;
 
     @FXML
-    private JFXTextField txtStatus;
+    private JFXTextField txtSearch;
 
     @FXML
-    private JFXTextField txtSearch;
+    private JFXTextField txtCustomerID;
+
+    @FXML
+    private Label lblOrderDate;
 
     public void initialize(){
         setCellValueFactory();
         generateNextDeviceId();
         loadAllItems();
+        setCmbItems();
+        loadCustomerNames();
+        setDate();
     }
 
     public void setCellValueFactory(){
@@ -100,16 +115,61 @@ public class HandoverDeviceManageFormController {
         }
     }
 
+    private void loadCustomerNames() {
+        ObservableList<String> obList = FXCollections.observableArrayList();
+
+        try {
+            List<CustomerDto> idList = CustomerModel.getAllCustomer();
+
+            for (CustomerDto dto : idList) {
+                obList.add(dto.getName());
+            }
+
+            cmbCustomerName.setItems(obList);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    void cmbCustomerOnAction(ActionEvent event) {
+        String name = cmbCustomerName.getValue();
+
+        if (name!= null &&!name.isEmpty()) {
+            try {
+                CustomerDto customerDto = CustomerModel.getCustomerByName(name);
+                txtCustomerID.setText(customerDto.getCId());
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            System.out.println("Customer name is null or empty");
+        }
+    }
+
+    public void setCmbItems(){
+        ObservableList<String> obList = FXCollections.observableArrayList();
+
+        String repairing = "Repairing";
+        String repaired = "Repaired";
+
+        obList.add(repairing);
+        obList.add(repaired);
+
+        cmbStatus.setItems(obList);
+    }
+
     @FXML
     void btnAddOnAction(ActionEvent event) {
         try {
             String id = txtId.getText();
             String name = txtName.getText();
             String problem = txtProblem.getText();
-            String status = txtStatus.getText();
+            String status = cmbStatus.getValue();
             String cost = txtCost.getText();
-            String date = "2023.12.12";
-            String cId = "C001";
+            LocalDate date = LocalDate.parse(lblOrderDate.getText());
+            String cId = txtCustomerID.getText();
 
             if(id.isEmpty() || name.isEmpty() || cost.isEmpty() || problem.isEmpty() || status.isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.ERROR,"Fill all fields");
@@ -128,6 +188,7 @@ public class HandoverDeviceManageFormController {
                 Alert alert =new Alert(Alert.AlertType.CONFIRMATION, "Success");
                 alert.showAndWait();
                 loadAllItems();
+                clearFields();
             }else {
                 Alert alert = new Alert(Alert.AlertType.ERROR,"Something went wrong");
                 alert.showAndWait();
@@ -139,36 +200,15 @@ public class HandoverDeviceManageFormController {
 
     private boolean validateDevice(){
 
-        boolean matches = Pattern.matches("[E][0-9]{3,}", txtId.getText());
+        boolean matches = Pattern.matches("[D][0-9]{3,}", txtId.getText());
         if (!matches){
             Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid device id");
             alert.showAndWait();
             return false;
         }
 
-        boolean matches1 = Pattern.matches("[A-Za-z]{3,}", txtName.getText());
-        if(!matches1){
-            Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid name");
-            alert.showAndWait();
-            return false;
-        }
-
-        boolean matches2 = Pattern.matches("[A-Za-z]{3,}", txtProblem.getText());
-        if (!matches2) {
-            Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid Problem");
-            alert.showAndWait();
-            return false;
-        }
-
-        boolean matches3 = Pattern.matches("\\w\\D", txtStatus.getText());
-        if (!matches3) {
-            Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid status");
-            alert.showAndWait();
-            return false;
-        }
-
-        boolean matches4 = Pattern.matches("[0-9]{0,}\\W", txtCost.getText());
-        if (!matches4) {
+        boolean matches2 = Pattern.matches("\\d{1,}(?:[.,]\\d{1})*(?:[.,]\\d{2})?", txtCost.getText());
+        if(!matches2){
             Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid cost");
             alert.showAndWait();
             return false;
@@ -191,6 +231,7 @@ public class HandoverDeviceManageFormController {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Success");
                 alert.showAndWait();
                 loadAllItems();
+                clearFields();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR,"Something went wrong");
                 alert.showAndWait();
@@ -205,10 +246,10 @@ public class HandoverDeviceManageFormController {
         String id = txtId.getText();
         String name= txtName.getText();
         String problem = txtProblem.getText();
-        String status = txtStatus.getText();
+        String status = cmbStatus.getValue();
         String cost = txtCost.getText();
-        String date = "2023.12.12";
-        String cId = "C001";
+        LocalDate date = LocalDate.parse(lblOrderDate.getText());
+        String cId = txtCustomerID.getText();
 
         if(id.isEmpty() || name.isEmpty() || problem.isEmpty() || status.isEmpty() || cost.isEmpty()){
             Alert alert = new Alert(Alert.AlertType.ERROR, "Fill all fields");
@@ -245,7 +286,7 @@ public class HandoverDeviceManageFormController {
                     txtId.setText(deviceDto.getCId());
                     txtName.setText(deviceDto.getDName());
                     txtProblem.setText(deviceDto.getProblem());
-                    txtStatus.setText(deviceDto.getStatus());
+                    cmbStatus.setValue(deviceDto.getStatus());
                     txtCost.setText(deviceDto.getCost());
                 } else {
                     Alert alert = new Alert(Alert.AlertType.ERROR, "Customer not found");
@@ -269,13 +310,18 @@ public class HandoverDeviceManageFormController {
         }
     }
 
+    private void setDate() {
+        lblOrderDate.setText(String.valueOf(LocalDate.now()));
+    }
+
     private void clearFields() {
         txtId.setText("");
         txtName.setText("");
         txtProblem.setText("");
-        txtStatus.setText("");
+        cmbStatus.setValue("");
         txtCost.setText("");
         txtSearch.setText("");
+        txtCustomerID.setText("");
     }
 
 }

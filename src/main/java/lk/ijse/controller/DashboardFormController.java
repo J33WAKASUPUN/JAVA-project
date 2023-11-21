@@ -9,12 +9,20 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
-import javafx.stage.Window;
+import lk.ijse.dto.CustomerDto;
+import lk.ijse.dto.DeviceDto;
+import lk.ijse.dto.EmployeeDto;
+import lk.ijse.dto.OrderDto;
+import lk.ijse.model.CustomerModel;
+import lk.ijse.model.EmployeeModel;
+import lk.ijse.model.HandoverDeviceModel;
+import lk.ijse.model.OrdersModel;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
 
 public class DashboardFormController {
 
@@ -52,22 +60,22 @@ public class DashboardFormController {
     private Label lblDate;
 
     @FXML
-    private Label lblIncomeCount;
-
-    @FXML
     private Label lblSales;
-
-    @FXML
-    private Label lblTodayCustomerCount;
-
-    @FXML
-    private Label lblTodayIncome;
 
     @FXML
     private Label lblTodaySales;
 
     @FXML
     private Label lblUserId;
+
+    @FXML
+    private Label lblDeviceCount;
+
+    @FXML
+    private Label lblDeviceRepairedCount;
+
+    @FXML
+    private Label lblEmployeeCount;
 
     @FXML
     private AnchorPane root;
@@ -78,6 +86,115 @@ public class DashboardFormController {
     public void initialize(){
         //btnDashboard.setStyle("-fx-background-color: #D3D3D3;");
         setDate();
+        setCustomerCount();
+        setOderCount();
+        setTodayOderCount();
+        setDeviceToRepairCount();
+        setDeviceRepairedCount();
+        setEmployeeCount();
+    }
+
+    public void setCustomerCount ()  {
+        List<CustomerDto> list = null;
+        try {
+            list = CustomerModel.getAllCustomer();
+            int size = list.size() - 1;
+            if(size < 10){
+                lblCustomerCount.setText("0"+ size);
+            } else {
+                lblCustomerCount.setText(String.valueOf(size));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void setTodayOderCount() {
+        List<OrderDto> list = null;
+
+        try {
+            list = OrdersModel.getAllOdersByDate(lblDate.getText());
+            int size = list.size() - 1;
+            if(size < 10){
+                lblTodaySales.setText("0"+ size);
+            } else {
+                lblTodaySales.setText(String.valueOf(size));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void setOderCount(){
+        List<OrderDto> list =null;
+
+        try {
+            list = OrdersModel.getAllOders();
+            int size = list.size();
+
+            if(size < 10){
+                lblSales.setText("0"+ size);
+            } else {
+                lblSales.setText(String.valueOf(size));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void setDeviceToRepairCount(){
+        List<DeviceDto> list = null;
+        String status = "Repairing";
+
+        try {
+            list = HandoverDeviceModel.getAllDevicesByStatus(status);
+
+            int size = list.size();
+
+            if(size < 10){
+                lblDeviceCount.setText("0"+ size);
+            } else {
+                lblDeviceCount.setText(String.valueOf(size));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setDeviceRepairedCount (){
+        List<DeviceDto> list = null;
+        String status = "Repaired";
+
+        try {
+            list = HandoverDeviceModel.getAllDevicesByStatus(status);
+
+            int size = list.size();
+
+            if(size < 10){
+                lblDeviceRepairedCount.setText("0"+ size);
+            } else {
+                lblDeviceRepairedCount.setText(String.valueOf(size));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void setEmployeeCount () {
+        List<EmployeeDto> list = null;
+
+        try {
+            list = EmployeeModel.getAllEmployees();
+            int size = list.size();
+
+            if(size < 10){
+                lblEmployeeCount.setText("0"+ size);
+            } else {
+                lblEmployeeCount.setText(String.valueOf(size));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
