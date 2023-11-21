@@ -6,17 +6,24 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.BoxBlur;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
 import lk.ijse.dto.CustomerDto;
 import lk.ijse.dto.DeviceDto;
 import lk.ijse.dto.tm.DeviceTm;
 import lk.ijse.model.CustomerModel;
 import lk.ijse.model.HandoverDeviceModel;
 import lk.ijse.model.OrdersModel;
+import org.controlsfx.control.Notifications;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -24,6 +31,9 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class HandoverDeviceManageFormController {
+
+    @FXML
+    private AnchorPane root;
 
     @FXML
     private JFXComboBox<String> cmbCustomerName;
@@ -185,13 +195,22 @@ public class HandoverDeviceManageFormController {
 
             boolean isAdded = HandoverDeviceModel.setDevice(deviceDto);
             if (isAdded) {
-                Alert alert =new Alert(Alert.AlertType.CONFIRMATION, "Success");
-                alert.showAndWait();
+                Notifications.create()
+                        .graphic(new ImageView(new Image("/icons/icons8-check-mark-48.png")))
+                        .text("Device Added")
+                        .title("success")
+                        .hideAfter(Duration.seconds(5))
+                        .position(Pos.TOP_RIGHT)
+                        .darkStyle()
+                        .show();
                 loadAllItems();
                 clearFields();
             }else {
-                Alert alert = new Alert(Alert.AlertType.ERROR,"Something went wrong");
+                BoxBlur blur = new BoxBlur(3, 3, 1);
+                root.setEffect(blur);
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Somthing went wrong");
                 alert.showAndWait();
+                root.setEffect(null);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -228,13 +247,19 @@ public class HandoverDeviceManageFormController {
         try {
             boolean isDeleted = HandoverDeviceModel.deleteDevice(id);
             if (isDeleted) {
+                BoxBlur blur = new BoxBlur(3, 3, 1);
+                root.setEffect(blur);
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Success");
                 alert.showAndWait();
+                root.setEffect(null);
                 loadAllItems();
                 clearFields();
             } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR,"Something went wrong");
+                BoxBlur blur = new BoxBlur(3, 3, 1);
+                root.setEffect(blur);
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Somthing went wrong");
                 alert.showAndWait();
+                root.setEffect(null);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -261,13 +286,22 @@ public class HandoverDeviceManageFormController {
         try {
             boolean isUpdated = HandoverDeviceModel.updateDevice(dto);
             if (isUpdated){
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Success");
-                alert.showAndWait();
+                Notifications.create()
+                        .graphic(new ImageView(new Image("/icons/icons8-check-mark-48.png")))
+                        .text("Device updated")
+                        .title("success")
+                        .hideAfter(Duration.seconds(5))
+                        .position(Pos.TOP_RIGHT)
+                        .darkStyle()
+                        .show();
                 loadAllItems();
                 clearFields();
             } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR,"Something went wrong");
+                BoxBlur blur = new BoxBlur(3, 3, 1);
+                root.setEffect(blur);
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Somthing went wrong");
                 alert.showAndWait();
+                root.setEffect(null);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

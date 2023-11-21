@@ -10,6 +10,8 @@ import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.BoxBlur;
+import javafx.scene.layout.AnchorPane;
 import lk.ijse.dto.CustomerDto;
 import lk.ijse.dto.ItemDto;
 import lk.ijse.dto.OrderDto;
@@ -25,6 +27,9 @@ import java.util.List;
 import java.util.Optional;
 
 public class OrderManageFormController {
+
+    @FXML
+    private AnchorPane root;
 
     @FXML
     private JFXComboBox<String> cmbItem;
@@ -280,8 +285,11 @@ public class OrderManageFormController {
                     tblOrders.refresh();
                     calculateTotal();
                 } else {
+                    BoxBlur blur = new BoxBlur(3, 3, 1);
+                    root.setEffect(blur);
                     Alert alert = new Alert(Alert.AlertType.ERROR, "Please select row to remove");
                     alert.showAndWait();
+                    root.setEffect(null);
                 }
             }
         });
@@ -326,14 +334,20 @@ public class OrderManageFormController {
                 alert.showAndWait();
                 boolean isSaved = PaymentModel.setPayment(paymentDto);
                 if (!isSaved) {
+                    BoxBlur blur = new BoxBlur(3, 3, 1);
+                    root.setEffect(blur);
                     Alert alert1 = new Alert(Alert.AlertType.ERROR, "Payment details not saved");
                     alert.showAndWait();
+                    root.setEffect(null);
                 }
                 obList.clear();
                 generateNextOrderId();
             } else{
-                Alert alert = new Alert(Alert.AlertType.ERROR,"Oder not saved");
+                BoxBlur blur = new BoxBlur(3, 3, 1);
+                root.setEffect(blur);
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Oder Unsuccessful");
                 alert.showAndWait();
+                root.setEffect(null);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

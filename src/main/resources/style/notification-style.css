@@ -1,0 +1,7 @@
+.notification-pane.dark {
+    -fx-background-color: #ffcc00; /* Set your desired background color */
+}
+
+.custom-notification {
+    -fx-background-color: #1e1e1e; /* Set your desired background color */
+}

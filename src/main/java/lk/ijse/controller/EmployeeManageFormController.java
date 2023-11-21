@@ -6,6 +6,7 @@ package lk.ijse.controller;
         import javafx.event.ActionEvent;
         import javafx.fxml.FXML;
         import javafx.fxml.FXMLLoader;
+        import javafx.geometry.Pos;
         import javafx.scene.Parent;
         import javafx.scene.Scene;
         import javafx.scene.control.Alert;
@@ -13,14 +14,18 @@ package lk.ijse.controller;
         import javafx.scene.control.TableView;
         import javafx.scene.control.cell.PropertyValueFactory;
         import javafx.scene.effect.BoxBlur;
+        import javafx.scene.image.Image;
+        import javafx.scene.image.ImageView;
         import javafx.scene.layout.AnchorPane;
         import javafx.stage.Stage;
+        import javafx.util.Duration;
         import lk.ijse.dto.CustomerDto;
         import lk.ijse.dto.EmployeeDto;
         import lk.ijse.dto.tm.EmployeeTm;
         import lk.ijse.model.CustomerModel;
         import lk.ijse.model.EmployeeModel;
         import lk.ijse.model.OrdersModel;
+        import org.controlsfx.control.Notifications;
 
         import java.io.IOException;
         import java.sql.SQLException;
@@ -154,13 +159,22 @@ public class EmployeeManageFormController {
         try {
             boolean isAdded = EmployeeModel.saveEmployee(employeeDto);
             if (isAdded) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Employee Added");
-                alert.showAndWait();
+                Notifications.create()
+                        .graphic(new ImageView(new Image("/icons/icons8-check-mark-48.png")))
+                        .text("Supplier Added")
+                        .title("success")
+                        .hideAfter(Duration.seconds(5))
+                        .position(Pos.TOP_RIGHT)
+                        .darkStyle()
+                        .show();
                 clearFields();
                 loadAllEmployee();
             } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Employee Not Added");
+                BoxBlur blur = new BoxBlur(3, 3, 1);
+                root.setEffect(blur);
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Somthing went wrong");
                 alert.showAndWait();
+                root.setEffect(null);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -180,6 +194,13 @@ public class EmployeeManageFormController {
         boolean matches1 = Pattern.matches("^([ \\u00c0-\\u01ffa-zA-Z'\\-]{2,})+$", txtName.getText());
         if(!matches1){
             Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid name");
+            alert.showAndWait();
+            return false;
+        }
+
+        boolean matches2 = Pattern.matches("[A-Za-z0-9'\\.\\-\\s\\,\\\\]", txtAddress.getText());
+        if(!matches2){
+            Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid address");
             alert.showAndWait();
             return false;
         }
@@ -219,13 +240,19 @@ public class EmployeeManageFormController {
         try {
             boolean isDeleted = EmployeeModel.deleteEmployee(id);
             if (isDeleted) {
+                BoxBlur blur = new BoxBlur(3, 3, 1);
+                root.setEffect(blur);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Employee Deleted");
                 alert.showAndWait();
+                root.setEffect(null);
                 clearFields();
                 loadAllEmployee();
             } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Employee Not Deleted");
+                BoxBlur blur = new BoxBlur(3, 3, 1);
+                root.setEffect(blur);
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Somthing went wrong");
                 alert.showAndWait();
+                root.setEffect(null);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -253,13 +280,22 @@ public class EmployeeManageFormController {
         try {
             Boolean isUpdated = EmployeeModel.updateEmployee(employeeDto);
             if (isUpdated) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Employee Updated");
-                alert.showAndWait();
+                Notifications.create()
+                        .graphic(new ImageView(new Image("/icons/icons8-check-mark-48.png")))
+                        .text("Employee updated")
+                        .title("success")
+                        .hideAfter(Duration.seconds(5))
+                        .position(Pos.TOP_RIGHT)
+                        .darkStyle()
+                        .show();
                 clearFields();
                 loadAllEmployee();
             } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Employee Not Updated");
+                BoxBlur blur = new BoxBlur(3, 3, 1);
+                root.setEffect(blur);
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Somthing went wrong");
                 alert.showAndWait();
+                root.setEffect(null);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -282,8 +318,11 @@ public class EmployeeManageFormController {
                     txtPosition.setText(employeeDto.getPosition());
                     txtSalary.setText(employeeDto.getSalary());
                 } else {
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "Customer not found");
+                    BoxBlur blur = new BoxBlur(3, 3, 1);
+                    root.setEffect(blur);
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Employee not found");
                     alert.showAndWait();
+                    root.setEffect(null);
                 }
 
             } catch (SQLException e) {

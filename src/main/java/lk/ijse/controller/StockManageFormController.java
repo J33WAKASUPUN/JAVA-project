@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -13,14 +14,18 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.BoxBlur;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import lk.ijse.dto.CustomerDto;
 import lk.ijse.dto.ItemDto;
 import lk.ijse.dto.tm.StockTm;
 import lk.ijse.model.CustomerModel;
 import lk.ijse.model.ItemModel;
 import lk.ijse.model.OrdersModel;
+import org.controlsfx.control.Notifications;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -129,13 +134,22 @@ public class StockManageFormController {
         try {
             boolean isSaved = ItemModel.setItem(itemDto);
             if (isSaved) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Succsess");
-                alert.showAndWait();
+                Notifications.create()
+                        .graphic(new ImageView(new Image("/icons/icons8-check-mark-48.png")))
+                        .text("Item Added")
+                        .title("success")
+                        .hideAfter(Duration.seconds(5))
+                        .position(Pos.TOP_RIGHT)
+                        .darkStyle()
+                        .show();
                 loadAllItems();
                 clearFields();
             } else {
+                BoxBlur blur = new BoxBlur(3, 3, 1);
+                root.setEffect(blur);
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Somthing went wrong");
                 alert.showAndWait();
+                root.setEffect(null);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -194,12 +208,18 @@ public class StockManageFormController {
         try {
             boolean isDeleted = ItemModel.deleteItem(id);
             if (isDeleted) {
+                BoxBlur blur = new BoxBlur(3, 3, 1);
+                root.setEffect(blur);
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Success");
                 alert.showAndWait();
+                root.setEffect(null);
                 loadAllItems();
             } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR,"Something went wrong");
+                BoxBlur blur = new BoxBlur(3, 3, 1);
+                root.setEffect(blur);
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Somthing went wrong");
                 alert.showAndWait();
+                root.setEffect(null);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -215,8 +235,11 @@ public class StockManageFormController {
         String unitPrice = txtUnitPrice.getText();
 
         if(id.isEmpty() || name.isEmpty() || cost.isEmpty() || qty.isEmpty() || unitPrice.isEmpty()){
+            BoxBlur blur = new BoxBlur(3, 3, 1);
+            root.setEffect(blur);
             Alert alert = new Alert(Alert.AlertType.ERROR, "Fill all fields");
             alert.showAndWait();
+            root.setEffect(null);
             return;
         }
         ItemDto dto = new ItemDto(id, name, cost, qty, unitPrice);
@@ -225,13 +248,22 @@ public class StockManageFormController {
             boolean isUpdated = ItemModel.updateItem(dto);
 
             if (isUpdated){
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Success");
-                alert.showAndWait();
+                Notifications.create()
+                        .graphic(new ImageView(new Image("/icons/icons8-check-mark-48.png")))
+                        .text("Item updated")
+                        .title("success")
+                        .hideAfter(Duration.seconds(5))
+                        .position(Pos.TOP_RIGHT)
+                        .darkStyle()
+                        .show();
                 clearFields();
                 loadAllItems();
             } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Something went wrong");
+                BoxBlur blur = new BoxBlur(3, 3, 1);
+                root.setEffect(blur);
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Somthing went wrong");
                 alert.showAndWait();
+                root.setEffect(null);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

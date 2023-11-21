@@ -10,8 +10,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 import lk.ijse.dto.CustomerDto;
 import lk.ijse.dto.SupplierDto;
@@ -28,6 +32,9 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class SupplierManageFormController {
+
+    @FXML
+    private AnchorPane root;
 
     @FXML
     private TableColumn<?, ?> colAddress;
@@ -102,8 +109,11 @@ public class SupplierManageFormController {
         String contact = txtContactNumber.getText();
 
         if(id.isEmpty() || name.isEmpty() || address.isEmpty() || contact.isEmpty()){
+            BoxBlur blur = new BoxBlur(3, 3, 1);
+            root.setEffect(blur);
             Alert alert = new Alert(Alert.AlertType.ERROR, "Fill all fields");
             alert.showAndWait();
+            root.setEffect(null);
             return;
         }
 
@@ -116,20 +126,22 @@ public class SupplierManageFormController {
         try {
             boolean isSaved = SupplierModel.setSupplier(dto);
             if (isSaved) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Succsess");
-                alert.showAndWait();
                 Notifications.create()
-                        .graphic(new ImageView(new Image("/icons/icons8-search-64.png")))
-                        .text("Employee Added")
+                        .graphic(new ImageView(new Image("/icons/icons8-check-mark-48.png")))
+                        .text("Supplier Added")
                         .title("success")
                         .hideAfter(Duration.seconds(5))
                         .position(Pos.TOP_RIGHT)
+                        .darkStyle()
                         .show();
                 loadAllSupplier();
                 clearFields();
             } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Somthing went wrong");
+                BoxBlur blur = new BoxBlur(3, 3, 1);
+                root.setEffect(blur);
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Something went wrong");
                 alert.showAndWait();
+                root.setEffect(null);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -148,6 +160,13 @@ public class SupplierManageFormController {
         boolean matches1 = Pattern.matches("^([ \\u00c0-\\u01ffa-zA-Z'\\-]{5,})+$", txtName.getText());
         if(!matches1){
             Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid name");
+            alert.showAndWait();
+            return false;
+        }
+
+        boolean matches2 = Pattern.matches("[A-Za-z0-9'\\.\\-\\s\\,\\\\]", txtAddress.getText());
+        if(!matches2){
+            Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid address");
             alert.showAndWait();
             return false;
         }
@@ -176,9 +195,13 @@ public class SupplierManageFormController {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Success");
                 alert.showAndWait();
                 loadAllSupplier();
+                clearFields();
             } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR,"Something went wrong");
+                BoxBlur blur = new BoxBlur(3, 3, 1);
+                root.setEffect(blur);
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Something went wrong");
                 alert.showAndWait();
+                root.setEffect(null);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -193,8 +216,11 @@ public class SupplierManageFormController {
         String contact = txtContactNumber.getText();
 
         if(id.isEmpty() || name.isEmpty() || address.isEmpty() || contact.isEmpty()){
+            BoxBlur blur = new BoxBlur(3, 3, 1);
+            root.setEffect(blur);
             Alert alert = new Alert(Alert.AlertType.ERROR, "Fill all fields");
             alert.showAndWait();
+            root.setEffect(null);
             return;
         }
         SupplierDto dto = new SupplierDto(id, name, address, contact);
@@ -203,13 +229,22 @@ public class SupplierManageFormController {
         try {
             boolean isUpdated = SupplierModel.updateSupplier(dto);
             if (isUpdated) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Succsess");
-                alert.showAndWait();
+                Notifications.create()
+                        .graphic(new ImageView(new Image("/icons/icons8-check-mark-48.png")))
+                        .text("Supplier updated")
+                        .title("success")
+                        .hideAfter(Duration.seconds(5))
+                        .position(Pos.TOP_RIGHT)
+                        .darkStyle()
+                        .show();
                 loadAllSupplier();
                 clearFields();
             }else {
+                BoxBlur blur = new BoxBlur(3, 3, 1);
+                root.setEffect(blur);
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Something went wrong");
                 alert.showAndWait();
+                root.setEffect(null);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
