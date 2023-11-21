@@ -17,6 +17,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import lk.ijse.dto.CustomerDto;
 import lk.ijse.dto.tm.CustomerTm;
+import lk.ijse.dto.tm.StockTm;
 import lk.ijse.model.CustomerModel;
 import lk.ijse.model.OrdersModel;
 import org.controlsfx.control.Notifications;
@@ -61,6 +62,7 @@ public class CustomerManageFormController {
         setCellValueFactory();
         generateNextCustomerId();
         loadAllCustomer();
+        tableListener();
     }
 
     public void setCellValueFactory(){
@@ -282,6 +284,20 @@ public class CustomerManageFormController {
         } else {
             System.out.println("Customer name is null or empty");
         }
+    }
+
+    private void tableListener() {
+        tblCustomer.getSelectionModel().selectedItemProperty().addListener((observable, oldValued, newValue) -> {
+            setData(newValue);
+        });
+    }
+
+    private void setData(CustomerTm row) {
+        txtCustomerId.setText(row.getCId());
+        txtCustomerName.setText(row.getName());
+        txtAddress.setText(String.valueOf(row.getAddress()));
+        txtEmail.setText(String.valueOf(row.getEmail()));
+        txtContactNumber.setText(String.valueOf(row.getContact()));
     }
 
     private void clearFields() {

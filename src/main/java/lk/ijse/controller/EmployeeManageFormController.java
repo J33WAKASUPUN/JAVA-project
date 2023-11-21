@@ -22,6 +22,7 @@ package lk.ijse.controller;
         import lk.ijse.dto.CustomerDto;
         import lk.ijse.dto.EmployeeDto;
         import lk.ijse.dto.tm.EmployeeTm;
+        import lk.ijse.dto.tm.StockTm;
         import lk.ijse.model.CustomerModel;
         import lk.ijse.model.EmployeeModel;
         import lk.ijse.model.OrdersModel;
@@ -83,6 +84,7 @@ public class EmployeeManageFormController {
         setCellValueFactory();
         generateNextEmployeeId();
         loadAllEmployee();
+        tableListener();
     }
 
     private void setCellValueFactory(){
@@ -340,6 +342,21 @@ public class EmployeeManageFormController {
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
+    }
+
+    private void tableListener() {
+        tblEmployee.getSelectionModel().selectedItemProperty().addListener((observable, oldValued, newValue) -> {
+            setData(newValue);
+        });
+    }
+
+    private void setData(EmployeeTm row) {
+        txtEmployeeId.setText(row.getEmpId());
+        txtName.setText(row.getName());
+        txtPosition.setText(String.valueOf(row.getPosition()));
+        txtSalary.setText(String.valueOf(row.getSalary()));
+        txtContact.setText(String.valueOf(row.getContact()));
+        txtAddress.setText(String.valueOf(row.getAddress()));
     }
 
     private void clearFields() {

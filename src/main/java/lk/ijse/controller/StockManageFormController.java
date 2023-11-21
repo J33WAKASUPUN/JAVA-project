@@ -77,6 +77,7 @@ public class StockManageFormController {
         setCellValueFactory();
         generateNextItemId();
         loadAllItems();
+        tableListener();
     }
 
     public void setCellValueFactory(){
@@ -322,6 +323,20 @@ public class StockManageFormController {
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
+    }
+
+    private void tableListener() {
+        tblItems.getSelectionModel().selectedItemProperty().addListener((observable, oldValued, newValue) -> {
+            setData(newValue);
+        });
+    }
+
+    private void setData(StockTm row) {
+        txtId.setText(row.getItemId());
+        txtName.setText(row.getItemName());
+        txtUnitPrice.setText(String.valueOf(row.getUnitPrice()));
+        txtQty.setText(String.valueOf(row.getQtyOnHand()));
+        txtCost.setText(String.valueOf(row.getCost()));
     }
 
     private void clearFields() {

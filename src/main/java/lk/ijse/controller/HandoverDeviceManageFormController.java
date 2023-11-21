@@ -20,6 +20,7 @@ import javafx.util.Duration;
 import lk.ijse.dto.CustomerDto;
 import lk.ijse.dto.DeviceDto;
 import lk.ijse.dto.tm.DeviceTm;
+import lk.ijse.dto.tm.StockTm;
 import lk.ijse.model.CustomerModel;
 import lk.ijse.model.HandoverDeviceModel;
 import lk.ijse.model.OrdersModel;
@@ -90,6 +91,7 @@ public class HandoverDeviceManageFormController {
         setCmbItems();
         loadCustomerNames();
         setDate();
+        tableListener();
     }
 
     public void setCellValueFactory(){
@@ -348,6 +350,29 @@ public class HandoverDeviceManageFormController {
         lblOrderDate.setText(String.valueOf(LocalDate.now()));
     }
 
+    private void tableListener() {
+        tblDevice.getSelectionModel().selectedItemProperty().addListener((observable, oldValued, newValue) -> {
+            setData(newValue);
+        });
+    }
+
+    private void setData(DeviceTm row) {
+        txtId.setText(row.getDeviceId());
+        txtName.setText(row.getDName());
+        txtProblem.setText(String.valueOf(row.getProblem()));
+        txtCost.setText(String.valueOf(row.getCost()));
+        cmbStatus.setValue(String.valueOf(row.getStatus()));
+
+        try {
+            DeviceDto deviceDto = HandoverDeviceModel.getDevice(row.getDeviceId());
+            txtCustomerID.setText(deviceDto.getCId());
+            CustomerDto customerDto = CustomerModel.getCustomer(deviceDto.getCId());
+            cmbCustomerName.setValue(customerDto.getName());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private void clearFields() {
         txtId.setText("");
         txtName.setText("");
@@ -356,6 +381,7 @@ public class HandoverDeviceManageFormController {
         txtCost.setText("");
         txtSearch.setText("");
         txtCustomerID.setText("");
+        generateNextDeviceId();
     }
 
 }

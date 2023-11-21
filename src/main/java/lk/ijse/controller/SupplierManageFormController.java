@@ -20,6 +20,7 @@ import javafx.util.Duration;
 import lk.ijse.dto.CustomerDto;
 import lk.ijse.dto.SupplierDto;
 import lk.ijse.dto.tm.CustomerTm;
+import lk.ijse.dto.tm.StockTm;
 import lk.ijse.dto.tm.SupplierTm;
 import lk.ijse.model.CustomerModel;
 import lk.ijse.model.OrdersModel;
@@ -70,6 +71,7 @@ public class SupplierManageFormController {
         setCellValueFactory();
         generateNextSupplierId();
         loadAllSupplier();
+        tableListener();
     }
 
     private void setCellValueFactory() {
@@ -284,6 +286,19 @@ public class SupplierManageFormController {
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
+    }
+
+    private void tableListener() {
+        tblSupplier.getSelectionModel().selectedItemProperty().addListener((observable, oldValued, newValue) -> {
+            setData(newValue);
+        });
+    }
+
+    private void setData(SupplierTm row) {
+        txtId.setText(row.getSupId());
+        txtName.setText(row.getSName());
+        txtAddress.setText(String.valueOf(row.getAddress()));
+        txtContactNumber.setText(String.valueOf(row.getContact()));
     }
 
     private void clearFields() {
