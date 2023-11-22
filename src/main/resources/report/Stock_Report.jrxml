@@ -50,56 +50,62 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="102" splitType="Stretch">
+		<band height="90" splitType="Stretch">
 			<staticText>
-				<reportElement x="440" y="39" width="100" height="23" uuid="a38b5693-6321-43ab-a211-161c3622c331"/>
+				<reportElement x="50" y="29" width="230" height="20" uuid="0d659a11-fc71-4994-9321-0dcc938b13b4"/>
 				<textElement>
-					<font fontName="Arial" size="16" isBold="true"/>
+					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Stock Report]]></text>
+				<text><![CDATA[SERISARA NETWORKS (PVT) LTD]]></text>
 			</staticText>
 			<image>
-				<reportElement x="50" y="2" width="90" height="88" uuid="193a1f1c-e5ad-4ea0-91c4-c38b2e9003d7"/>
-				<imageExpression><![CDATA["C:/Users/ASUS/Documents/GitHub/serisara-networks/src/main/resources/asset/logo qqqqqq.png"]]></imageExpression>
-			</image>
-			<image>
-				<reportElement x="10" y="21" width="50" height="50" uuid="6cf829e9-89f4-4c1e-b078-698e0a0afc95"/>
+				<reportElement x="0" y="20" width="40" height="41" uuid="7514792c-6791-4d41-b795-4da28beb335e"/>
 				<imageExpression><![CDATA["C:/Users/ASUS/Documents/GitHub/serisara-networks/src/main/resources/asset/S letter geometric Logo design Linear.  (2).png"]]></imageExpression>
 			</image>
+			<staticText>
+				<reportElement x="483" y="30" width="72" height="21" uuid="68ddb1fa-2c5c-47bb-b2bc-f05bc7d21c63"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Stock details]]></text>
+			</staticText>
 		</band>
 	</title>
 	<columnHeader>
-		<band height="30" splitType="Stretch">
+		<band height="20" splitType="Stretch">
 			<staticText>
-				<reportElement x="19" y="0" width="100" height="30" uuid="d80b1f3e-a205-475a-a7dd-a4456ad95cc7">
+				<reportElement x="19" y="0" width="100" height="20" uuid="d80b1f3e-a205-475a-a7dd-a4456ad95cc7">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="47bdf665-a21e-43eb-8990-2b7726c43fc2"/>
 				</reportElement>
 				<text><![CDATA[itemId]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="119" y="0" width="174" height="30" uuid="0b369b0b-4d9d-4b66-ae8a-8aa7ee08e239">
+				<reportElement x="119" y="0" width="174" height="20" uuid="0b369b0b-4d9d-4b66-ae8a-8aa7ee08e239">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="145ddaf7-ee3b-4643-b4ee-8b788752f407"/>
 				</reportElement>
 				<text><![CDATA[itemName]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="294" y="0" width="80" height="30" uuid="9c1e7b0a-c8e0-4d8e-aa78-aae0c10bf389">
+				<reportElement x="294" y="0" width="80" height="20" uuid="9c1e7b0a-c8e0-4d8e-aa78-aae0c10bf389">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bf377866-9f32-49cf-86a1-b164170b9900"/>
 				</reportElement>
 				<text><![CDATA[qtyOnHand]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="374" y="0" width="100" height="30" uuid="52470f36-45a8-4e68-9f2f-0caa76c0e43c">
+				<reportElement x="374" y="0" width="100" height="20" uuid="52470f36-45a8-4e68-9f2f-0caa76c0e43c">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="879765b6-bdd7-4a1d-8b7d-448fea4857f8"/>
 				</reportElement>
 				<text><![CDATA[cost]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="474" y="0" width="76" height="30" uuid="e4245a5d-b7ae-4502-98a1-1a1f316bcda1">
+				<reportElement x="474" y="0" width="76" height="20" uuid="e4245a5d-b7ae-4502-98a1-1a1f316bcda1">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="455fbb63-2307-4add-8bee-91406926b6b3"/>
 				</reportElement>
 				<text><![CDATA[unitPrice]]></text>
 			</staticText>
+			<line>
+				<reportElement x="0" y="19" width="555" height="1" uuid="59147d23-f33d-4603-9448-cba0ac5049b2"/>
+			</line>
 		</band>
 	</columnHeader>
 	<detail>
@@ -149,6 +155,9 @@
 				<reportElement x="4" y="0" width="100" height="16" uuid="b5ffdfea-97a4-415f-ad38-b01c38732a62"/>
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement x="0" y="1" width="555" height="1" uuid="c3f2a188-6dac-428a-b9af-38e56940b4f8"/>
+			</line>
 		</band>
 	</pageFooter>
 </jasperReport>
