@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.db.DBConnection;
 import lk.ijse.dto.CustomerDto;
 import lk.ijse.dto.ItemDto;
 import lk.ijse.dto.OrderDto;
@@ -19,7 +20,17 @@ import lk.ijse.dto.PaymentDto;
 import lk.ijse.dto.tm.CustomerTm;
 import lk.ijse.dto.tm.OrderTm;
 import lk.ijse.model.*;
+import lombok.SneakyThrows;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
+import java.nio.file.FileSystems;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -340,6 +351,24 @@ public class OrderManageFormController {
                     alert.showAndWait();
                     root.setEffect(null);
                 }
+                Thread thread=new Thread(){
+                    @SneakyThrows
+                    public void run(){
+                        String billPath = "C:\\Users\\ASUS\\Documents\\GitHub\\serisara-networks\\src\\main\\resources\\report\\Main_Bill.jrxml";
+                        String sql="select d.orderId, d.itemId, d.qty, d.unitPrice, i.itemName, o.cId, p.amount from item i join orderItemDetail d on i.itemId = d.itemId join orders o on d.orderId = o.orderId join payment p on o.orderId = p.orderId where d.orderId = \""+orderId+"\"";
+                        String path = FileSystems.getDefault().getPath("/report/Main_Bill.jrxml").toAbsolutePath().toString();
+                        JasperDesign jasdi = JRXmlLoader.load(billPath);
+                        JRDesignQuery newQuery = new JRDesignQuery();
+                        newQuery.setText(sql);
+                        jasdi.setQuery(newQuery);
+                        JasperReport js = JasperCompileManager.compileReport(jasdi);
+                        JasperPrint jp = JasperFillManager.fillReport(js, null, DBConnection.getInstance().getConnection());
+                        JasperViewer viewer = new JasperViewer(jp, false);
+                        viewer.show();
+                    }
+                };
+                thread.start();
+
                 obList.clear();
                 generateNextOrderId();
             } else{
