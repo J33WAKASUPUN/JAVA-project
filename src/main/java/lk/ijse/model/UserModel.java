@@ -28,6 +28,23 @@ public class UserModel {
         return list;
     }
 
+    public static UserDto getUserByName(String userName) throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT * FROM user WHERE userName = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setObject(1,userName);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()){
+            UserDto userDto = new UserDto();
+            userDto.setUserId(resultSet.getString(1));
+            userDto.setUserName(resultSet.getString(2));
+            userDto.setPassword(resultSet.getString(3));
+            return userDto;
+        }
+        return null;
+    }
+
     public static UserDto getUserDtoList(String userId) throws SQLException {
         List<UserDto> list = new ArrayList<>();
         Connection connection = DBConnection.getInstance().getConnection();

@@ -166,19 +166,19 @@ public class SupplierManageFormController {
             return false;
         }
 
-        boolean matches2 = Pattern.matches("[A-Za-z0-9'\\.\\-\\s\\,\\\\]", txtAddress.getText());
+        boolean matches2 = Pattern.matches("[A-Za-z0-9'\\.\\-\\s\\,]{0,}", txtAddress.getText());
         if(!matches2){
             Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid address");
             alert.showAndWait();
             return false;
         }
 
-        boolean matches3 = Pattern.matches("^\\s*(?:\\+?(\\d{1,3}))?[-. (]*(\\d{3})[-. )]*(\\d{3})[-. ]*(\\d{4})(?: *x(\\d+))?\\s*$", txtContactNumber.getText());
+        /*boolean matches3 = Pattern.matches("^\\s*(?:\\+?(\\d{1,3}))?[-. (]*(\\d{3})[-. )]*(\\d{3})[-. ]*(\\d{4})(?: *x(\\d+))?\\s*$", txtContactNumber.getText());
         if (!matches3) {
             Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid contact number");
             alert.showAndWait();
             return false;
-        }
+        }*/
         return true;
     }
 

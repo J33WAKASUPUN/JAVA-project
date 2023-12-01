@@ -84,12 +84,12 @@
       </Label>
       <JFXTextField fx:id="txtRepairPrice" layoutX="1091.0" layoutY="197.0" prefHeight="30.0" prefWidth="162.0" promptText="Cost for repair" unFocusColor="BLACK" />
       <JFXComboBox fx:id="cmbCustomerName" layoutX="316.0" layoutY="198.0" onAction="#cmbCustomerOnAction" prefHeight="30.0" prefWidth="198.0" promptText="Select Customer" unFocusColor="BLACK" />
-      <Label fx:id="lblPrice1" layoutX="629.0" layoutY="180.0" text="Customer ID">
+      <Label fx:id="lblPrice1" layoutX="739.0" layoutY="180.0" text="Customer ID">
          <font>
             <Font name="Arial Bold" size="13.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txtCustomerID" layoutX="629.0" layoutY="197.0" prefHeight="30.0" prefWidth="210.0" promptText="Select Customer name frist" unFocusColor="BLACK" />
+      <JFXTextField fx:id="txtCustomerID" layoutX="739.0" layoutY="197.0" prefHeight="30.0" prefWidth="210.0" promptText="Select Customer name frist" unFocusColor="BLACK" />
       <Pane layoutX="847.0" layoutY="716.0" prefHeight="30.0" prefWidth="200.0" style="-fx-border-color: #403D39;">
          <children>
             <Label fx:id="lblTotal" layoutX="55.0" prefHeight="30.0" prefWidth="144.0">
@@ -114,5 +114,11 @@
             <Font name="Arial Bold" size="12.0" />
          </font>
       </JFXButton>
+      <JFXButton layoutX="932.0" layoutY="265.0" onAction="#btnScanOnAction" prefHeight="30.0" prefWidth="115.0" style="-fx-background-color: #E5383B;" text="Scan Barcode" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <JFXTextField fx:id="txtScannedData" layoutX="848.0" layoutY="265.0" prefHeight="30.0" prefWidth="78.0" unFocusColor="BLACK" />
    </children>
 </AnchorPane>

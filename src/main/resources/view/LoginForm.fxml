@@ -24,8 +24,8 @@
             <Font name="Goudy Old Style Bold" size="38.0" />
          </font>
       </Label>
-      <JFXTextField focusColor="#252422" layoutX="395.0" layoutY="199.0" prefHeight="38.0" prefWidth="254.0" promptText="User Name" />
-      <JFXPasswordField focusColor="#252422" layoutX="394.0" layoutY="259.0" prefHeight="38.0" prefWidth="254.0" promptText="Password" />
+      <JFXTextField fx:id="txtUserName" focusColor="#252422" layoutX="395.0" layoutY="199.0" prefHeight="38.0" prefWidth="254.0" promptText="User Name" />
+      <JFXPasswordField fx:id="txtPassword" focusColor="#252422" layoutX="394.0" layoutY="259.0" prefHeight="38.0" prefWidth="254.0" promptText="Password" />
       <ImageView fitHeight="112.0" fitWidth="368.0" layoutX="-15.0" layoutY="310.0">
          <image>
             <Image url="@../asset/S_letter_geometric_Logo_design_Linear.___5_-removebg-preview  s logo.png" />
@@ -54,5 +54,15 @@
             </LinearGradient>
          </ripplerFill>
       </JFXButton>
+      <Label fx:id="lblUsernameIncorrect" layoutX="574.0" layoutY="238.0" text="Username incorrect" textFill="RED">
+         <font>
+            <Font name="Arial" size="8.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblPasswordIncorrect" layoutX="575.0" layoutY="298.0" text="Password incorrect" textFill="RED">
+         <font>
+            <Font name="Arial" size="8.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

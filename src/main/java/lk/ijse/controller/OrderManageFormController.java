@@ -7,11 +7,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import lk.ijse.db.DBConnection;
 import lk.ijse.dto.CustomerDto;
 import lk.ijse.dto.ItemDto;
@@ -30,15 +34,18 @@ import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
+import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class OrderManageFormController {
 
+    public JFXTextField txtScannedData;
     @FXML
     private AnchorPane root;
 
@@ -112,6 +119,8 @@ public class OrderManageFormController {
         txtRepairPrice.setDisable(true);
         txtQuantity.setDisable(false);
         lblQuantity.setDisable(false);
+        txtScannedData.setVisible(false);
+        textFieldListener();
     }
 
     ObservableList<OrderTm> obList = FXCollections.observableArrayList();
@@ -397,4 +406,39 @@ public class OrderManageFormController {
         txtRepairPrice.setText("");
     }
 
+    public void btnScanOnAction(ActionEvent actionEvent) throws IOException {
+        BoxBlur blur = new BoxBlur(3, 3, 1);
+        root.setEffect(blur);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/BarcodeScannerForm.fxml"));
+        Parent parent = fxmlLoader.load();
+
+        BarcodeScannerFormController controller = fxmlLoader.getController();
+        controller.setOrderController(this);
+
+        Scene scene = new Scene(parent);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.showAndWait();
+        root.setEffect(null);
+        stage.setOnCloseRequest(e -> {
+            root.setEffect(null);
+        });
+    }
+
+    public void setLabel (String label) {
+        this.txtScannedData.setText(label);
+    }
+
+    public void textFieldListener(){
+        txtScannedData.textProperty().addListener((observable, oldValue, newValue) -> {
+
+            try {
+                ItemDto dto = ItemModel.getItemById(txtScannedData.getText());
+
+                cmbItem.setValue(dto.getItemName());
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
 }

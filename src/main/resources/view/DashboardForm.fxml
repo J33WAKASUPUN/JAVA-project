@@ -67,7 +67,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="btnReports" layoutX="17.0" layoutY="469.0" onAction="#btnReportsOnAction" prefHeight="38.0" prefWidth="218.0" style="-fx-background-color: FFFCF2;" text="Reports">
+            <JFXButton fx:id="btnReports" layoutX="17.0" layoutY="522.0" onAction="#btnReportsOnAction" prefHeight="38.0" prefWidth="218.0" style="-fx-background-color: FFFCF2;" text="Reports">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
@@ -75,7 +75,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="btnEmployee" layoutX="17.0" layoutY="516.0" onAction="#btnEmployeesOnAction" prefHeight="38.0" prefWidth="218.0" style="-fx-background-color: FFFCF2;" text="Employees">
+            <JFXButton fx:id="btnEmployee" layoutX="17.0" layoutY="471.0" onAction="#btnEmployeesOnAction" prefHeight="38.0" prefWidth="218.0" style="-fx-background-color: FFFCF2;" text="Employees">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
@@ -113,12 +113,12 @@
                   <Image url="@../icons/inventory.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="24.0" fitWidth="25.0" layoutX="39.0" layoutY="477.0">
+            <ImageView fitHeight="24.0" fitWidth="25.0" layoutX="39.0" layoutY="530.0">
                <image>
                   <Image url="@../icons/file.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="24.0" fitWidth="25.0" layoutX="38.0" layoutY="523.0">
+            <ImageView fitHeight="24.0" fitWidth="25.0" layoutX="38.0" layoutY="478.0">
                <image>
                   <Image url="@../icons/employees.png" />
                </image>
@@ -134,7 +134,7 @@
                   <Font name="Arial Bold" size="14.0" />
                </font>
             </JFXButton>
-            <Label fx:id="lblUserId" alignment="CENTER" layoutX="97.0" layoutY="659.0" prefHeight="18.0" prefWidth="48.0" text="U001">
+            <Label fx:id="lblUserId" alignment="CENTER" layoutX="97.0" layoutY="659.0" prefHeight="18.0" prefWidth="48.0" text="0000">
                <font>
                   <Font name="Arial Bold" size="12.0" />
                </font>
@@ -296,7 +296,6 @@
                         <Image url="@../asset/S%20letter%20geometric%20Logo%20design%20Linear.%20%20(2).png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="lblDateInvisible" layoutX="122.0" layoutY="27.0" text="Label" />
                </children>
             </Pane>
          </children>

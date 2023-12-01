@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="root" prefHeight="468.0" prefWidth="408.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.BarcodeScannerFormController">
+   <children>
+      <AnchorPane fx:id="mainPanel" layoutX="20.0" layoutY="14.0" prefHeight="339.0" prefWidth="368.0" style="-fx-background-color: black;">
+         <children>
+            <AnchorPane fx:id="miniPanel" layoutX="22.0" layoutY="14.0" prefHeight="219.0" prefWidth="327.0" />
+         </children>
+      </AnchorPane>
+      <Label fx:id="txtLable" layoutX="260.0" layoutY="375.0" prefHeight="25.0" prefWidth="128.0" />
+      <JFXButton fx:id="btnStop" layoutX="310.0" layoutY="417.0" onAction="#btnStopOnAction" prefHeight="26.0" prefWidth="78.0" style="-fx-background-color: #E5383B;" text="Stop" textFill="WHITE" />
+      <JFXButton fx:id="btnStart" layoutX="221.0" layoutY="417.0" onAction="#btnStartOnAction" prefHeight="26.0" prefWidth="78.0" style="-fx-background-color: #403D39;" text="Start" textFill="WHITE" />
+   </children>
+</AnchorPane>

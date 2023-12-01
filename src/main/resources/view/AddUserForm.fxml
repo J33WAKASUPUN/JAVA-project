@@ -4,6 +4,8 @@
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Line?>
@@ -11,12 +13,14 @@
 
 <AnchorPane fx:id="root" prefHeight="701.0" prefWidth="565.0" style="-fx-background-color: FFFCF2;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.AddUserFormController">
    <children>
-      <Pane layoutX="214.0" layoutY="109.0" prefHeight="134.0" prefWidth="140.0" style="-fx-background-color: #CCC5B9; -fx-background-radius: 10;" />
-      <JFXButton layoutX="243.0" layoutY="251.0" prefHeight="29.0" prefWidth="79.0" style="-fx-background-color: #403D39;" text="Set photo" textFill="WHITE">
-         <font>
-            <Font name="Arial Bold" size="12.0" />
-         </font>
-      </JFXButton>
+      <Pane layoutX="214.0" layoutY="121.0" prefHeight="134.0" prefWidth="140.0" style="-fx-background-color: #CCC5B9; -fx-background-radius: 10;">
+         <children>
+            <ImageView fitHeight="110.0" fitWidth="103.0" layoutX="19.0" layoutY="12.0">
+               <image>
+                  <Image url="@../icons/clipart1297398.png" />
+               </image>
+            </ImageView>
+         </children></Pane>
       <Label layoutX="35.0" layoutY="308.0" prefHeight="18.0" prefWidth="173.0" text="Username">
          <font>
             <Font name="Arial" size="12.0" />
@@ -48,11 +52,6 @@
          </font>
       </Label>
       <Line endX="250.4000244140625" endY="7.62939453125E-6" layoutX="284.0" layoutY="99.0" startX="-250.39999389648438" startY="7.62939453125E-6" />
-      <Label fx:id="lblEmployeeDetails" alignment="CENTER" layoutX="32.0" layoutY="68.0" prefHeight="30.0" prefWidth="502.0" text="Employee- details">
-         <font>
-            <Font name="Arial Bold" size="13.0" />
-         </font>
-      </Label>
       <JFXButton layoutX="443.0" layoutY="644.0" onAction="#btnComfirmOnAction" prefHeight="36.0" prefWidth="90.0" style="-fx-background-color: #403D39;" text="Comfirm" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="12.0" />
